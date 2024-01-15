@@ -60,6 +60,30 @@ impl NominalString {
     pub fn is_inline(&self) -> bool {
         matches!(self.0, MaybeInline::Inline(_))
     }
+
+    /// Returns the heap-allocated [`String`] inside of `self`, if `self` is
+    /// heap allocated.
+    ///
+    /// # Errors
+    ///
+    /// If `self` is inline, `Err(self)` will be returned.
+    #[cfg(feature = "alloc")]
+    pub fn try_into_string(self) -> Result<String, Self> {
+        match self.0 {
+            MaybeInline::Inline(inline) => Err(Self(MaybeInline::Inline(inline))),
+            MaybeInline::Heap(string) => Ok(string),
+        }
+    }
+}
+
+#[cfg(feature = "alloc")]
+impl From<NominalString> for String {
+    fn from(s: NominalString) -> Self {
+        match s.try_into_string() {
+            Ok(string) => string,
+            Err(s) => String::from(&*s),
+        }
+    }
 }
 
 impl Display for NominalString {
