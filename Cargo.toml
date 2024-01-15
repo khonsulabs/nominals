@@ -1,0 +1,15 @@
+[package]
+name = "numbering"
+version = "0.1.0"
+edition = "2021"
+
+
+[features]
+default = ["chinese"]
+chinese = ["dep:chinese-number"]
+
+[dependencies]
+chinese-number = { version = "0.7.7", default-features = false, features = [
+    "number-to-chinese",
+], optional = true }
+ecow = { version = "0.2.0", default-features = false }
