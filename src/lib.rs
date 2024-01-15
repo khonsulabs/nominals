@@ -191,7 +191,7 @@ where
     }
 
     fn len(&self) -> usize {
-        self.0.len() - self.1
+        self.1
     }
 
     fn digit(&self, index: usize) -> char {
@@ -207,7 +207,7 @@ pub const HEX_LOWER: Restrict<Chain<Digits<10, true>, Digits<26, false>>> =
 #[test]
 fn hex() {
     assert_eq!(15_u32.formatted_with(&HEX_UPPER), "F");
-    assert_eq!(15_u32.formatted_with(&HEX_LOWER), "f");
+    assert_eq!(0xfeedd0d0_u32.formatted_with(&HEX_LOWER), "feedd0d0");
 }
 
 #[allow(clippy::len_without_is_empty)]
