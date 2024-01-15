@@ -1,15 +1,23 @@
 [package]
-name = "numbering"
+name = "nominals"
 version = "0.1.0"
 edition = "2021"
-
+rust-version = "1.65.0"
 
 [features]
 default = ["chinese"]
-chinese = ["dep:chinese-number"]
+alloc = []
+chinese = ["dep:chinese-number", "alloc"]
 
 [dependencies]
 chinese-number = { version = "0.7.7", default-features = false, features = [
     "number-to-chinese",
 ], optional = true }
-ecow = { version = "0.2.0", default-features = false }
+
+[lints.rust]
+unsafe_code = "deny"
+missing_docs = "warn"
+
+[lints.clippy]
+pedantic = "warn"
+module_name_repetitions = "allow"
