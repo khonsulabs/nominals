@@ -7,9 +7,9 @@ extern crate alloc;
 #[cfg(feature = "chinese")]
 mod chinese;
 mod hebrew;
+mod nominalstring;
 mod roman;
 mod sealed;
-mod stackstring;
 
 /// Systems that operate using ordered sets of digit-like characters.
 mod digital;
@@ -21,8 +21,8 @@ use core::ops::{Div, Rem, Sub};
 pub use chinese::Chinese;
 pub use digital::*;
 pub use hebrew::Hebrew;
+pub use nominalstring::NominalString;
 pub use roman::{RomanLowercase, RomanUpper};
-pub use stackstring::NominalString;
 
 /// A system of ordered nominal identifiers.
 pub trait NominalSystem<T> {
