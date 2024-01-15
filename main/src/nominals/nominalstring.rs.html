@@ -617,7 +617,7 @@
                     }
                     <span class="attr">#[cfg(not(feature = <span class="string">"alloc"</span>))]
                     </span>{
-                        <span class="kw">return </span><span class="prelude-val">Err</span>(Error::OutOfMemory);
+                        <span class="kw">return </span><span class="prelude-val">Err</span>(OutOfMemoryError);
                     }
                 }
             }
@@ -646,7 +646,7 @@
                     }
                     <span class="attr">#[cfg(not(feature = <span class="string">"alloc"</span>))]
                     </span>{
-                        <span class="kw">return </span><span class="prelude-val">Err</span>(Error::OutOfMemory);
+                        <span class="kw">return </span><span class="prelude-val">Err</span>(OutOfMemoryError);
                     }
                 }
             }
@@ -676,7 +676,7 @@
                     }
                     <span class="attr">#[cfg(not(feature = <span class="string">"alloc"</span>))]
                     </span>{
-                        <span class="kw">return </span><span class="prelude-val">Err</span>(Error::OutOfMemory);
+                        <span class="kw">return </span><span class="prelude-val">Err</span>(OutOfMemoryError);
                     }
                 }
             }
