@@ -351,13 +351,13 @@
 <a href="#349" id="349">349</a>
 <a href="#350" id="350">350</a>
 <a href="#351" id="351">351</a>
+<a href="#352" id="352">352</a>
+<a href="#353" id="353">353</a>
 </pre></div><pre class="rust"><code><span class="attr">#[cfg(feature = <span class="string">"alloc"</span>)]
 </span><span class="kw">use </span>alloc::string::String;
 <span class="kw">use </span>core::array;
 <span class="kw">use </span>core::fmt::{Debug, Display};
 <span class="kw">use </span>core::ops::{Deref, DerefMut};
-
-<span class="kw">use </span><span class="kw">crate</span>::Error;
 
 <span class="doccomment">/// A string that can contain most formatted nominals without a heap allocation.
 ///
@@ -382,9 +382,9 @@
     ///
     /// # Errors
     ///
-    /// Returns [`Error::OutOfMemory`] if no additiol space is available and the
+    /// Returns [`OutOfMemoryError`] if no additiol space is available and the
     /// `alloc` feature is disabled.
-    </span><span class="kw">pub fn </span>try_push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ch: char) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    </span><span class="kw">pub fn </span>try_push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ch: char) -&gt; <span class="prelude-ty">Result</span>&lt;(), OutOfMemoryError&gt; {
         <span class="self">self</span>.<span class="number">0</span>.push(ch)
     }
 
@@ -392,9 +392,9 @@
     ///
     /// # Errors
     ///
-    /// Returns [`Error::OutOfMemory`] if no additiol space is available and the
+    /// Returns [`OutOfMemoryError`] if no additiol space is available and the
     /// `alloc` feature is disabled.
-    </span><span class="kw">pub fn </span>try_push_str(<span class="kw-2">&amp;mut </span><span class="self">self</span>, str: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    </span><span class="kw">pub fn </span>try_push_str(<span class="kw-2">&amp;mut </span><span class="self">self</span>, str: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), OutOfMemoryError&gt; {
         <span class="self">self</span>.<span class="number">0</span>.push_str(str)
     }
 
@@ -402,9 +402,9 @@
     ///
     /// # Errors
     ///
-    /// Returns [`Error::OutOfMemory`] if no additiol space is available and the
+    /// Returns [`OutOfMemoryError`] if no additiol space is available and the
     /// `alloc` feature is disabled.
-    </span><span class="kw">pub fn </span>try_push_front(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ch: char) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    </span><span class="kw">pub fn </span>try_push_front(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ch: char) -&gt; <span class="prelude-ty">Result</span>&lt;(), OutOfMemoryError&gt; {
         <span class="self">self</span>.<span class="number">0</span>.push_front(ch)
     }
 
@@ -599,7 +599,7 @@
     }
 
     <span class="attr">#[allow(clippy::unnecessary_wraps)]
-    </span><span class="kw">fn </span>push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ch: char) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    </span><span class="kw">fn </span>push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ch: char) -&gt; <span class="prelude-ty">Result</span>&lt;(), OutOfMemoryError&gt; {
         <span class="kw">match </span><span class="self">self </span>{
             MaybeInline::Inline(inline) =&gt; {
                 <span class="kw">let </span>char_len = ch.len_utf8();
@@ -628,7 +628,7 @@
     }
 
     <span class="attr">#[allow(clippy::unnecessary_wraps)]
-    </span><span class="kw">fn </span>push_str(<span class="kw-2">&amp;mut </span><span class="self">self</span>, str: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    </span><span class="kw">fn </span>push_str(<span class="kw-2">&amp;mut </span><span class="self">self</span>, str: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), OutOfMemoryError&gt; {
         <span class="kw">match </span><span class="self">self </span>{
             MaybeInline::Inline(inline) =&gt; {
                 <span class="kw">let </span>insert_len = str.len();
@@ -657,7 +657,7 @@
     }
 
     <span class="attr">#[allow(clippy::unnecessary_wraps)]
-    </span><span class="kw">fn </span>push_front(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ch: char) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    </span><span class="kw">fn </span>push_front(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ch: char) -&gt; <span class="prelude-ty">Result</span>&lt;(), OutOfMemoryError&gt; {
         <span class="kw">match </span><span class="self">self </span>{
             MaybeInline::Inline(inline) =&gt; {
                 <span class="kw">let </span>char_len = ch.len_utf8();
@@ -702,4 +702,8 @@
         }
     }
 }
+
+<span class="doccomment">/// No additional memory was able to be allocated.
+</span><span class="attr">#[derive(Debug, Clone, Copy, Eq, PartialEq)]
+</span><span class="kw">pub struct </span>OutOfMemoryError;
 </code></pre></div></section></main></body></html>

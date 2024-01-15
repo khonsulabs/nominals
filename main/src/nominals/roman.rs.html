@@ -159,19 +159,19 @@
 <a href="#157" id="157">157</a>
 <a href="#158" id="158">158</a>
 <a href="#159" id="159">159</a>
-</pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, NominalString, NominalSystem, UnsignedInteger};
+</pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 <span class="kw">fn </span>format_roman&lt;T&gt;(
     zero_digit: <span class="kw-2">&amp;</span>str,
     digits: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span>str, u32); <span class="number">25</span>],
-    numeric: T,
-) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, Error&gt;
+    nominal: T,
+) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, Error&lt;T&gt;&gt;
 <span class="kw">where
     </span>T: UnsignedInteger + TryFrom&lt;u32&gt;,
 {
     <span class="kw">let </span><span class="kw-2">mut </span>formatted = NominalString::default();
 
-    <span class="kw">let </span><span class="kw-2">mut </span>remaining = numeric;
+    <span class="kw">let </span><span class="kw-2">mut </span>remaining = nominal;
     <span class="kw">if </span>remaining.is_zero() {
         <span class="kw">return </span><span class="prelude-val">Ok</span>(NominalString::from(zero_digit));
     }
@@ -182,7 +182,7 @@
         };
         <span class="kw">while </span>remaining &gt;= value_as_t {
             remaining = remaining - value_as_t;
-            formatted.try_push_str(digit.<span class="number">0</span>)<span class="question-mark">?</span>;
+            formatted.try_push_str(digit.<span class="number">0</span>).with_nominal(nominal)<span class="question-mark">?</span>;
         }
     }
 
@@ -205,11 +205,11 @@
 
 <span class="kw">impl</span>&lt;T&gt; NominalSystem&lt;T&gt; <span class="kw">for </span>RomanLowercase
 <span class="kw">where
-    </span>T: UnsignedInteger + TryFrom&lt;u32&gt;,
+    </span>T: Nominal + UnsignedInteger + TryFrom&lt;u32&gt;,
+    &lt;T <span class="kw">as </span>TryFrom&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+    &lt;T <span class="kw">as </span>TryInto&lt;usize&gt;&gt;::Error: core::fmt::Debug,
 {
-    <span class="kw">type </span>Error = Error;
-
-    <span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, numeric: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, <span class="self">Self</span>::Error&gt; {
+    <span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, numeric: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, Error&lt;T&gt;&gt; {
         format_roman(
             <span class="string">"n"</span>,
             <span class="kw-2">&amp;</span>[
@@ -260,11 +260,11 @@
 
 <span class="kw">impl</span>&lt;T&gt; NominalSystem&lt;T&gt; <span class="kw">for </span>RomanUpper
 <span class="kw">where
-    </span>T: UnsignedInteger + TryFrom&lt;u32&gt;,
+    </span>T: Nominal + UnsignedInteger + TryFrom&lt;u32&gt;,
+    &lt;T <span class="kw">as </span>TryFrom&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+    &lt;T <span class="kw">as </span>TryInto&lt;usize&gt;&gt;::Error: core::fmt::Debug,
 {
-    <span class="kw">type </span>Error = Error;
-
-    <span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, numeric: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, <span class="self">Self</span>::Error&gt; {
+    <span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, numeric: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, Error&lt;T&gt;&gt; {
         format_roman(
             <span class="string">"N"</span>,
             <span class="kw-2">&amp;</span>[

@@ -85,18 +85,20 @@
 <a href="#83" id="83">83</a>
 <a href="#84" id="84">84</a>
 <a href="#85" id="85">85</a>
-</pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, NominalString, NominalSystem, UnsignedInteger};
+<a href="#86" id="86">86</a>
+</pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 <span class="doccomment">/// Hebrew numerals.
 </span><span class="kw">pub struct </span>Hebrew;
 
 <span class="kw">impl</span>&lt;T&gt; NominalSystem&lt;T&gt; <span class="kw">for </span>Hebrew
 <span class="kw">where
-    </span>T: UnsignedInteger + TryFrom&lt;u32&gt; + From&lt;u8&gt;,
+    </span>T: Nominal + UnsignedInteger + TryFrom&lt;u32&gt; + From&lt;u8&gt;,
+    &lt;T <span class="kw">as </span>TryFrom&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+    &lt;T <span class="kw">as </span>TryInto&lt;usize&gt;&gt;::Error: core::fmt::Debug,
 {
-    <span class="kw">type </span>Error = Error;
-
-    <span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw-2">mut </span>remaining: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, <span class="self">Self</span>::Error&gt; {
+    <span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, nominal: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, Error&lt;T&gt;&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>remaining = nominal;
         <span class="kw">if </span>remaining.is_zero() {
             <span class="kw">return </span><span class="prelude-val">Err</span>(Error::NoZeroSymbol);
         }
@@ -135,10 +137,10 @@
 
             <span class="kw">while </span>remaining &gt;= value {
                 <span class="kw">if </span>remaining == fifteen {
-                    formatted.try_push_str(<span class="string">"ט״ו"</span>)<span class="question-mark">?</span>;
+                    formatted.try_push_str(<span class="string">"ט״ו"</span>).with_nominal(nominal)<span class="question-mark">?</span>;
                     <span class="kw">break </span><span class="lifetime">'symbol_loop</span>;
                 } <span class="kw">else if </span>remaining == sixteen {
-                    formatted.try_push_str(<span class="string">"ט״ז"</span>)<span class="question-mark">?</span>;
+                    formatted.try_push_str(<span class="string">"ט״ז"</span>).with_nominal(nominal)<span class="question-mark">?</span>;
                     <span class="kw">break </span><span class="lifetime">'symbol_loop</span>;
                 }
 
@@ -147,12 +149,12 @@
                 // distinguish it from a word.
                 </span><span class="kw">let </span>single_symbol = value == remaining &amp;&amp; formatted.is_empty();
                 <span class="kw">if </span>single_symbol {
-                    formatted.try_push(<span class="string">'׳'</span>)<span class="question-mark">?</span>;
+                    formatted.try_push(<span class="string">'׳'</span>).with_nominal(nominal)<span class="question-mark">?</span>;
                 }
                 remaining = remaining - value;
-                formatted.try_push(symbol)<span class="question-mark">?</span>;
+                formatted.try_push(symbol).with_nominal(nominal)<span class="question-mark">?</span>;
                 <span class="kw">if </span>single_symbol {
-                    formatted.try_push(<span class="string">'״'</span>)<span class="question-mark">?</span>;
+                    formatted.try_push(<span class="string">'״'</span>).with_nominal(nominal)<span class="question-mark">?</span>;
                     <span class="kw">break</span>;
                 }
             }

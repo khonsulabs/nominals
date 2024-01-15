@@ -479,9 +479,7 @@
 <a href="#477" id="477">477</a>
 <a href="#478" id="478">478</a>
 <a href="#479" id="479">479</a>
-<a href="#480" id="480">480</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::sealed::IntoTryFromIntError;
-<span class="kw">use crate</span>::{Error, NominalString, NominalSystem, UnsignedInteger};
+</pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 <span class="doccomment">/// An ordered set of characters that can be treated as digits.
 ///
@@ -852,22 +850,20 @@
 <span class="kw">impl</span>&lt;T, D&gt; NominalSystem&lt;T&gt; <span class="kw">for </span>D
 <span class="kw">where
     </span>D: DigitCollection,
-    T: UnsignedInteger + From&lt;u8&gt; + TryFrom&lt;usize&gt; + TryInto&lt;usize&gt;,
-    &lt;T <span class="kw">as </span>TryFrom&lt;usize&gt;&gt;::Error: IntoTryFromIntError,
-    &lt;T <span class="kw">as </span>TryInto&lt;usize&gt;&gt;::Error: IntoTryFromIntError,
+    T: Nominal + UnsignedInteger,
+    &lt;T <span class="kw">as </span>TryFrom&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+    &lt;T <span class="kw">as </span>TryInto&lt;usize&gt;&gt;::Error: core::fmt::Debug,
 {
-    <span class="kw">type </span>Error = Error;
-
-    <span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, numeric: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, <span class="self">Self</span>::Error&gt; {
+    <span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, nominal: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, Error&lt;T&gt;&gt; {
         <span class="kw">let </span><span class="prelude-val">Ok</span>(count) = T::try_from(<span class="self">self</span>.len()) <span class="kw">else </span>{
             <span class="kw">return </span><span class="prelude-val">Ok</span>(NominalString::from(
-                <span class="self">self</span>.digit((numeric).try_into().expect(<span class="string">"numeric &lt; len"</span>)),
+                <span class="self">self</span>.digit((nominal).try_into().expect(<span class="string">"numeric &lt; len"</span>)),
             ));
         };
         <span class="kw">let </span>one = T::from(<span class="number">1_u8</span>);
         <span class="kw">let </span><span class="kw-2">mut </span>formatted = NominalString::new();
 
-        <span class="kw">let </span><span class="kw-2">mut </span>remaining = numeric;
+        <span class="kw">let </span><span class="kw-2">mut </span>remaining = nominal;
         <span class="kw">let </span><span class="kw-2">mut </span>first_loop = <span class="bool-val">true</span>;
         <span class="kw">while </span>!remaining.is_zero() || first_loop {
             <span class="kw">if </span>!<span class="self">self</span>.has_zero_digit() &amp;&amp; (!<span class="self">self</span>.zero_based() || !first_loop) {
@@ -879,9 +875,11 @@
             }
             first_loop = <span class="bool-val">false</span>;
 
-            formatted.try_push_front(
-                <span class="self">self</span>.digit((remaining % count).try_into().expect(<span class="string">"count &lt;= usize::MAX"</span>)),
-            )<span class="question-mark">?</span>;
+            formatted
+                .try_push_front(
+                    <span class="self">self</span>.digit((remaining % count).try_into().expect(<span class="string">"count &lt;= usize::MAX"</span>)),
+                )
+                .with_nominal(nominal)<span class="question-mark">?</span>;
             remaining = remaining / count;
         }
 

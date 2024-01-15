@@ -129,8 +129,87 @@
 <a href="#127" id="127">127</a>
 <a href="#128" id="128">128</a>
 <a href="#129" id="129">129</a>
+<a href="#130" id="130">130</a>
+<a href="#131" id="131">131</a>
+<a href="#132" id="132">132</a>
+<a href="#133" id="133">133</a>
+<a href="#134" id="134">134</a>
+<a href="#135" id="135">135</a>
+<a href="#136" id="136">136</a>
+<a href="#137" id="137">137</a>
+<a href="#138" id="138">138</a>
+<a href="#139" id="139">139</a>
+<a href="#140" id="140">140</a>
+<a href="#141" id="141">141</a>
+<a href="#142" id="142">142</a>
+<a href="#143" id="143">143</a>
+<a href="#144" id="144">144</a>
+<a href="#145" id="145">145</a>
+<a href="#146" id="146">146</a>
+<a href="#147" id="147">147</a>
+<a href="#148" id="148">148</a>
+<a href="#149" id="149">149</a>
+<a href="#150" id="150">150</a>
+<a href="#151" id="151">151</a>
+<a href="#152" id="152">152</a>
+<a href="#153" id="153">153</a>
+<a href="#154" id="154">154</a>
+<a href="#155" id="155">155</a>
+<a href="#156" id="156">156</a>
+<a href="#157" id="157">157</a>
+<a href="#158" id="158">158</a>
+<a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
+<a href="#170" id="170">170</a>
+<a href="#171" id="171">171</a>
+<a href="#172" id="172">172</a>
+<a href="#173" id="173">173</a>
+<a href="#174" id="174">174</a>
+<a href="#175" id="175">175</a>
+<a href="#176" id="176">176</a>
+<a href="#177" id="177">177</a>
+<a href="#178" id="178">178</a>
+<a href="#179" id="179">179</a>
+<a href="#180" id="180">180</a>
+<a href="#181" id="181">181</a>
+<a href="#182" id="182">182</a>
+<a href="#183" id="183">183</a>
+<a href="#184" id="184">184</a>
+<a href="#185" id="185">185</a>
+<a href="#186" id="186">186</a>
+<a href="#187" id="187">187</a>
+<a href="#188" id="188">188</a>
+<a href="#189" id="189">189</a>
+<a href="#190" id="190">190</a>
+<a href="#191" id="191">191</a>
+<a href="#192" id="192">192</a>
+<a href="#193" id="193">193</a>
+<a href="#194" id="194">194</a>
+<a href="#195" id="195">195</a>
+<a href="#196" id="196">196</a>
+<a href="#197" id="197">197</a>
+<a href="#198" id="198">198</a>
+<a href="#199" id="199">199</a>
+<a href="#200" id="200">200</a>
+<a href="#201" id="201">201</a>
+<a href="#202" id="202">202</a>
+<a href="#203" id="203">203</a>
+<a href="#204" id="204">204</a>
+<a href="#205" id="205">205</a>
+<a href="#206" id="206">206</a>
+<a href="#207" id="207">207</a>
 </pre></div><pre class="rust"><code><span class="attr">#![doc = <span class="macro">include_str!</span>(<span class="string">"../README.md"</span>)]
 #![no_std]
+#![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
 #[cfg(feature = <span class="string">"alloc"</span>)]
 </span><span class="kw">extern crate </span>alloc;
@@ -140,7 +219,12 @@
 <span class="kw">mod </span>hebrew;
 <span class="kw">mod </span>nominalstring;
 <span class="kw">mod </span>roman;
-<span class="kw">mod </span>sealed;
+
+<span class="kw">mod </span>sealed {
+    <span class="doccomment">/// A trait that marks a type as performing integer-style division with its
+    /// `Div` and `Rem` implementations.
+    </span><span class="kw">pub trait </span>IntegerDivision {}
+}
 
 <span class="doccomment">/// Systems that operate using ordered sets of digit-like characters.
 </span><span class="kw">mod </span>digital;
@@ -152,22 +236,19 @@
 </span><span class="kw">pub use </span>chinese::Chinese;
 <span class="kw">pub use </span>digital::<span class="kw-2">*</span>;
 <span class="kw">pub use </span>hebrew::Hebrew;
-<span class="kw">pub use </span>nominalstring::NominalString;
+<span class="kw">pub use </span>nominalstring::{NominalString, OutOfMemoryError};
 <span class="kw">pub use </span>roman::{RomanLowercase, RomanUpper};
 
 <span class="doccomment">/// A system of ordered nominal identifiers.
-</span><span class="kw">pub trait </span>NominalSystem&lt;T&gt; {
-    <span class="doccomment">/// The error type that this system can produce.
-    </span><span class="kw">type </span>Error: Debug;
-
+</span><span class="kw">pub trait </span>NominalSystem&lt;T&gt;
+<span class="kw">where
+    </span>T: Nominal,
+    &lt;T <span class="kw">as </span>TryFrom&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+    &lt;T <span class="kw">as </span>TryInto&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+{
     <span class="doccomment">/// Formats `nominal` using this system.
-    ///
-    /// # Panics
-    ///
-    /// If [`Self::try_format_nominal()`] returns an error, this function will
-    /// panic.
     </span><span class="kw">fn </span>format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, nominal: T) -&gt; NominalString {
-        <span class="self">self</span>.try_format_nominal(nominal).expect(<span class="string">"unable to format"</span>)
+        <span class="self">self</span>.try_format_nominal(nominal).unwrap_or_decimal()
     }
 
     <span class="doccomment">/// Tries to format `nominal` using this system.
@@ -177,11 +258,21 @@
     /// Each nominal system can use its own error type. The crate-level error
     /// type is [`Error`], and each variant describes why formatting a nominal
     /// may fail.
-    </span><span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, nominal: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, <span class="self">Self</span>::Error&gt;;
+    </span><span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, nominal: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, Error&lt;T&gt;&gt;;
+}
+
+<span class="attr">#[test]
+</span><span class="kw">fn </span>boxing() {
+    <span class="kw">let </span>system: alloc::boxed::Box&lt;<span class="kw">dyn </span>NominalSystem&lt;u32&gt;&gt; = alloc::boxed::Box::new(RomanUpper);
+    <span class="macro">assert_eq!</span>(<span class="number">1</span>.to_nominal(<span class="kw-2">&amp;*</span>system), <span class="string">"I"</span>);
 }
 
 <span class="doccomment">/// A type that can be formatted with a [`NominalSystem`].
-</span><span class="kw">pub trait </span>Nominal: Sized {
+</span><span class="kw">pub trait </span>Nominal: UnsignedInteger
+<span class="kw">where
+    </span>&lt;<span class="self">Self </span><span class="kw">as </span>TryFrom&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+    &lt;<span class="self">Self </span><span class="kw">as </span>TryInto&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+{
     <span class="doccomment">/// Returns `self` formatted as a nominal identifier using `system`.
     ///
     /// # Panics
@@ -190,7 +281,7 @@
     /// returns an error, this function will panic.
     </span><span class="kw">fn </span>to_nominal&lt;N&gt;(<span class="self">self</span>, system: <span class="kw-2">&amp;</span>N) -&gt; NominalString
     <span class="kw">where
-        </span>N: NominalSystem&lt;<span class="self">Self</span>&gt;,
+        </span>N: NominalSystem&lt;<span class="self">Self</span>&gt; + <span class="question-mark">?</span>Sized,
     {
         system.format_nominal(<span class="self">self</span>)
     }
@@ -202,9 +293,9 @@
     /// Each nominal system can use its own error type. The crate-level error
     /// type is [`Error`], and each variant describes why formatting a nominal
     /// may fail.
-    </span><span class="kw">fn </span>try_to_nominal&lt;N&gt;(<span class="self">self</span>, system: <span class="kw-2">&amp;</span>N) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, N::Error&gt;
+    </span><span class="kw">fn </span>try_to_nominal&lt;N&gt;(<span class="self">self</span>, system: <span class="kw-2">&amp;</span>N) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, Error&lt;<span class="self">Self</span>&gt;&gt;
     <span class="kw">where
-        </span>N: NominalSystem&lt;<span class="self">Self</span>&gt;,
+        </span>N: NominalSystem&lt;<span class="self">Self</span>&gt; + <span class="question-mark">?</span>Sized,
     {
         system.try_format_nominal(<span class="self">self</span>)
     }
@@ -220,12 +311,15 @@
 <span class="doccomment">/// An unsigned integer type.
 </span><span class="kw">pub trait </span>UnsignedInteger:
     Ord
+    + From&lt;u8&gt;
     + Sub&lt;Output = <span class="self">Self</span>&gt;
     + Div&lt;Output = <span class="self">Self</span>&gt;
     + Rem&lt;Output = <span class="self">Self</span>&gt;
     + Copy
     + Sized
     + sealed::IntegerDivision
+    + TryFrom&lt;usize&gt;
+    + TryInto&lt;usize&gt;
 {
     <span class="doccomment">/// Returns true if `self` is 0.
     </span><span class="kw">fn </span>is_zero(<span class="self">self</span>) -&gt; bool;
@@ -251,11 +345,73 @@
 
 <span class="doccomment">/// Error types that can arise from formatting nominals in this crate.
 </span><span class="attr">#[derive(Debug, Clone, Copy, Eq, PartialEq)]
-</span><span class="kw">pub enum </span>Error {
+#[non_exhaustive]
+</span><span class="kw">pub enum </span>Error&lt;T&gt; {
     <span class="doccomment">/// A formatting request for index `0` was made against a nominal system
     /// that has no zero symbol.
     </span>NoZeroSymbol,
-    <span class="doccomment">/// The nominal can't be formatted with the available memory.
-    </span>OutOfMemory,
+    <span class="doccomment">/// This nominal can't be formatted with the available memory.
+    </span>OutOfMemory(T),
+    <span class="doccomment">/// This number cannot be represented by the nominal system.
+    </span>OutOfBounds(T),
+}
+
+<span class="kw">impl</span>&lt;T&gt; Error&lt;T&gt;
+<span class="kw">where
+    </span>T: Nominal,
+    &lt;T <span class="kw">as </span>TryFrom&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+    &lt;T <span class="kw">as </span>TryInto&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+{
+    <span class="doccomment">/// Converts this error to a nominal string in decimal form.
+    ///
+    /// - [`Error::NoZeroSymbol`] is returned as 0
+    /// - [`Error::OutOfBounds`] and [`Error::OutOfMemory`] will format the
+    ///   erroring nominal in [`Decimal`].
+    </span><span class="kw">pub fn </span>into_decimal(<span class="self">self</span>) -&gt; NominalString {
+        <span class="kw">match </span><span class="self">self </span>{
+            Error::NoZeroSymbol =&gt; NominalString::from(<span class="string">'0'</span>),
+            Error::OutOfBounds(nominal) | Error::OutOfMemory(nominal) =&gt; {
+                Decimal.format_nominal(nominal)
+            }
+        }
+    }
+}
+
+<span class="doccomment">/// Unwraps a result with an [`Error`] by formatting the erroring nominal in
+/// [`Decimal`].
+</span><span class="kw">pub trait </span>UnwrapOrDecimal {
+    <span class="doccomment">/// Returns the nominal string or a nominal string formatted using
+    /// [`Decimal`].
+    </span><span class="kw">fn </span>unwrap_or_decimal(<span class="self">self</span>) -&gt; NominalString;
+}
+
+<span class="kw">impl</span>&lt;T&gt; UnwrapOrDecimal <span class="kw">for </span><span class="prelude-ty">Result</span>&lt;NominalString, Error&lt;T&gt;&gt;
+<span class="kw">where
+    </span>T: Nominal,
+    &lt;T <span class="kw">as </span>TryFrom&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+    &lt;T <span class="kw">as </span>TryInto&lt;usize&gt;&gt;::Error: core::fmt::Debug,
+{
+    <span class="kw">fn </span>unwrap_or_decimal(<span class="self">self</span>) -&gt; NominalString {
+        <span class="kw">match </span><span class="self">self </span>{
+            <span class="prelude-val">Ok</span>(s) =&gt; s,
+            <span class="prelude-val">Err</span>(err) =&gt; err.into_decimal(),
+        }
+    }
+}
+
+<span class="doccomment">/// Converts a result from one error type to an [`Error&lt;N&gt;`].
+</span><span class="kw">pub trait </span>WithNominal&lt;R&gt; {
+    <span class="doccomment">/// Returns the result with an updated error containing `nominal`.
+    ///
+    /// # Errors
+    ///
+    /// Returns an error if `self` is `Err()`.
+    </span><span class="kw">fn </span>with_nominal&lt;N&gt;(<span class="self">self</span>, nominal: N) -&gt; <span class="prelude-ty">Result</span>&lt;R, Error&lt;N&gt;&gt;;
+}
+
+<span class="kw">impl</span>&lt;R&gt; WithNominal&lt;R&gt; <span class="kw">for </span><span class="prelude-ty">Result</span>&lt;R, OutOfMemoryError&gt; {
+    <span class="kw">fn </span>with_nominal&lt;N&gt;(<span class="self">self</span>, nominal: N) -&gt; <span class="prelude-ty">Result</span>&lt;R, Error&lt;N&gt;&gt; {
+        <span class="self">self</span>.map_err(|<span class="kw">_</span>| Error::OutOfMemory(nominal))
+    }
 }
 </code></pre></div></section></main></body></html>
