@@ -1,16 +1,16 @@
-use crate::{Error, NominalString, NominalSystem, UnsignedInteger};
+use crate::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 fn format_roman<T>(
     zero_digit: &str,
     digits: &[(&str, u32); 25],
-    numeric: T,
-) -> Result<NominalString, Error>
+    nominal: T,
+) -> Result<NominalString, Error<T>>
 where
     T: UnsignedInteger + TryFrom<u32>,
 {
     let mut formatted = NominalString::default();
 
-    let mut remaining = numeric;
+    let mut remaining = nominal;
     if remaining.is_zero() {
         return Ok(NominalString::from(zero_digit));
     }
@@ -21,7 +21,7 @@ where
         };
         while remaining >= value_as_t {
             remaining = remaining - value_as_t;
-            formatted.try_push_str(digit.0)?;
+            formatted.try_push_str(digit.0).with_nominal(nominal)?;
         }
     }
 
@@ -44,11 +44,11 @@ pub struct RomanLowercase;
 
 impl<T> NominalSystem<T> for RomanLowercase
 where
-    T: UnsignedInteger + TryFrom<u32>,
+    T: Nominal + UnsignedInteger + TryFrom<u32>,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
-    type Error = Error;
-
-    fn try_format_nominal(&self, numeric: T) -> Result<NominalString, Self::Error> {
+    fn try_format_nominal(&self, numeric: T) -> Result<NominalString, Error<T>> {
         format_roman(
             "n",
             &[
@@ -99,11 +99,11 @@ pub struct RomanUpper;
 
 impl<T> NominalSystem<T> for RomanUpper
 where
-    T: UnsignedInteger + TryFrom<u32>,
+    T: Nominal + UnsignedInteger + TryFrom<u32>,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
-    type Error = Error;
-
-    fn try_format_nominal(&self, numeric: T) -> Result<NominalString, Self::Error> {
+    fn try_format_nominal(&self, numeric: T) -> Result<NominalString, Error<T>> {
         format_roman(
             "N",
             &[

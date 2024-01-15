@@ -1,8 +1,6 @@
-use chinese_number::{
-    ChineseCase, ChineseCountMethod, ChineseVariant, NumberToChinese, NumberToChineseError,
-};
+use chinese_number::{ChineseCase, ChineseCountMethod, ChineseVariant, NumberToChinese};
 
-use crate::{NominalString, NominalSystem};
+use crate::{Error, Nominal, NominalString, NominalSystem};
 
 /// A Chinese nominal system.
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
@@ -55,12 +53,14 @@ impl Chinese {
 
 impl<T> NominalSystem<T> for Chinese
 where
-    T: NumberToChinese + Copy,
+    T: Nominal + NumberToChinese + Copy,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
-    type Error = NumberToChineseError;
-
-    fn try_format_nominal(&self, numeric: T) -> Result<NominalString, Self::Error> {
-        let formatted = numeric.to_chinese(self.variant, self.case, self.method)?;
+    fn try_format_nominal(&self, numeric: T) -> Result<NominalString, Error<T>> {
+        let formatted = numeric
+            .to_chinese(self.variant, self.case, self.method)
+            .map_err(|_| Error::OutOfBounds(numeric))?;
 
         Ok(NominalString::from(formatted))
     }

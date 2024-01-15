@@ -1,15 +1,16 @@
-use crate::{Error, NominalString, NominalSystem, UnsignedInteger};
+use crate::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 /// Hebrew numerals.
 pub struct Hebrew;
 
 impl<T> NominalSystem<T> for Hebrew
 where
-    T: UnsignedInteger + TryFrom<u32> + From<u8>,
+    T: Nominal + UnsignedInteger + TryFrom<u32> + From<u8>,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
-    type Error = Error;
-
-    fn try_format_nominal(&self, mut remaining: T) -> Result<NominalString, Self::Error> {
+    fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
+        let mut remaining = nominal;
         if remaining.is_zero() {
             return Err(Error::NoZeroSymbol);
         }
@@ -48,10 +49,10 @@ where
 
             while remaining >= value {
                 if remaining == fifteen {
-                    formatted.try_push_str("ט״ו")?;
+                    formatted.try_push_str("ט״ו").with_nominal(nominal)?;
                     break 'symbol_loop;
                 } else if remaining == sixteen {
-                    formatted.try_push_str("ט״ז")?;
+                    formatted.try_push_str("ט״ז").with_nominal(nominal)?;
                     break 'symbol_loop;
                 }
 
@@ -60,12 +61,12 @@ where
                 // distinguish it from a word.
                 let single_symbol = value == remaining && formatted.is_empty();
                 if single_symbol {
-                    formatted.try_push('׳')?;
+                    formatted.try_push('׳').with_nominal(nominal)?;
                 }
                 remaining = remaining - value;
-                formatted.try_push(symbol)?;
+                formatted.try_push(symbol).with_nominal(nominal)?;
                 if single_symbol {
-                    formatted.try_push('״')?;
+                    formatted.try_push('״').with_nominal(nominal)?;
                     break;
                 }
             }

@@ -1,5 +1,6 @@
 #![doc = include_str!("../README.md")]
 #![no_std]
+#![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
 #[cfg(feature = "alloc")]
 extern crate alloc;
@@ -9,7 +10,12 @@ mod chinese;
 mod hebrew;
 mod nominalstring;
 mod roman;
-mod sealed;
+
+mod sealed {
+    /// A trait that marks a type as performing integer-style division with its
+    /// `Div` and `Rem` implementations.
+    pub trait IntegerDivision {}
+}
 
 /// Systems that operate using ordered sets of digit-like characters.
 mod digital;
@@ -21,22 +27,19 @@ use core::ops::{Div, Rem, Sub};
 pub use chinese::Chinese;
 pub use digital::*;
 pub use hebrew::Hebrew;
-pub use nominalstring::NominalString;
+pub use nominalstring::{NominalString, OutOfMemoryError};
 pub use roman::{RomanLowercase, RomanUpper};
 
 /// A system of ordered nominal identifiers.
-pub trait NominalSystem<T> {
-    /// The error type that this system can produce.
-    type Error: Debug;
-
+pub trait NominalSystem<T>
+where
+    T: Nominal,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
+{
     /// Formats `nominal` using this system.
-    ///
-    /// # Panics
-    ///
-    /// If [`Self::try_format_nominal()`] returns an error, this function will
-    /// panic.
     fn format_nominal(&self, nominal: T) -> NominalString {
-        self.try_format_nominal(nominal).expect("unable to format")
+        self.try_format_nominal(nominal).unwrap_or_decimal()
     }
 
     /// Tries to format `nominal` using this system.
@@ -46,11 +49,21 @@ pub trait NominalSystem<T> {
     /// Each nominal system can use its own error type. The crate-level error
     /// type is [`Error`], and each variant describes why formatting a nominal
     /// may fail.
-    fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Self::Error>;
+    fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>>;
+}
+
+#[test]
+fn boxing() {
+    let system: alloc::boxed::Box<dyn NominalSystem<u32>> = alloc::boxed::Box::new(RomanUpper);
+    assert_eq!(1.to_nominal(&*system), "I");
 }
 
 /// A type that can be formatted with a [`NominalSystem`].
-pub trait Nominal: Sized {
+pub trait Nominal: UnsignedInteger
+where
+    <Self as TryFrom<usize>>::Error: core::fmt::Debug,
+    <Self as TryInto<usize>>::Error: core::fmt::Debug,
+{
     /// Returns `self` formatted as a nominal identifier using `system`.
     ///
     /// # Panics
@@ -59,7 +72,7 @@ pub trait Nominal: Sized {
     /// returns an error, this function will panic.
     fn to_nominal<N>(self, system: &N) -> NominalString
     where
-        N: NominalSystem<Self>,
+        N: NominalSystem<Self> + ?Sized,
     {
         system.format_nominal(self)
     }
@@ -71,9 +84,9 @@ pub trait Nominal: Sized {
     /// Each nominal system can use its own error type. The crate-level error
     /// type is [`Error`], and each variant describes why formatting a nominal
     /// may fail.
-    fn try_to_nominal<N>(self, system: &N) -> Result<NominalString, N::Error>
+    fn try_to_nominal<N>(self, system: &N) -> Result<NominalString, Error<Self>>
     where
-        N: NominalSystem<Self>,
+        N: NominalSystem<Self> + ?Sized,
     {
         system.try_format_nominal(self)
     }
@@ -89,12 +102,15 @@ impl Nominal for usize {}
 /// An unsigned integer type.
 pub trait UnsignedInteger:
     Ord
+    + From<u8>
     + Sub<Output = Self>
     + Div<Output = Self>
     + Rem<Output = Self>
     + Copy
     + Sized
     + sealed::IntegerDivision
+    + TryFrom<usize>
+    + TryInto<usize>
 {
     /// Returns true if `self` is 0.
     fn is_zero(self) -> bool;
@@ -120,10 +136,72 @@ impl_positive_integer!(usize);
 
 /// Error types that can arise from formatting nominals in this crate.
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
-pub enum Error {
+#[non_exhaustive]
+pub enum Error<T> {
     /// A formatting request for index `0` was made against a nominal system
     /// that has no zero symbol.
     NoZeroSymbol,
-    /// The nominal can't be formatted with the available memory.
-    OutOfMemory,
+    /// This nominal can't be formatted with the available memory.
+    OutOfMemory(T),
+    /// This number cannot be represented by the nominal system.
+    OutOfBounds(T),
+}
+
+impl<T> Error<T>
+where
+    T: Nominal,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
+{
+    /// Converts this error to a nominal string in decimal form.
+    ///
+    /// - [`Error::NoZeroSymbol`] is returned as 0
+    /// - [`Error::OutOfBounds`] and [`Error::OutOfMemory`] will format the
+    ///   erroring nominal in [`Decimal`].
+    pub fn into_decimal(self) -> NominalString {
+        match self {
+            Error::NoZeroSymbol => NominalString::from('0'),
+            Error::OutOfBounds(nominal) | Error::OutOfMemory(nominal) => {
+                Decimal.format_nominal(nominal)
+            }
+        }
+    }
+}
+
+/// Unwraps a result with an [`Error`] by formatting the erroring nominal in
+/// [`Decimal`].
+pub trait UnwrapOrDecimal {
+    /// Returns the nominal string or a nominal string formatted using
+    /// [`Decimal`].
+    fn unwrap_or_decimal(self) -> NominalString;
+}
+
+impl<T> UnwrapOrDecimal for Result<NominalString, Error<T>>
+where
+    T: Nominal,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
+{
+    fn unwrap_or_decimal(self) -> NominalString {
+        match self {
+            Ok(s) => s,
+            Err(err) => err.into_decimal(),
+        }
+    }
+}
+
+/// Converts a result from one error type to an [`Error<N>`].
+pub trait WithNominal<R> {
+    /// Returns the result with an updated error containing `nominal`.
+    ///
+    /// # Errors
+    ///
+    /// Returns an error if `self` is `Err()`.
+    fn with_nominal<N>(self, nominal: N) -> Result<R, Error<N>>;
+}
+
+impl<R> WithNominal<R> for Result<R, OutOfMemoryError> {
+    fn with_nominal<N>(self, nominal: N) -> Result<R, Error<N>> {
+        self.map_err(|_| Error::OutOfMemory(nominal))
+    }
 }

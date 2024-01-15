@@ -1,5 +1,4 @@
-use crate::sealed::IntoTryFromIntError;
-use crate::{Error, NominalString, NominalSystem, UnsignedInteger};
+use crate::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 /// An ordered set of characters that can be treated as digits.
 ///
@@ -370,22 +369,20 @@ impl<const N: usize> DigitCollection for DigitSet<N, true> {
 impl<T, D> NominalSystem<T> for D
 where
     D: DigitCollection,
-    T: UnsignedInteger + From<u8> + TryFrom<usize> + TryInto<usize>,
-    <T as TryFrom<usize>>::Error: IntoTryFromIntError,
-    <T as TryInto<usize>>::Error: IntoTryFromIntError,
+    T: Nominal + UnsignedInteger,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
-    type Error = Error;
-
-    fn try_format_nominal(&self, numeric: T) -> Result<NominalString, Self::Error> {
+    fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
         let Ok(count) = T::try_from(self.len()) else {
             return Ok(NominalString::from(
-                self.digit((numeric).try_into().expect("numeric < len")),
+                self.digit((nominal).try_into().expect("numeric < len")),
             ));
         };
         let one = T::from(1_u8);
         let mut formatted = NominalString::new();
 
-        let mut remaining = numeric;
+        let mut remaining = nominal;
         let mut first_loop = true;
         while !remaining.is_zero() || first_loop {
             if !self.has_zero_digit() && (!self.zero_based() || !first_loop) {
@@ -397,9 +394,11 @@ where
             }
             first_loop = false;
 
-            formatted.try_push_front(
-                self.digit((remaining % count).try_into().expect("count <= usize::MAX")),
-            )?;
+            formatted
+                .try_push_front(
+                    self.digit((remaining % count).try_into().expect("count <= usize::MAX")),
+                )
+                .with_nominal(nominal)?;
             remaining = remaining / count;
         }
 

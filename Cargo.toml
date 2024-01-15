@@ -27,3 +27,10 @@ missing_docs = "warn"
 [lints.clippy]
 pedantic = "warn"
 module_name_repetitions = "allow"
+
+
+[package.metadata.docs.rs]
+# document all features
+all-features = true
+# defines the configuration attribute `docsrs`
+rustdoc-args = ["--cfg", "docsrs"]

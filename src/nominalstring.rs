@@ -4,8 +4,6 @@ use core::array;
 use core::fmt::{Debug, Display};
 use core::ops::{Deref, DerefMut};
 
-use crate::Error;
-
 /// A string that can contain most formatted nominals without a heap allocation.
 ///
 /// This type can store up to 47 bytes on the stack before requiring a heap
@@ -29,9 +27,9 @@ impl NominalString {
     ///
     /// # Errors
     ///
-    /// Returns [`Error::OutOfMemory`] if no additiol space is available and the
+    /// Returns [`OutOfMemoryError`] if no additiol space is available and the
     /// `alloc` feature is disabled.
-    pub fn try_push(&mut self, ch: char) -> Result<(), Error> {
+    pub fn try_push(&mut self, ch: char) -> Result<(), OutOfMemoryError> {
         self.0.push(ch)
     }
 
@@ -39,9 +37,9 @@ impl NominalString {
     ///
     /// # Errors
     ///
-    /// Returns [`Error::OutOfMemory`] if no additiol space is available and the
+    /// Returns [`OutOfMemoryError`] if no additiol space is available and the
     /// `alloc` feature is disabled.
-    pub fn try_push_str(&mut self, str: &str) -> Result<(), Error> {
+    pub fn try_push_str(&mut self, str: &str) -> Result<(), OutOfMemoryError> {
         self.0.push_str(str)
     }
 
@@ -49,9 +47,9 @@ impl NominalString {
     ///
     /// # Errors
     ///
-    /// Returns [`Error::OutOfMemory`] if no additiol space is available and the
+    /// Returns [`OutOfMemoryError`] if no additiol space is available and the
     /// `alloc` feature is disabled.
-    pub fn try_push_front(&mut self, ch: char) -> Result<(), Error> {
+    pub fn try_push_front(&mut self, ch: char) -> Result<(), OutOfMemoryError> {
         self.0.push_front(ch)
     }
 
@@ -246,7 +244,7 @@ impl MaybeInline {
     }
 
     #[allow(clippy::unnecessary_wraps)]
-    fn push(&mut self, ch: char) -> Result<(), Error> {
+    fn push(&mut self, ch: char) -> Result<(), OutOfMemoryError> {
         match self {
             MaybeInline::Inline(inline) => {
                 let char_len = ch.len_utf8();
@@ -275,7 +273,7 @@ impl MaybeInline {
     }
 
     #[allow(clippy::unnecessary_wraps)]
-    fn push_str(&mut self, str: &str) -> Result<(), Error> {
+    fn push_str(&mut self, str: &str) -> Result<(), OutOfMemoryError> {
         match self {
             MaybeInline::Inline(inline) => {
                 let insert_len = str.len();
@@ -304,7 +302,7 @@ impl MaybeInline {
     }
 
     #[allow(clippy::unnecessary_wraps)]
-    fn push_front(&mut self, ch: char) -> Result<(), Error> {
+    fn push_front(&mut self, ch: char) -> Result<(), OutOfMemoryError> {
         match self {
             MaybeInline::Inline(inline) => {
                 let char_len = ch.len_utf8();
@@ -349,3 +347,7 @@ impl MaybeInline {
         }
     }
 }
+
+/// No additional memory was able to be allocated.
+#[derive(Debug, Clone, Copy, Eq, PartialEq)]
+pub struct OutOfMemoryError;
