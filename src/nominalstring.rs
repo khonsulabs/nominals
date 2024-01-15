@@ -262,7 +262,7 @@ impl MaybeInline {
                     }
                     #[cfg(not(feature = "alloc"))]
                     {
-                        return Err(Error::OutOfMemory);
+                        return Err(OutOfMemoryError);
                     }
                 }
             }
@@ -291,7 +291,7 @@ impl MaybeInline {
                     }
                     #[cfg(not(feature = "alloc"))]
                     {
-                        return Err(Error::OutOfMemory);
+                        return Err(OutOfMemoryError);
                     }
                 }
             }
@@ -321,7 +321,7 @@ impl MaybeInline {
                     }
                     #[cfg(not(feature = "alloc"))]
                     {
-                        return Err(Error::OutOfMemory);
+                        return Err(OutOfMemoryError);
                     }
                 }
             }
