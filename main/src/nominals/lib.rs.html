@@ -138,9 +138,9 @@
 <span class="attr">#[cfg(feature = <span class="string">"chinese"</span>)]
 </span><span class="kw">mod </span>chinese;
 <span class="kw">mod </span>hebrew;
+<span class="kw">mod </span>nominalstring;
 <span class="kw">mod </span>roman;
 <span class="kw">mod </span>sealed;
-<span class="kw">mod </span>stackstring;
 
 <span class="doccomment">/// Systems that operate using ordered sets of digit-like characters.
 </span><span class="kw">mod </span>digital;
@@ -152,8 +152,8 @@
 </span><span class="kw">pub use </span>chinese::Chinese;
 <span class="kw">pub use </span>digital::<span class="kw-2">*</span>;
 <span class="kw">pub use </span>hebrew::Hebrew;
+<span class="kw">pub use </span>nominalstring::NominalString;
 <span class="kw">pub use </span>roman::{RomanLowercase, RomanUpper};
-<span class="kw">pub use </span>stackstring::NominalString;
 
 <span class="doccomment">/// A system of ordered nominal identifiers.
 </span><span class="kw">pub trait </span>NominalSystem&lt;T&gt; {
