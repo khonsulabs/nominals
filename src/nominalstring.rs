@@ -1,7 +1,9 @@
+#![allow(unsafe_code)]
+
 #[cfg(feature = "alloc")]
 use alloc::string::String;
-use core::array;
 use core::fmt::{Debug, Display};
+use core::mem::MaybeUninit;
 use core::ops::{Deref, DerefMut};
 
 /// A string that can contain most formatted nominals without a heap allocation.
@@ -16,7 +18,7 @@ pub struct NominalString(MaybeInline);
 impl NominalString {
     /// The maximum byte capacity this type can contain before allocating on the
     /// heap.
-    pub const INLINE_CAPACITY: usize = MaybeInline::INLINE_CAPACITY;
+    pub const INLINE_CAPACITY: usize = MaybeInline::INLINE_CAPACITY as usize;
 
     /// Returns an empty string.
     #[must_use]
@@ -106,22 +108,28 @@ impl From<String> for NominalString {
 
 impl From<&'_ str> for NominalString {
     fn from(value: &'_ str) -> Self {
-        if value.len() <= MaybeInline::INLINE_CAPACITY {
-            NominalString(MaybeInline::Inline(InlineString {
-                length: value.len(),
-                bytes: array::from_fn(|index| {
-                    value.as_bytes().get(index).copied().unwrap_or_default()
-                }),
-            }))
-        } else {
-            #[cfg(feature = "alloc")]
-            {
-                Self::from(String::from(value))
-            }
+        match u8::try_from(value.len()) {
+            Ok(value_len) if value_len <= MaybeInline::INLINE_CAPACITY => {
+                let mut bytes = [MaybeUninit::uninit(); MaybeInline::INLINE_CAPACITY as usize];
 
-            #[cfg(not(feature = "alloc"))]
-            {
-                panic!("string too long to store on stack");
+                for (dest, src) in bytes[0..value.len()].iter_mut().zip(value.as_bytes()) {
+                    dest.write(*src);
+                }
+                NominalString(MaybeInline::Inline(InlineString {
+                    length: value_len,
+                    bytes,
+                }))
+            }
+            _ => {
+                #[cfg(feature = "alloc")]
+                {
+                    Self::from(String::from(value))
+                }
+
+                #[cfg(not(feature = "alloc"))]
+                {
+                    panic!("string too long to store on stack");
+                }
             }
         }
     }
@@ -129,9 +137,9 @@ impl From<&'_ str> for NominalString {
 
 impl From<char> for NominalString {
     fn from(ch: char) -> Self {
-        let mut bytes = [0; MaybeInline::INLINE_CAPACITY];
-        let length = ch.encode_utf8(&mut bytes).len();
-        Self(MaybeInline::Inline(InlineString { length, bytes }))
+        let mut s = Self::new();
+        s.try_push(ch).expect("at least one char fits inline");
+        s
     }
 }
 
@@ -206,20 +214,30 @@ impl Debug for MaybeInline {
 
 #[derive(Clone, Copy)]
 struct InlineString {
-    length: usize,
-    bytes: [u8; MaybeInline::INLINE_CAPACITY],
+    length: u8,
+    bytes: [MaybeUninit<u8>; MaybeInline::INLINE_CAPACITY as usize],
 }
 
 impl InlineString {
     fn as_bytes(&self) -> &[u8] {
-        &self.bytes[0..self.length]
+        // SAFETY: This function only returns access to the bytes that have
+        // been initialized, indicated by `self.length`.
+        unsafe { core::slice::from_raw_parts(self.bytes.as_ptr().cast(), usize::from(self.length)) }
     }
 
     fn as_bytes_mut(&mut self) -> &mut [u8] {
-        &mut self.bytes[0..self.length]
+        // SAFETY: This function only returns access to the bytes that have been
+        // initialized, indicated by `self.length`. Because this borrow uses
+        // `self`'s lifetime, it ensures only one exclusive reference can be
+        // created.
+        unsafe {
+            core::slice::from_raw_parts_mut(
+                self.bytes.as_mut_ptr().cast(),
+                usize::from(self.length),
+            )
+        }
     }
 
-    #[allow(unsafe_code)]
     fn as_str(&self) -> &str {
         // SAFETY: This type only performs unicode-safe operations, and ensures
         // that the bytes through `length` are valid UTF-8. `as_bytes` only
@@ -227,7 +245,6 @@ impl InlineString {
         unsafe { core::str::from_utf8_unchecked(self.as_bytes()) }
     }
 
-    #[allow(unsafe_code)]
     fn as_mut_str(&mut self) -> &mut str {
         // SAFETY: This type only performs unicode-safe operations, and ensures
         // that the bytes through `length` are valid UTF-8. `as_bytes_mut` only
@@ -237,12 +254,12 @@ impl InlineString {
 }
 
 impl MaybeInline {
-    const INLINE_CAPACITY: usize = 47;
+    const INLINE_CAPACITY: u8 = 62;
 
     const fn new() -> MaybeInline {
         MaybeInline::Inline(InlineString {
             length: 0,
-            bytes: [0; 47],
+            bytes: [MaybeUninit::uninit(); Self::INLINE_CAPACITY as usize],
         })
     }
 
@@ -250,15 +267,23 @@ impl MaybeInline {
     fn push(&mut self, ch: char) -> Result<(), OutOfMemoryError> {
         match self {
             MaybeInline::Inline(inline) => {
-                let char_len = ch.len_utf8();
+                let char_len = u8::try_from(ch.len_utf8()).expect("4 < u8::MAX");
                 let new_length = inline.length + char_len;
                 if new_length <= Self::INLINE_CAPACITY {
-                    ch.encode_utf8(&mut inline.bytes[inline.length..new_length]);
+                    let mut utf8_bytes = [0; 4];
+                    ch.encode_utf8(&mut utf8_bytes);
+                    for (dest, src) in inline.bytes
+                        [usize::from(inline.length)..usize::from(new_length)]
+                        .iter_mut()
+                        .zip(&utf8_bytes[0..usize::from(char_len)])
+                    {
+                        dest.write(*src);
+                    }
                     inline.length = new_length;
                 } else {
                     #[cfg(feature = "alloc")]
                     {
-                        let mut string = String::with_capacity(new_length);
+                        let mut string = String::with_capacity(usize::from(new_length));
                         string.push_str(inline.as_str());
                         string.push(ch);
                         *self = MaybeInline::Heap(string);
@@ -279,45 +304,78 @@ impl MaybeInline {
     fn push_str(&mut self, str: &str) -> Result<(), OutOfMemoryError> {
         match self {
             MaybeInline::Inline(inline) => {
-                let insert_len = str.len();
-                let new_length = inline.length + insert_len;
-                if new_length <= Self::INLINE_CAPACITY {
-                    inline.bytes[inline.length..new_length].copy_from_slice(str.as_bytes());
-                    inline.length = new_length;
-                } else {
-                    #[cfg(feature = "alloc")]
-                    {
-                        let mut string = String::with_capacity(new_length);
-                        string.push_str(inline.as_str());
-                        string.push_str(str);
-                        *self = MaybeInline::Heap(string);
+                if let Ok(insert_len) = u8::try_from(str.len()) {
+                    let new_length = inline.length.checked_add(insert_len);
+                    match new_length {
+                        Some(new_length) if new_length <= Self::INLINE_CAPACITY => {
+                            // SAFETY: This snippet copies initialized data into
+                            // uninitialized locations, causing them to become
+                            // initialized. No read access is performed on
+                            // uninitialized data.
+                            unsafe {
+                                inline
+                                    .bytes
+                                    .as_mut_ptr()
+                                    .cast::<u8>()
+                                    .add(usize::from(inline.length))
+                                    .copy_from(str.as_bytes().as_ptr(), str.len());
+                            };
+
+                            inline.length = new_length;
+                            return Ok(());
+                        }
+                        _ => {}
                     }
-                    #[cfg(not(feature = "alloc"))]
-                    {
-                        return Err(OutOfMemoryError);
-                    }
+                }
+
+                #[cfg(feature = "alloc")]
+                {
+                    let new_length = usize::from(inline.length) + str.len();
+                    let mut string = String::with_capacity(new_length);
+                    string.push_str(inline.as_str());
+                    string.push_str(str);
+                    *self = MaybeInline::Heap(string);
+                    Ok(())
+                }
+                #[cfg(not(feature = "alloc"))]
+                {
+                    return Err(OutOfMemoryError);
                 }
             }
             #[cfg(feature = "alloc")]
-            MaybeInline::Heap(s) => s.push_str(str),
+            MaybeInline::Heap(s) => {
+                s.push_str(str);
+                Ok(())
+            }
         }
-        Ok(())
     }
 
     #[allow(clippy::unnecessary_wraps)]
     fn push_front(&mut self, ch: char) -> Result<(), OutOfMemoryError> {
         match self {
             MaybeInline::Inline(inline) => {
-                let char_len = ch.len_utf8();
+                let char_len = u8::try_from(ch.len_utf8()).expect("4 < u8::MAX");
                 let new_length = inline.length + char_len;
                 if new_length <= Self::INLINE_CAPACITY {
-                    inline.bytes.copy_within(0..inline.length, char_len);
-                    ch.encode_utf8(&mut inline.bytes);
-                    inline.length = new_length;
+                    // SAFETY: This snippet copies initialized data into
+                    // uninitialized locations, causing them to become
+                    // initialized. No read access is performed on
+                    // uninitialized data.
+                    unsafe {
+                        inline
+                            .bytes
+                            .as_mut_ptr()
+                            .cast::<u8>()
+                            .add(usize::from(char_len))
+                            .copy_from(inline.as_bytes().as_ptr(), usize::from(inline.length));
+                        inline.length = new_length;
+                    };
+
+                    ch.encode_utf8(inline.as_bytes_mut());
                 } else {
                     #[cfg(feature = "alloc")]
                     {
-                        let mut string = String::with_capacity(new_length);
+                        let mut string = String::with_capacity(usize::from(new_length));
                         string.push(ch);
                         string.push_str(inline.as_str());
                         *self = MaybeInline::Heap(string);
@@ -354,3 +412,11 @@ impl MaybeInline {
 /// No additional memory was able to be allocated.
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
 pub struct OutOfMemoryError;
+
+#[test]
+fn preconditions() {
+    // The push[_front]() functions rely on the fact that at the time of writing
+    // its code, INLINE_CAPACITY was a fixed value. This guaranteees that adding
+    // the length of a utf-8 encoded char will never overflow. If we change INLINE_CAPACITY to be something that could be 251 or larger, we shou
+    assert!(MaybeInline::INLINE_CAPACITY.checked_add(4).is_some());
+}

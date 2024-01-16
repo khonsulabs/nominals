@@ -157,3 +157,11 @@ fn roman() {
     assert_eq!(4000_u32.to_nominal(&RomanLower), "i̅v̅");
     assert_eq!(2_000_000_u32.to_nominal(&RomanLower), "m̅m̅");
 }
+
+#[test]
+fn long_test() {
+    assert_eq!(
+        63_000_000_u32.to_nominal(&RomanLower),
+        "m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅"
+    );
+}
