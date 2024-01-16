@@ -34,15 +34,15 @@ where
 /// notation uses an overline over a repeated set of symbols. A few examples:
 ///
 /// ```rust
-/// use nominals::{Nominal, RomanLowercase};
+/// use nominals::{Nominal, RomanLower};
 ///
-/// assert_eq!(4_000_u32.to_nominal(&RomanLowercase), "i̅v̅");
-/// assert_eq!(4_001_u32.to_nominal(&RomanLowercase), "i̅v̅i");
-/// assert_eq!(2_000_000_u32.to_nominal(&RomanLowercase), "m̅m̅");
+/// assert_eq!(4_000_u32.to_nominal(&RomanLower), "i̅v̅");
+/// assert_eq!(4_001_u32.to_nominal(&RomanLower), "i̅v̅i");
+/// assert_eq!(2_000_000_u32.to_nominal(&RomanLower), "m̅m̅");
 /// ```
-pub struct RomanLowercase;
+pub struct RomanLower;
 
-impl<T> NominalSystem<T> for RomanLowercase
+impl<T> NominalSystem<T> for RomanLower
 where
     T: Nominal + UnsignedInteger + TryFrom<u32>,
     <T as TryFrom<usize>>::Error: core::fmt::Debug,
@@ -148,12 +148,12 @@ fn roman() {
     assert_eq!(3_u32.to_nominal(&RomanUpper), "III");
     assert_eq!(4_u32.to_nominal(&RomanUpper), "IV");
     assert_eq!(5_u32.to_nominal(&RomanUpper), "V");
-    assert_eq!(0_u32.to_nominal(&RomanLowercase), "n");
-    assert_eq!(1_u32.to_nominal(&RomanLowercase), "i");
-    assert_eq!(2_u32.to_nominal(&RomanLowercase), "ii");
-    assert_eq!(3_u32.to_nominal(&RomanLowercase), "iii");
-    assert_eq!(4_u32.to_nominal(&RomanLowercase), "iv");
-    assert_eq!(5_u32.to_nominal(&RomanLowercase), "v");
-    assert_eq!(4000_u32.to_nominal(&RomanLowercase), "i̅v̅");
-    assert_eq!(2_000_000_u32.to_nominal(&RomanLowercase), "m̅m̅");
+    assert_eq!(0_u32.to_nominal(&RomanLower), "n");
+    assert_eq!(1_u32.to_nominal(&RomanLower), "i");
+    assert_eq!(2_u32.to_nominal(&RomanLower), "ii");
+    assert_eq!(3_u32.to_nominal(&RomanLower), "iii");
+    assert_eq!(4_u32.to_nominal(&RomanLower), "iv");
+    assert_eq!(5_u32.to_nominal(&RomanLower), "v");
+    assert_eq!(4000_u32.to_nominal(&RomanLower), "i̅v̅");
+    assert_eq!(2_000_000_u32.to_nominal(&RomanLower), "m̅m̅");
 }

@@ -10,6 +10,7 @@ use core::ops::{Deref, DerefMut};
 /// allocation. The total size of this structure is 64 bytes on a 64-bit
 /// architecture.
 #[derive(Debug)]
+#[cfg_attr(feature = "alloc", derive(Clone))]
 pub struct NominalString(MaybeInline);
 
 impl NominalString {
@@ -186,6 +187,7 @@ impl PartialOrd for NominalString {
     }
 }
 
+#[derive(Clone)]
 enum MaybeInline {
     Inline(InlineString),
     #[cfg(feature = "alloc")]
@@ -202,6 +204,7 @@ impl Debug for MaybeInline {
     }
 }
 
+#[derive(Clone, Copy)]
 struct InlineString {
     length: usize,
     bytes: [u8; MaybeInline::INLINE_CAPACITY],

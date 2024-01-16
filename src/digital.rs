@@ -182,7 +182,7 @@ impl_digit_set!(
 
 impl_digit_set!(
     /// Japanese Hiaragana Aiueo alphabet.
-    HiraganaAiueo,
+    Hiragana,
     DigitSet<46, false> = DigitSet::zeroless([
         'あ', 'い', 'う', 'え', 'お', 'か', 'き', 'く', 'け', 'こ', 'さ', 'し', 'す', 'せ', 'そ',
         'た', 'ち', 'つ', 'て', 'と', 'な', 'に', 'ぬ', 'ね', 'の', 'は', 'ひ', 'ふ', 'へ', 'ほ',
@@ -204,7 +204,7 @@ impl_digit_set!(
 
 impl_digit_set!(
     /// Japanese Katakana Aiueo alphabet.
-    KatakanaAiueo,
+    Katakana,
     DigitSet<46, false> = DigitSet::zeroless([
         'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ',
         'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ',

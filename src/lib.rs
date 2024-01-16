@@ -28,7 +28,7 @@ pub use chinese::Chinese;
 pub use digital::*;
 pub use hebrew::Hebrew;
 pub use nominalstring::{NominalString, OutOfMemoryError};
-pub use roman::{RomanLowercase, RomanUpper};
+pub use roman::{RomanLower, RomanUpper};
 
 /// A system of ordered nominal identifiers.
 pub trait NominalSystem<T>
