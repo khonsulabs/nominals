@@ -159,6 +159,14 @@
 <a href="#157" id="157">157</a>
 <a href="#158" id="158">158</a>
 <a href="#159" id="159">159</a>
+<a href="#160" id="160">160</a>
+<a href="#161" id="161">161</a>
+<a href="#162" id="162">162</a>
+<a href="#163" id="163">163</a>
+<a href="#164" id="164">164</a>
+<a href="#165" id="165">165</a>
+<a href="#166" id="166">166</a>
+<a href="#167" id="167">167</a>
 </pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 <span class="kw">fn </span>format_roman&lt;T&gt;(
@@ -317,5 +325,13 @@
     <span class="macro">assert_eq!</span>(<span class="number">5_u32</span>.to_nominal(<span class="kw-2">&amp;</span>RomanLower), <span class="string">"v"</span>);
     <span class="macro">assert_eq!</span>(<span class="number">4000_u32</span>.to_nominal(<span class="kw-2">&amp;</span>RomanLower), <span class="string">"i̅v̅"</span>);
     <span class="macro">assert_eq!</span>(<span class="number">2_000_000_u32</span>.to_nominal(<span class="kw-2">&amp;</span>RomanLower), <span class="string">"m̅m̅"</span>);
+}
+
+<span class="attr">#[test]
+</span><span class="kw">fn </span>long_test() {
+    <span class="macro">assert_eq!</span>(
+        <span class="number">63_000_000_u32</span>.to_nominal(<span class="kw-2">&amp;</span>RomanLower),
+        <span class="string">"m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅m̅"
+    </span>);
 }
 </code></pre></div></section></main></body></html>
