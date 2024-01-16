@@ -24,6 +24,10 @@ chinese-number = { version = "0.7.7", default-features = false, features = [
 unsafe_code = "deny"
 missing_docs = "warn"
 
+[dev-dependencies]
+unicode-segmentation = "1.10.1"
+unicode-width = "0.1.11"
+
 [lints.clippy]
 pedantic = "warn"
 module_name_repetitions = "allow"

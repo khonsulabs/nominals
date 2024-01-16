@@ -89,7 +89,7 @@ impl From<NominalString> for String {
 
 impl Display for NominalString {
     fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
-        f.write_str(self)
+        Display::fmt(&**self, f)
     }
 }
 

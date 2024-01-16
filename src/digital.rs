@@ -91,8 +91,12 @@ where
 }
 
 macro_rules! impl_digit_set {
-    ($(#$doc:tt)? $name:ident, $type:ty = $digits:expr) => {
-        $(#$doc)?
+    ($(#$doc:tt)* $name:ident, $type:ty = $digits:expr) => {
+        $(#$doc)*
+        // When adding a new variant and getting an error here, either
+        // temporarily comment this out or add an empty file until the new
+        // variant has been added to the previews example.
+        #[doc = include_str!(concat!("./previews/",stringify!($name), ".md"))]
         #[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
         pub struct $name;
 
@@ -129,19 +133,17 @@ impl_digit_set!(
 impl_digit_set!(
     /// Eastern Arabic numeric digits.
     EasternArabic,
-    DigitSet<10, true> = DigitSet::new(['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'])
+    DigitSet<10, true> = DigitSet::new(['\u{0660}', '\u{0661}', '\u{0662}', '\u{0663}', '\u{0664}', '\u{0665}', '\u{0666}', '\u{0667}', '\u{0668}', '\u{0669}'])
 );
 
 impl_digit_set!(
-    /// Persian numeric digits.
+    /// Persian/Urdu numeric digits.
+    ///
+    /// The Unicode codepoints for both Persian and Urdu numeric digits are
+    /// identical. The glyph selection comes from using different fonts based on
+    /// the language desired.
     Persian,
-    DigitSet<10, true> = DigitSet::new(['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'])
-);
-
-impl_digit_set!(
-    /// Urdu numeric digits.
-    Urdu,
-    DigitSet<10, true> = DigitSet::new(['۰', '۱', '۲', '۴', '۴', '۵', '۶', '۷', '۸', '۹'])
+    DigitSet<10, true> = DigitSet::new(['\u{06F0}', '\u{06F1}', '\u{06F2}', '\u{06F3}', '\u{06F4}', '\u{06F5}', '\u{06F6}', '\u{06F7}', '\u{06F8}', '\u{06F9}'])
 );
 
 impl_digit_set!(
@@ -462,18 +464,3 @@ fn basic_digits() {
 
     assert_eq!(core::mem::size_of::<NominalString>(), 64);
 }
-// #[test]
-// fn basic_digits() {
-//     assert_eq!(0_u8.formatted_with(&ARABIC), "0");
-//     assert_eq!(1_u8.formatted_with(&ARABIC), "1");
-//     assert_eq!(12_u8.formatted_with(&ARABIC), "12");
-//     assert_eq!(0_u8.formatted_with(&LETTER_LOWER), "a");
-//     assert_eq!(26_u8.formatted_with(&LETTER_UPPER), "AA");
-//     assert_eq!(
-//         0_u8.try_formatted_with(&LETTER_LOWER.one_based()),
-//         Err(NoZeroSymbol)
-//     );
-//     assert_eq!(1_u8.formatted_with(&LETTER_LOWER.one_based()), "a");
-//     assert_eq!(26_u8.formatted_with(&LETTER_UPPER.one_based()), "Z");
-//     assert_eq!(27_u8.formatted_with(&LETTER_UPPER.one_based()), "AA");
-// }

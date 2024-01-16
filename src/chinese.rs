@@ -3,6 +3,8 @@ use chinese_number::{ChineseCase, ChineseCountMethod, ChineseVariant, NumberToCh
 use crate::{Error, Nominal, NominalString, NominalSystem};
 
 /// A Chinese nominal system.
+#[doc = include_str!("./previews/TraditionalChinese.md")]
+#[doc = include_str!("./previews/SimplifiedChinese.md")]
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
 pub struct Chinese {
     /// Determines whether to format using simplified or traditional Chinese.

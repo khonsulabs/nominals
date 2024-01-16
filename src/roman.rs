@@ -40,6 +40,7 @@ where
 /// assert_eq!(4_001_u32.to_nominal(&RomanLower), "i̅v̅i");
 /// assert_eq!(2_000_000_u32.to_nominal(&RomanLower), "m̅m̅");
 /// ```
+#[doc = include_str!("./previews/RomanLower.md")]
 pub struct RomanLower;
 
 impl<T> NominalSystem<T> for RomanLower
@@ -95,6 +96,7 @@ where
 /// assert_eq!(4_001_u32.to_nominal(&RomanUpper), "I̅V̅I");
 /// assert_eq!(2_000_000_u32.to_nominal(&RomanUpper), "M̅M̅");
 /// ```
+#[doc = include_str!("./previews/RomanUpper.md")]
 pub struct RomanUpper;
 
 impl<T> NominalSystem<T> for RomanUpper

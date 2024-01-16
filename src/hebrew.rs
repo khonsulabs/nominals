@@ -1,6 +1,7 @@
 use crate::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 /// Hebrew numerals.
+#[doc = include_str!("./previews/Hebrew.md")]
 pub struct Hebrew;
 
 impl<T> NominalSystem<T> for Hebrew

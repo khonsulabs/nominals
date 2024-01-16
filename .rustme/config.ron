@@ -1,0 +1,45 @@
+Configuration(
+    files: {
+        "../README.md":  (
+            for_docs: false,
+            sections: [
+                "header.md",
+                "docs.md",
+                "https://github.com/khonsulabs/.github/raw/main/snippets/readme-footer.md",
+            ],
+        ),
+        "../src/.crate-docs.md": (
+            for_docs: true,
+            sections: [
+                "docs.md",
+                "https://github.com/khonsulabs/.github/raw/main/snippets/readme-footer.md",
+            ],
+        ),
+        "../CONTRIBUTING.md":  [
+            "https://github.com/khonsulabs/.github/raw/main/docs/CONTRIBUTING.md",
+        ],
+        "../CODE_OF_CONDUCT.md":  [
+            "https://github.com/khonsulabs/.github/raw/main/docs/CODE_OF_CONDUCT.md",
+        ],
+        "../LICENSE-APACHE":  [
+            "https://github.com/khonsulabs/.github/raw/main/licenses/LICENSE-APACHE",
+        ],
+        "../LICENSE-MIT":  [
+            "https://github.com/khonsulabs/.github/raw/main/licenses/LICENSE-MIT",
+        ],
+    },
+    glossaries: [
+        "https://github.com/khonsulabs/.github/raw/main/snippets/glossary.ron",
+        {
+            // "msrv": "1.70",
+            "ref-name": (
+                default: "main",
+                release: "v0.1.0",
+            ),
+            "docs": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/",
+                release: "https://docs.rs/nominals",
+            ),
+        },
+    ],
+)

@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `RomanLowercase` has been renamed to `RomanLower` for consistency.
 - `HiraganaAiueo` and `KatakanaAiueo` have had `Aiueo` removed from their names
   to match the CSS naming and reflect modern expectations.
+- `Urdu` has been removed. The `Persian` Unicode range is reused for `Urdu`
+  numerals, and the different symbols are a result of using an Urdu or Persian
+  font.
 
 ### Changed
 

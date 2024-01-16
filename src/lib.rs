@@ -105,11 +105,6 @@ where
     <Self as TryInto<usize>>::Error: core::fmt::Debug,
 {
     /// Returns `self` formatted as a nominal identifier using `system`.
-    ///
-    /// # Panics
-    ///
-    /// If [`N::try_format_nominal()`](NominalSystem::try_format_nominal)
-    /// returns an error, this function will panic.
     fn to_nominal<N>(self, system: &N) -> NominalString
     where
         N: NominalSystem<Self>,
