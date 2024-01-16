@@ -13,10 +13,6 @@ This crate's original implementation was inspired by [Typst][typst]'s
 implementation of list numbering. However, this crate is a fresh implementation
 with newly-written implementations and types.
 
-## Supported Systems
-
-$../src/previews/index.md$
-
 ## `no_std` support
 
 This crate is `no_std` compatible, and can operate both with and without
@@ -25,3 +21,5 @@ dependencies that require alloc.
 
 [cushy]: https://github.com/khonsulabs/cushy
 [typst]: https://github.com/typst/typst
+
+## Supported Systems

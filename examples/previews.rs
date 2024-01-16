@@ -143,7 +143,11 @@ where
 }
 
 fn markdown_link(name: &str) -> String {
-    format!("[`{name}`]({name})")
+    markdown_link_to(name, name)
+}
+
+fn markdown_link_to(name: &str, anchor: &str) -> String {
+    format!("[`{name}`](${anchor}$)")
 }
 
 trait Previewable: NominalSystem<u32> + Sized + 'static {
@@ -226,7 +230,7 @@ struct SimplifiedChinese;
 
 impl Previewable for SimplifiedChinese {
     fn doc_link(&self) -> String {
-        markdown_link("Chinese::simplified()")
+        markdown_link_to("Chinese::simplified()", "simplified-chinese")
     }
 
     fn preview_values(&self) -> Vec<u32> {
@@ -246,7 +250,7 @@ struct TraditionalChinese;
 
 impl Previewable for TraditionalChinese {
     fn doc_link(&self) -> String {
-        markdown_link("Chinese::traditional()")
+        markdown_link_to("Chinese::traditional()", "traditional-chinese")
     }
 
     fn preview_values(&self) -> Vec<u32> {

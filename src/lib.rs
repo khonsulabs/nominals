@@ -1,4 +1,4 @@
-#![doc = include_str!("../README.md")]
+#![doc = include_str!(".crate-docs.md")]
 #![no_std]
 #![cfg_attr(docsrs, feature(doc_auto_cfg))]
 

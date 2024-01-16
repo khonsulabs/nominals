@@ -5,6 +5,7 @@ Configuration(
             sections: [
                 "header.md",
                 "docs.md",
+                "../src/previews/index.md",
                 "https://github.com/khonsulabs/.github/raw/main/snippets/readme-footer.md",
             ],
         ),
@@ -12,6 +13,7 @@ Configuration(
             for_docs: true,
             sections: [
                 "docs.md",
+                "../src/previews/index.md",
                 "https://github.com/khonsulabs/.github/raw/main/snippets/readme-footer.md",
             ],
         ),
@@ -39,6 +41,106 @@ Configuration(
             "docs": (
                 default: "https://khonsulabs.github.io/nominals/main/nominals/",
                 release: "https://docs.rs/nominals",
+            ),
+            "Decimal": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Decimal.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.Decimal.html",
+                for_docs: "Decimal",
+            ),
+            "EasternArabic": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.EasternArabic.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.EasternArabic.html",
+                for_docs: "EasternArabic",
+            ),
+            "GreekLower": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.GreekLower.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.GreekLower.html",
+                for_docs: "GreekLower",
+            ),
+            "GreekUpper": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.GreekUpper.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.GreekUpper.html",
+                for_docs: "GreekUpper",
+            ),
+            "HangeulJamo": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulJamo.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.HangeulJamo.html",
+                for_docs: "HangeulJamo",
+            ),
+            "HangeulSyllable": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulSyllable.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.HangeulSyllable.html",
+                for_docs: "HangeulSyllable",
+            ),
+            "Hebrew": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Hebrew.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.Hebrew.html",
+                for_docs: "Hebrew",
+            ),
+            "HexLower": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.HexLower.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.HexLower.html",
+                for_docs: "HexLower",
+            ),
+            "HexUpper": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.HexUpper.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.HexUpper.html",
+                for_docs: "HexUpper",
+            ),
+            "Hiragana": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Hiragana.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.Hiragana.html",
+                for_docs: "Hiragana",
+            ),
+            "HiraganaIroha": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.HiraganaIroha.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.HiraganaIroha.html",
+                for_docs: "HiraganaIroha",
+            ),
+            "Katakana": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Katakana.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.Katakana.html",
+                for_docs: "Katakana",
+            ),
+            "KatakanaIroha": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.KatakanaIroha.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.KatakanaIroha.html",
+                for_docs: "KatakanaIroha",
+            ),
+            "LetterLower": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.LetterLower.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.LetterLower.html",
+                for_docs: "LetterLower",
+            ),
+            "LetterUpper": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.LetterUpper.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.LetterUpper.html",
+                for_docs: "LetterUpper",
+            ),
+            "Persian": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Persian.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.Persian.html",
+                for_docs: "Persian",
+            ),
+            "RomanLower": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.RomanLower.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.RomanLower.html",
+                for_docs: "RomanLower",
+            ),
+            "RomanUpper": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.RomanUpper.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.RomanUpper.html",
+                for_docs: "RomanUpper",
+            ),
+            "simplified-chinese": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Chinese.html#method.simplified",
+                release: "https://docs.rs/nominals/latest/nominals/struct.Chinese.html#method.simplified",
+                for_docs: "Chinese::simplified",
+            ),
+            "traditional-chinese": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Chinese.html#method.traditional",
+                release: "https://docs.rs/nominals/latest/nominals/struct.Chinese.html#method.traditional",
+                for_docs: "Chinese::traditional",
             ),
         },
     ],
