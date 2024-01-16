@@ -52,10 +52,50 @@ where
     fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>>;
 }
 
+#[cfg(feature = "alloc")]
+impl<T> NominalSystem<T> for alloc::boxed::Box<dyn NominalSystem<T>>
+where
+    T: Nominal,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
+{
+    fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
+        self.as_ref().try_format_nominal(nominal)
+    }
+}
+
+#[cfg(feature = "alloc")]
+impl<T> NominalSystem<T> for alloc::rc::Rc<dyn NominalSystem<T>>
+where
+    T: Nominal,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
+{
+    fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
+        self.as_ref().try_format_nominal(nominal)
+    }
+}
+
+#[cfg(feature = "alloc")]
+impl<T> NominalSystem<T> for alloc::sync::Arc<dyn NominalSystem<T>>
+where
+    T: Nominal,
+    <T as TryFrom<usize>>::Error: core::fmt::Debug,
+    <T as TryInto<usize>>::Error: core::fmt::Debug,
+{
+    fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
+        self.as_ref().try_format_nominal(nominal)
+    }
+}
+
 #[test]
 fn boxing() {
     let system: alloc::boxed::Box<dyn NominalSystem<u32>> = alloc::boxed::Box::new(RomanUpper);
-    assert_eq!(1.to_nominal(&*system), "I");
+    assert_eq!(1.to_nominal(&system), "I");
+    let system: alloc::rc::Rc<dyn NominalSystem<u32>> = alloc::rc::Rc::new(RomanUpper);
+    assert_eq!(1.to_nominal(&system), "I");
+    let system: alloc::sync::Arc<dyn NominalSystem<u32>> = alloc::sync::Arc::new(RomanUpper);
+    assert_eq!(1.to_nominal(&system), "I");
 }
 
 /// A type that can be formatted with a [`NominalSystem`].
@@ -72,7 +112,7 @@ where
     /// returns an error, this function will panic.
     fn to_nominal<N>(self, system: &N) -> NominalString
     where
-        N: NominalSystem<Self> + ?Sized,
+        N: NominalSystem<Self>,
     {
         system.format_nominal(self)
     }
