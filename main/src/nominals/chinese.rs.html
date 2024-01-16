@@ -67,12 +67,16 @@
 <a href="#65" id="65">65</a>
 <a href="#66" id="66">66</a>
 <a href="#67" id="67">67</a>
+<a href="#68" id="68">68</a>
+<a href="#69" id="69">69</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>chinese_number::{ChineseCase, ChineseCountMethod, ChineseVariant, NumberToChinese};
 
 <span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem};
 
 <span class="doccomment">/// A Chinese nominal system.
-</span><span class="attr">#[derive(Debug, Clone, Copy, Eq, PartialEq)]
+</span><span class="attr">#[doc = <span class="macro">include_str!</span>(<span class="string">"./previews/TraditionalChinese.md"</span>)]
+#[doc = <span class="macro">include_str!</span>(<span class="string">"./previews/SimplifiedChinese.md"</span>)]
+#[derive(Debug, Clone, Copy, Eq, PartialEq)]
 </span><span class="kw">pub struct </span>Chinese {
     <span class="doccomment">/// Determines whether to format using simplified or traditional Chinese.
     </span><span class="kw">pub </span>variant: ChineseVariant,

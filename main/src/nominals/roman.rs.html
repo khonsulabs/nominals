@@ -167,6 +167,8 @@
 <a href="#165" id="165">165</a>
 <a href="#166" id="166">166</a>
 <a href="#167" id="167">167</a>
+<a href="#168" id="168">168</a>
+<a href="#169" id="169">169</a>
 </pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 <span class="kw">fn </span>format_roman&lt;T&gt;(
@@ -209,6 +211,7 @@
 /// assert_eq!(4_001_u32.to_nominal(&amp;RomanLower), "i̅v̅i");
 /// assert_eq!(2_000_000_u32.to_nominal(&amp;RomanLower), "m̅m̅");
 /// ```
+</span><span class="attr">#[doc = <span class="macro">include_str!</span>(<span class="string">"./previews/RomanLower.md"</span>)]
 </span><span class="kw">pub struct </span>RomanLower;
 
 <span class="kw">impl</span>&lt;T&gt; NominalSystem&lt;T&gt; <span class="kw">for </span>RomanLower
@@ -264,6 +267,7 @@
 /// assert_eq!(4_001_u32.to_nominal(&amp;RomanUpper), "I̅V̅I");
 /// assert_eq!(2_000_000_u32.to_nominal(&amp;RomanUpper), "M̅M̅");
 /// ```
+</span><span class="attr">#[doc = <span class="macro">include_str!</span>(<span class="string">"./previews/RomanUpper.md"</span>)]
 </span><span class="kw">pub struct </span>RomanUpper;
 
 <span class="kw">impl</span>&lt;T&gt; NominalSystem&lt;T&gt; <span class="kw">for </span>RomanUpper
