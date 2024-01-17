@@ -245,12 +245,12 @@ fn roman_values() -> Vec<u32> {
 }
 
 fn additive_values() -> Vec<u32> {
-    vec![1, 2, 3, 9, 10, 13, 14, 15, 16, 17, 396, 397, 398, 399, 400]
+    vec![1, 2, 3, 9, 10, 11, 12, 99, 100, 101]
 }
 
 impl Previewable for Hebrew {
     fn preview_values(&self) -> Vec<u32> {
-        additive_values()
+        vec![1, 2, 3, 9, 10, 13, 14, 15, 16, 17, 396, 397, 398, 399, 400]
     }
 }
 
@@ -355,6 +355,6 @@ impl Previewable for Georgian {
 
 impl Previewable for HanjaFormal {
     fn preview_values(&self) -> Vec<u32> {
-        additive_values()
+        cjk_values()
     }
 }

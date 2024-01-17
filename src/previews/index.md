@@ -3,8 +3,8 @@
 - [`LetterUpper`]($LetterUpper$): A‎ B‎ C‎ D‎ E‎ …‎ Z‎ AA‎ AB‎ AC‎ …‎ YZ‎ ZA‎ ZB‎ ZC
 - [`RomanLower`]($RomanLower$): i‎ ii‎ iii‎ iv‎ v‎ vi‎ …‎ ix‎ x‎ xi‎ …‎ mmmcmxcix‎ i̅v̅‎ i̅v̅i‎ …‎ d̅m̅l̅c̅i̅x̅cmxcix‎ m̅‎ m̅i
 - [`RomanUpper`]($RomanUpper$): I‎ II‎ III‎ IV‎ V‎ VI‎ …‎ IX‎ X‎ XI‎ …‎ MMMCMXCIX‎ I̅V̅‎ I̅V̅I‎ …‎ D̅M̅L̅C̅I̅X̅CMXCIX‎ M̅‎ M̅I
-- [`ArmenianLower`]($ArmenianLower$): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ …‎ ժգ‎ ժդ‎ ժե‎ ժզ‎ ժէ‎ …‎ յղզ‎ յղէ‎ յղը‎ յղթ‎ ն
-- [`ArmenianUpper`]($ArmenianUpper$): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ …‎ ԺԳ‎ ԺԴ‎ ԺԵ‎ ԺԶ‎ ԺԷ‎ …‎ ՅՂԶ‎ ՅՂԷ‎ ՅՂԸ‎ ՅՂԹ‎ Ն
+- [`ArmenianLower`]($ArmenianLower$): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ ժա‎ ժբ‎ …‎ ղթ‎ ճ‎ ճա
+- [`ArmenianUpper`]($ArmenianUpper$): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ ԺԱ ‎ ԺԲ‎ …‎ ՂԹ‎ Ճ‎ ՃԱ 
 - [`Bengali`]($Bengali$): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২
 - [`Cambodian`]($Cambodian$): ០‎ ១‎ ២‎ ៣‎ ៤‎ …‎ ៩‎ ១០‎ ១១‎ ១២‎ …‎ ៩៩‎ ១០០‎ ១០១‎ ១០២
 - [`Chinese::simplified()`]($simplified-chinese$): 零‎ 壹‎ 贰‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 贰拾‎ 贰拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹
@@ -14,7 +14,7 @@
 - [`CjkHeavenlyStem`]($CjkHeavenlyStem$): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙
 - [`Devanagari`]($Devanagari$): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
 - [`EasternArabic`]($EasternArabic$): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
-- [`Georgian`]($Georgian$): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ …‎ იგ‎ იდ‎ იე‎ ივ‎ იზ‎ …‎ ტჟვ‎ ტჟზ‎ ტჟჱ‎ ტჟთ‎ ჳ
+- [`Georgian`]($Georgian$): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ ია‎ იბ‎ …‎ ჟთ‎ რ‎ რა
 - [`GreekLower`]($GreekLower$): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ‎ …‎ ψω‎ ωα‎ ωβ‎ ωγ
 - [`GreekUpper`]($GreekUpper$): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
 - [`Gujarati`]($Gujarati$): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
@@ -23,7 +23,7 @@
 - [`HangeulInformal`]($HangeulInformal$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
 - [`HangeulJamo`]($HangeulJamo$): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ‎ …‎ ㅍㅎ‎ ㅎㄱ‎ ㅎㄴ‎ ㅎㄷ
 - [`HangeulSyllable`]($HangeulSyllable$): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다‎ …‎ 파하‎ 하가‎ 하나‎ 하다
-- [`HanjaFormal`]($HanjaFormal$): 壹‎ 貳‎ 參‎ …‎ 九‎ 壹拾‎ …‎ 壹拾參‎ 壹拾四‎ 壹拾五‎ 壹拾六‎ 壹拾七‎ …‎ 參百九拾六‎ 參百九拾七‎ 參百九拾八‎ 參百九拾九‎ 四百
+- [`HanjaFormal`]($HanjaFormal$): 零‎ 壹‎ 貳‎ …‎ 九‎ 壹拾‎ 壹拾壹‎ …‎ 壹拾九‎ 貳拾‎ 貳拾壹‎ …‎ 九拾九‎ 壹百‎ 壹百壹
 - [`Hebrew`]($Hebrew$): ׳א״‎ ׳ב״‎ ׳ג״‎ …‎ ׳ט״‎ ׳י״‎ …‎ יג‎ יד‎ ט״ו‎ ט״ז‎ יז‎ …‎ שצו‎ שצז‎ שצח‎ שצט‎ ׳ת״
 - [`HexLower`]($HexLower$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ f‎ 10‎ 11‎ 12‎ …‎ ff‎ 100‎ 101‎ 102
 - [`HexUpper`]($HexUpper$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ F‎ 10‎ 11‎ 12‎ …‎ FF‎ 100‎ 101‎ 102
