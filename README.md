@@ -15,6 +15,33 @@ This crate's original implementation was inspired by [Typst][typst]'s
 implementation of list numbering. However, this crate is a fresh implementation
 with newly-written implementations and types.
 
+```rust
+use nominals::{Decimal, DigitCollection, Error, LetterLower, Nominal};
+
+fn main() {
+    // Formatting a nominal is as easy as calling to_nominal with the desired
+    // nominal system.
+    assert_eq!(0_u32.to_nominal(&Decimal), "0");
+    // By default, alphabet systems treat their first symbol as 0 in the ones
+    // place, but treat the first symbol as 1 in every other digit place.
+    assert_eq!(0_u32.to_nominal(&LetterLower), "a");
+    assert_eq!(1_u32.to_nominal(&LetterLower), "b");
+    assert_eq!(26_u32.to_nominal(&LetterLower), "aa");
+
+    // This behavior can be changed by using the one_based helper:
+    assert_eq!(1_u32.to_nominal(&LetterLower.one_based()), "a");
+    assert_eq!(2_u32.to_nominal(&LetterLower.one_based()), "b");
+    assert_eq!(27_u32.to_nominal(&LetterLower.one_based()), "aa");
+    // When a nominal can't be formatted with `to_nominal`, it falls back to
+    // Decimal.
+    assert_eq!(0_u32.to_nominal(&LetterLower.one_based()), "0");
+    assert_eq!(
+        0_u32.try_to_nominal(&LetterLower.one_based()).unwrap_err(),
+        Error::NoZeroSymbol
+    );
+}
+```
+
 ## `no_std` support
 
 This crate is `no_std` compatible, and can operate both with and without
@@ -35,6 +62,8 @@ dependencies that require alloc.
 - [`ArmenianUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianUpper.html): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ …‎ ԺԳ‎ ԺԴ‎ ԺԵ‎ ԺԶ‎ ԺԷ‎ …‎ ՅՂԶ‎ ՅՂԷ‎ ՅՂԸ‎ ՅՂԹ‎ Ն
 - [`Bengali`](https://khonsulabs.github.io/nominals/main/nominals/struct.Bengali.html): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২
 - [`Cambodian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Cambodian.html): ០‎ ១‎ ២‎ ៣‎ ៤‎ …‎ ៩‎ ១០‎ ១១‎ ១២‎ …‎ ៩៩‎ ១០០‎ ១០១‎ ១០២
+- [`Chinese::simplified()`](https://khonsulabs.github.io/nominals/main/nominals/struct.Chinese.html#method.simplified): 零‎ 壹‎ 贰‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 贰拾‎ 贰拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹
+- [`Chinese::traditional()`](https://khonsulabs.github.io/nominals/main/nominals/struct.Chinese.html#method.traditional): 零‎ 壹‎ 貳‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 貳拾‎ 貳拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹
 - [`CjkDecimal`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkDecimal.html): 〇‎ 一‎ 二‎ 三‎ 四‎ …‎ 九‎ 一〇‎ 一一‎ 一二‎ …‎ 九九‎ 一〇〇‎ 一〇一‎ 一〇二
 - [`CjkEarthlyBranch`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkEarthlyBranch.html): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一子‎ 一丑‎ 一寅‎ …‎ 九亥‎ 一〇子‎ 一〇丑‎ 一〇寅
 - [`CjkHeavenlyStem`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkHeavenlyStem.html): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙
@@ -70,8 +99,6 @@ dependencies that require alloc.
 - [`Telugu`](https://khonsulabs.github.io/nominals/main/nominals/struct.Telugu.html): ౦‎ ౧‎ ౨‎ ౩‎ ౪‎ …‎ ౯‎ ౧౦‎ ౧౧‎ ౧౨‎ …‎ ౯౯‎ ౧౦౦‎ ౧౦౧‎ ౧౦౨
 - [`Thai`](https://khonsulabs.github.io/nominals/main/nominals/struct.Thai.html): ๐‎ ๑‎ ๒‎ ๓‎ ๔‎ …‎ ๙‎ ๑๐‎ ๑๑‎ ๑๒‎ …‎ ๙๙‎ ๑๐๐‎ ๑๐๑‎ ๑๐๒
 - [`Tibetan`](https://khonsulabs.github.io/nominals/main/nominals/struct.Tibetan.html): ༠‎ ༡‎ ༢‎ ༣‎ ༤‎ …‎ ༩‎ ༡༠‎ ༡༡‎ ༡༢‎ …‎ ༩༩‎ ༡༠༠‎ ༡༠༡‎ ༡༠༢
-- [`Chinese::simplified()`](https://khonsulabs.github.io/nominals/main/nominals/struct.Chinese.html#method.simplified): 零‎ 壹‎ 贰‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 贰拾‎ 贰拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹
-- [`Chinese::traditional()`](https://khonsulabs.github.io/nominals/main/nominals/struct.Chinese.html#method.traditional): 零‎ 壹‎ 貳‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 貳拾‎ 貳拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹
 
 ## Open-source Licenses
 

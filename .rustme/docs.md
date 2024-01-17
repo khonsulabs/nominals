@@ -13,6 +13,10 @@ This crate's original implementation was inspired by [Typst][typst]'s
 implementation of list numbering. However, this crate is a fresh implementation
 with newly-written implementations and types.
 
+```rust
+$../examples/basics.rs:readme$
+```
+
 ## `no_std` support
 
 This crate is `no_std` compatible, and can operate both with and without
