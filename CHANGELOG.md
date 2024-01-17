@@ -26,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `NominalString` now implements `Clone`.
+- `NominalString::new_reverse()` returns an empty string that is optimized for
+  `push_front` operations.
 
 ## v0.1.0 (2023-12-18)
 

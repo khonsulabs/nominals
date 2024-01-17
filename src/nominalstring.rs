@@ -18,12 +18,36 @@ pub struct NominalString(MaybeInline);
 impl NominalString {
     /// The maximum byte capacity this type can contain before allocating on the
     /// heap.
+    ///
+    /// The capacity is 62 bytes.
+    ///
+    /// ```rust
+    /// use nominals::NominalString;
+    ///
+    /// assert_eq!(NominalString::INLINE_CAPACITY, 62);
+    ///
+    /// let max_inline = "a".repeat(NominalString::INLINE_CAPACITY);
+    /// let mut s = NominalString::from(&max_inline);
+    /// assert!(s.is_inline());
+    ///
+    /// s.try_push('a').unwrap();
+    /// assert!(!s.is_inline());
+    /// ```
     pub const INLINE_CAPACITY: usize = MaybeInline::INLINE_CAPACITY as usize;
 
     /// Returns an empty string.
     #[must_use]
     pub const fn new() -> Self {
         Self(MaybeInline::new())
+    }
+
+    /// Returns an empty string, optimized for
+    /// [`push_front()`](Self::push_front) calls.
+    ///
+    /// While the string can fit on the stack ([`Self::INLINE_CAPACITY`]),
+    #[must_use]
+    pub const fn new_reverse() -> Self {
+        Self(MaybeInline::reverse())
     }
 
     /// Pushes `ch` to the end of the string.
@@ -106,6 +130,13 @@ impl From<String> for NominalString {
     }
 }
 
+#[cfg(feature = "alloc")]
+impl From<&'_ String> for NominalString {
+    fn from(value: &'_ String) -> Self {
+        Self::from(value.as_str())
+    }
+}
+
 impl From<&'_ str> for NominalString {
     fn from(value: &'_ str) -> Self {
         match u8::try_from(value.len()) {
@@ -176,10 +207,23 @@ impl PartialEq<&'_ str> for NominalString {
         self == *other
     }
 }
+#[cfg(feature = "alloc")]
+impl PartialEq<String> for NominalString {
+    fn eq(&self, other: &String) -> bool {
+        self == other.as_str()
+    }
+}
 
 impl PartialOrd<str> for NominalString {
     fn partial_cmp(&self, other: &str) -> Option<core::cmp::Ordering> {
         Some((**self).cmp(other))
+    }
+}
+
+#[cfg(feature = "alloc")]
+impl PartialOrd<String> for NominalString {
+    fn partial_cmp(&self, other: &String) -> Option<core::cmp::Ordering> {
+        self.partial_cmp(other.as_str())
     }
 }
 
@@ -219,10 +263,35 @@ struct InlineString {
 }
 
 impl InlineString {
+    const fn len(&self) -> u8 {
+        self.length & 0x7F
+    }
+
+    const fn len_usize(&self) -> usize {
+        self.len() as usize
+    }
+
+    const fn is_reverse(&self) -> bool {
+        self.length & 0x80 != 0
+    }
+
+    fn data_offset(&self) -> usize {
+        if self.is_reverse() {
+            usize::from(MaybeInline::INLINE_CAPACITY) - self.len_usize()
+        } else {
+            0
+        }
+    }
+
     fn as_bytes(&self) -> &[u8] {
         // SAFETY: This function only returns access to the bytes that have
         // been initialized, indicated by `self.length`.
-        unsafe { core::slice::from_raw_parts(self.bytes.as_ptr().cast(), usize::from(self.length)) }
+        unsafe {
+            core::slice::from_raw_parts(
+                self.bytes.as_ptr().cast::<u8>().add(self.data_offset()),
+                self.len_usize(),
+            )
+        }
     }
 
     fn as_bytes_mut(&mut self) -> &mut [u8] {
@@ -232,8 +301,8 @@ impl InlineString {
         // created.
         unsafe {
             core::slice::from_raw_parts_mut(
-                self.bytes.as_mut_ptr().cast(),
-                usize::from(self.length),
+                self.bytes.as_mut_ptr().cast::<u8>().add(self.data_offset()),
+                self.len_usize(),
             )
         }
     }
@@ -251,6 +320,91 @@ impl InlineString {
         // returns the written-to portions of the string.
         unsafe { core::str::from_utf8_unchecked_mut(self.as_bytes_mut()) }
     }
+
+    fn set_length(&mut self, new_length: u8) {
+        self.length = self.length & 0x80 | new_length;
+    }
+
+    fn push(&mut self, ch: char, char_len: u8, inline_len: u8, new_length: u8) {
+        let mut utf8_bytes = [0; 4];
+        ch.encode_utf8(&mut utf8_bytes);
+        if self.is_reverse() {
+            // Copy to make room at the end
+            let current_offset = self.data_offset();
+            let size_of_bytes = usize::from(MaybeInline::INLINE_CAPACITY);
+            self.bytes
+                .copy_within(current_offset.., size_of_bytes - usize::from(new_length));
+
+            for (dest, src) in self.bytes[size_of_bytes - usize::from(char_len)..]
+                .iter_mut()
+                .zip(&utf8_bytes[0..usize::from(char_len)])
+            {
+                dest.write(*src);
+            }
+        } else {
+            for (dest, src) in self.bytes[usize::from(inline_len)..usize::from(new_length)]
+                .iter_mut()
+                .zip(&utf8_bytes[0..usize::from(char_len)])
+            {
+                dest.write(*src);
+            }
+        }
+        self.set_length(new_length);
+    }
+
+    fn push_str(&mut self, str: &str, new_length: u8) {
+        if self.is_reverse() {
+            // Copy to make room at the end
+            let current_offset = self.data_offset();
+            let size_of_bytes = usize::from(MaybeInline::INLINE_CAPACITY);
+            self.bytes
+                .copy_within(current_offset.., size_of_bytes - usize::from(new_length));
+
+            for (dest, src) in self.bytes[size_of_bytes - str.len()..]
+                .iter_mut()
+                .zip(str.as_bytes())
+            {
+                dest.write(*src);
+            }
+        } else {
+            // SAFETY: This snippet copies initialized data into
+            // uninitialized locations, causing them to become
+            // initialized. No read access is performed on
+            // uninitialized data.
+            unsafe {
+                self.bytes
+                    .as_mut_ptr()
+                    .cast::<u8>()
+                    .add(self.len_usize())
+                    .copy_from(str.as_bytes().as_ptr(), str.len());
+            };
+        }
+
+        self.set_length(new_length);
+    }
+
+    fn push_front(&mut self, ch: char, char_len: u8, inline_len: u8, new_length: u8) {
+        if self.is_reverse() {
+            let mut utf8_bytes = [0; 4];
+            ch.encode_utf8(&mut utf8_bytes);
+
+            let start = MaybeInline::INLINE_CAPACITY - new_length;
+            let end = MaybeInline::INLINE_CAPACITY - inline_len;
+            for (dest, src) in self.bytes[usize::from(start)..usize::from(end)]
+                .iter_mut()
+                .zip(&utf8_bytes[0..usize::from(char_len)])
+            {
+                dest.write(*src);
+            }
+            self.set_length(new_length);
+        } else {
+            self.bytes
+                .copy_within(0..usize::from(inline_len), usize::from(char_len));
+            self.set_length(new_length);
+
+            ch.encode_utf8(self.as_bytes_mut());
+        }
+    }
 }
 
 impl MaybeInline {
@@ -263,23 +417,22 @@ impl MaybeInline {
         })
     }
 
+    const fn reverse() -> MaybeInline {
+        MaybeInline::Inline(InlineString {
+            length: 0x80,
+            bytes: [MaybeUninit::uninit(); Self::INLINE_CAPACITY as usize],
+        })
+    }
+
     #[allow(clippy::unnecessary_wraps)]
     fn push(&mut self, ch: char) -> Result<(), OutOfMemoryError> {
         match self {
             MaybeInline::Inline(inline) => {
                 let char_len = u8::try_from(ch.len_utf8()).expect("4 < u8::MAX");
-                let new_length = inline.length + char_len;
+                let inline_len = inline.len();
+                let new_length = inline_len + char_len;
                 if new_length <= Self::INLINE_CAPACITY {
-                    let mut utf8_bytes = [0; 4];
-                    ch.encode_utf8(&mut utf8_bytes);
-                    for (dest, src) in inline.bytes
-                        [usize::from(inline.length)..usize::from(new_length)]
-                        .iter_mut()
-                        .zip(&utf8_bytes[0..usize::from(char_len)])
-                    {
-                        dest.write(*src);
-                    }
-                    inline.length = new_length;
+                    inline.push(ch, char_len, inline_len, new_length);
                 } else {
                     #[cfg(feature = "alloc")]
                     {
@@ -305,23 +458,10 @@ impl MaybeInline {
         match self {
             MaybeInline::Inline(inline) => {
                 if let Ok(insert_len) = u8::try_from(str.len()) {
-                    let new_length = inline.length.checked_add(insert_len);
+                    let new_length = inline.len().checked_add(insert_len);
                     match new_length {
                         Some(new_length) if new_length <= Self::INLINE_CAPACITY => {
-                            // SAFETY: This snippet copies initialized data into
-                            // uninitialized locations, causing them to become
-                            // initialized. No read access is performed on
-                            // uninitialized data.
-                            unsafe {
-                                inline
-                                    .bytes
-                                    .as_mut_ptr()
-                                    .cast::<u8>()
-                                    .add(usize::from(inline.length))
-                                    .copy_from(str.as_bytes().as_ptr(), str.len());
-                            };
-
-                            inline.length = new_length;
+                            inline.push_str(str, new_length);
                             return Ok(());
                         }
                         _ => {}
@@ -330,7 +470,7 @@ impl MaybeInline {
 
                 #[cfg(feature = "alloc")]
                 {
-                    let new_length = usize::from(inline.length) + str.len();
+                    let new_length = inline.len_usize() + str.len();
                     let mut string = String::with_capacity(new_length);
                     string.push_str(inline.as_str());
                     string.push_str(str);
@@ -355,23 +495,10 @@ impl MaybeInline {
         match self {
             MaybeInline::Inline(inline) => {
                 let char_len = u8::try_from(ch.len_utf8()).expect("4 < u8::MAX");
-                let new_length = inline.length + char_len;
+                let inline_len = inline.len();
+                let new_length = inline_len + char_len;
                 if new_length <= Self::INLINE_CAPACITY {
-                    // SAFETY: This snippet copies initialized data into
-                    // uninitialized locations, causing them to become
-                    // initialized. No read access is performed on
-                    // uninitialized data.
-                    unsafe {
-                        inline
-                            .bytes
-                            .as_mut_ptr()
-                            .cast::<u8>()
-                            .add(usize::from(char_len))
-                            .copy_from(inline.as_bytes().as_ptr(), usize::from(inline.length));
-                        inline.length = new_length;
-                    };
-
-                    ch.encode_utf8(inline.as_bytes_mut());
+                    inline.push_front(ch, char_len, inline_len, new_length);
                 } else {
                     #[cfg(feature = "alloc")]
                     {
@@ -419,4 +546,76 @@ fn preconditions() {
     // its code, INLINE_CAPACITY was a fixed value. This guaranteees that adding
     // the length of a utf-8 encoded char will never overflow. If we change INLINE_CAPACITY to be something that could be 251 or larger, we shou
     assert!(MaybeInline::INLINE_CAPACITY.checked_add(4).is_some());
+}
+
+#[test]
+fn forward_ops() {
+    let mut s = NominalString::new();
+    s.try_push('a').unwrap();
+    assert_eq!(s, "a");
+    s.try_push_str("bc").unwrap();
+    assert_eq!(s, "abc");
+    s.try_push_front('_').unwrap();
+    assert_eq!(s, "_abc");
+
+    let init = "a".repeat(usize::from(MaybeInline::INLINE_CAPACITY));
+    let check_after = init.clone() + "b";
+    let check_before = String::from("b") + &init;
+
+    let borderline = NominalString::from(&init);
+    let mut s = borderline.clone();
+    assert!(s.is_inline());
+    s.try_push('b').unwrap();
+    assert!(!s.is_inline());
+    assert_eq!(s, check_after);
+
+    let borderline = NominalString::from(&init);
+    let mut s = borderline.clone();
+    assert!(s.is_inline());
+    s.try_push_str("b").unwrap();
+    assert!(!s.is_inline());
+    assert_eq!(s, check_after);
+
+    let borderline = NominalString::from(&init);
+    let mut s = borderline.clone();
+    assert!(s.is_inline());
+    s.try_push_front('b').unwrap();
+    assert!(!s.is_inline());
+    assert_eq!(s, check_before);
+}
+
+#[test]
+fn reverse_ops() {
+    let mut s = NominalString::new_reverse();
+    s.try_push('a').unwrap();
+    assert_eq!(s, "a");
+    s.try_push_str("bc").unwrap();
+    assert_eq!(s, "abc");
+    s.try_push_front('_').unwrap();
+    assert_eq!(s, "_abc");
+
+    let init = "a".repeat(usize::from(MaybeInline::INLINE_CAPACITY));
+    let check_after = init.clone() + "b";
+    let check_before = String::from("b") + &init;
+
+    let borderline = NominalString::from(&init);
+    let mut s = borderline.clone();
+    assert!(s.is_inline());
+    s.try_push('b').unwrap();
+    assert!(!s.is_inline());
+    assert_eq!(s, check_after);
+
+    let borderline = NominalString::from(&init);
+    let mut s = borderline.clone();
+    assert!(s.is_inline());
+    s.try_push_str("b").unwrap();
+    assert!(!s.is_inline());
+    assert_eq!(s, check_after);
+
+    let borderline = NominalString::from(&init);
+    let mut s = borderline.clone();
+    assert!(s.is_inline());
+    s.try_push_front('b').unwrap();
+    assert!(!s.is_inline());
+    assert_eq!(s, check_before);
 }

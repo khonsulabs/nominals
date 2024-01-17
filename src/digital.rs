@@ -382,7 +382,7 @@ where
             ));
         };
         let one = T::from(1_u8);
-        let mut formatted = NominalString::new();
+        let mut formatted = NominalString::new_reverse();
 
         let mut remaining = nominal;
         let mut first_loop = true;

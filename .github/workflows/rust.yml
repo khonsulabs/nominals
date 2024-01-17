@@ -24,6 +24,22 @@ jobs:
         run: |
           cargo test --all-targets  --all-features
 
+  miri:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: hecrj/setup-rust-action@v1
+        with:
+          rust-version: nightly
+          components: rustc,rust-std,cargo,miri
+
+      - name: Run unit tests
+        run: |
+          cargo +nightly miri test --all-features
+
   build-msrv:
     name: Test on MSRV
     runs-on: ubuntu-latest
