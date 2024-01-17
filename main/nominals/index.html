@@ -11,6 +11,31 @@ lists similar to HTML’s <code>&lt;ol&gt;</code> tag. The crate was written to 
 <p>This crate’s original implementation was inspired by <a href="https://github.com/typst/typst">Typst</a>’s
 implementation of list numbering. However, this crate is a fresh implementation
 with newly-written implementations and types.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>nominals::{Decimal, DigitCollection, Error, LetterLower, Nominal};
+
+<span class="kw">fn </span>main() {
+    <span class="comment">// Formatting a nominal is as easy as calling to_nominal with the desired
+    // nominal system.
+    </span><span class="macro">assert_eq!</span>(<span class="number">0_u32</span>.to_nominal(<span class="kw-2">&amp;</span>Decimal), <span class="string">"0"</span>);
+    <span class="comment">// By default, alphabet systems treat their first symbol as 0 in the ones
+    // place, but treat the first symbol as 1 in every other digit place.
+    </span><span class="macro">assert_eq!</span>(<span class="number">0_u32</span>.to_nominal(<span class="kw-2">&amp;</span>LetterLower), <span class="string">"a"</span>);
+    <span class="macro">assert_eq!</span>(<span class="number">1_u32</span>.to_nominal(<span class="kw-2">&amp;</span>LetterLower), <span class="string">"b"</span>);
+    <span class="macro">assert_eq!</span>(<span class="number">26_u32</span>.to_nominal(<span class="kw-2">&amp;</span>LetterLower), <span class="string">"aa"</span>);
+
+    <span class="comment">// This behavior can be changed by using the one_based helper:
+    </span><span class="macro">assert_eq!</span>(<span class="number">1_u32</span>.to_nominal(<span class="kw-2">&amp;</span>LetterLower.one_based()), <span class="string">"a"</span>);
+    <span class="macro">assert_eq!</span>(<span class="number">2_u32</span>.to_nominal(<span class="kw-2">&amp;</span>LetterLower.one_based()), <span class="string">"b"</span>);
+    <span class="macro">assert_eq!</span>(<span class="number">27_u32</span>.to_nominal(<span class="kw-2">&amp;</span>LetterLower.one_based()), <span class="string">"aa"</span>);
+    <span class="comment">// When a nominal can't be formatted with `to_nominal`, it falls back to
+    // Decimal.
+    </span><span class="macro">assert_eq!</span>(<span class="number">0_u32</span>.to_nominal(<span class="kw-2">&amp;</span>LetterLower.one_based()), <span class="string">"0"</span>);
+    <span class="macro">assert_eq!</span>(
+        <span class="number">0_u32</span>.try_to_nominal(<span class="kw-2">&amp;</span>LetterLower.one_based()).unwrap_err(),
+        Error::NoZeroSymbol
+    );
+}</code></pre></div>
 <h3 id="no_std-support"><a href="#no_std-support"><code>no_std</code> support</a></h3>
 <p>This crate is <code>no_std</code> compatible, and can operate both with and without
 <code>alloc</code>. Some systems, such as Chinese, require <code>alloc</code> due to reliance on
@@ -26,6 +51,8 @@ dependencies that require alloc.</p>
 <li><a href="struct.ArmenianUpper.html" title="struct nominals::ArmenianUpper"><code>ArmenianUpper</code></a>: Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ …‎ ԺԳ‎ ԺԴ‎ ԺԵ‎ ԺԶ‎ ԺԷ‎ …‎ ՅՂԶ‎ ՅՂԷ‎ ՅՂԸ‎ ՅՂԹ‎ Ն</li>
 <li><a href="struct.Bengali.html" title="struct nominals::Bengali"><code>Bengali</code></a>: ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২</li>
 <li><a href="struct.Cambodian.html" title="struct nominals::Cambodian"><code>Cambodian</code></a>: ០‎ ១‎ ២‎ ៣‎ ៤‎ …‎ ៩‎ ១០‎ ១១‎ ១២‎ …‎ ៩៩‎ ១០០‎ ១០១‎ ១០២</li>
+<li><a href="struct.Chinese.html#method.simplified" title="associated function nominals::Chinese::simplified"><code>Chinese::simplified()</code></a>: 零‎ 壹‎ 贰‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 贰拾‎ 贰拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹</li>
+<li><a href="struct.Chinese.html#method.traditional" title="associated function nominals::Chinese::traditional"><code>Chinese::traditional()</code></a>: 零‎ 壹‎ 貳‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 貳拾‎ 貳拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹</li>
 <li><a href="struct.CjkDecimal.html" title="struct nominals::CjkDecimal"><code>CjkDecimal</code></a>: 〇‎ 一‎ 二‎ 三‎ 四‎ …‎ 九‎ 一〇‎ 一一‎ 一二‎ …‎ 九九‎ 一〇〇‎ 一〇一‎ 一〇二</li>
 <li><a href="struct.CjkEarthlyBranch.html" title="struct nominals::CjkEarthlyBranch"><code>CjkEarthlyBranch</code></a>: 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一子‎ 一丑‎ 一寅‎ …‎ 九亥‎ 一〇子‎ 一〇丑‎ 一〇寅</li>
 <li><a href="struct.CjkHeavenlyStem.html" title="struct nominals::CjkHeavenlyStem"><code>CjkHeavenlyStem</code></a>: 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙</li>
@@ -61,8 +88,6 @@ dependencies that require alloc.</p>
 <li><a href="struct.Telugu.html" title="struct nominals::Telugu"><code>Telugu</code></a>: ౦‎ ౧‎ ౨‎ ౩‎ ౪‎ …‎ ౯‎ ౧౦‎ ౧౧‎ ౧౨‎ …‎ ౯౯‎ ౧౦౦‎ ౧౦౧‎ ౧౦౨</li>
 <li><a href="struct.Thai.html" title="struct nominals::Thai"><code>Thai</code></a>: ๐‎ ๑‎ ๒‎ ๓‎ ๔‎ …‎ ๙‎ ๑๐‎ ๑๑‎ ๑๒‎ …‎ ๙๙‎ ๑๐๐‎ ๑๐๑‎ ๑๐๒</li>
 <li><a href="struct.Tibetan.html" title="struct nominals::Tibetan"><code>Tibetan</code></a>: ༠‎ ༡‎ ༢‎ ༣‎ ༤‎ …‎ ༩‎ ༡༠‎ ༡༡‎ ༡༢‎ …‎ ༩༩‎ ༡༠༠‎ ༡༠༡‎ ༡༠༢</li>
-<li><a href="struct.Chinese.html#method.simplified" title="associated function nominals::Chinese::simplified"><code>Chinese::simplified()</code></a>: 零‎ 壹‎ 贰‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 贰拾‎ 贰拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹</li>
-<li><a href="struct.Chinese.html#method.traditional" title="associated function nominals::Chinese::traditional"><code>Chinese::traditional()</code></a>: 零‎ 壹‎ 貳‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 貳拾‎ 貳拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹</li>
 </ul>
 <h3 id="open-source-licenses"><a href="#open-source-licenses">Open-source Licenses</a></h3>
 <p>This project, like all projects from <a href="https://khonsulabs.com/">Khonsu Labs</a>, is open-source.
