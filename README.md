@@ -26,24 +26,50 @@ dependencies that require alloc.
 
 ## Supported Systems
 
-- [`Decimal`](https://khonsulabs.github.io/nominals/main/nominals/struct.Decimal.html): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ 9‎ 10‎ 11‎ 12
-- [`EasternArabic`](https://khonsulabs.github.io/nominals/main/nominals/struct.EasternArabic.html): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢
-- [`GreekLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekLower.html): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ
-- [`GreekUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekUpper.html): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ
-- [`HangeulJamo`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulJamo.html): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ
-- [`HangeulSyllable`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulSyllable.html): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다
-- [`Hebrew`](https://khonsulabs.github.io/nominals/main/nominals/struct.Hebrew.html): ׳א״‎ ׳ב״‎ ׳ג״‎ …‎ ׳ט״‎ ׳י״‎ …‎ יג‎ יד‎ ט״ו‎ ט״ז‎ יז‎ …‎ שצו‎ שצז‎ שצח‎ שצט‎ ׳ת״
-- [`HexLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.HexLower.html): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ f‎ 10‎ 11‎ 12
-- [`HexUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.HexUpper.html): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ F‎ 10‎ 11‎ 12
-- [`Hiragana`](https://khonsulabs.github.io/nominals/main/nominals/struct.Hiragana.html): あ‎ い‎ う‎ え‎ お‎ …‎ ん‎ ああ‎ あい‎ あう
-- [`HiraganaIroha`](https://khonsulabs.github.io/nominals/main/nominals/struct.HiraganaIroha.html): い‎ ろ‎ は‎ に‎ ほ‎ …‎ す‎ いい‎ いろ‎ いは
-- [`Katakana`](https://khonsulabs.github.io/nominals/main/nominals/struct.Katakana.html): ア‎ イ‎ ウ‎ エ‎ オ‎ …‎ ン‎ アア‎ アイ‎ アウ
-- [`KatakanaIroha`](https://khonsulabs.github.io/nominals/main/nominals/struct.KatakanaIroha.html): イ‎ ロ‎ ハ‎ ニ‎ ホ‎ …‎ ス‎ イイ‎ イロ‎ イハ
-- [`LetterLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.LetterLower.html): a‎ b‎ c‎ d‎ e‎ …‎ z‎ aa‎ ab‎ ac
-- [`LetterUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.LetterUpper.html): A‎ B‎ C‎ D‎ E‎ …‎ Z‎ AA‎ AB‎ AC
-- [`Persian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Persian.html): ۰‎ ۱‎ ۲‎ ۳‎ ۴‎ …‎ ۹‎ ۱۰‎ ۱۱‎ ۱۲
+- [`Decimal`](https://khonsulabs.github.io/nominals/main/nominals/struct.Decimal.html): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ 9‎ 10‎ 11‎ 12‎ …‎ 99‎ 100‎ 101‎ 102
+- [`LetterLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.LetterLower.html): a‎ b‎ c‎ d‎ e‎ …‎ z‎ aa‎ ab‎ ac‎ …‎ yz‎ za‎ zb‎ zc
+- [`LetterUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.LetterUpper.html): A‎ B‎ C‎ D‎ E‎ …‎ Z‎ AA‎ AB‎ AC‎ …‎ YZ‎ ZA‎ ZB‎ ZC
 - [`RomanLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.RomanLower.html): i‎ ii‎ iii‎ iv‎ v‎ vi‎ …‎ ix‎ x‎ xi‎ …‎ mmmcmxcix‎ i̅v̅‎ i̅v̅i‎ …‎ d̅m̅l̅c̅i̅x̅cmxcix‎ m̅‎ m̅i
 - [`RomanUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.RomanUpper.html): I‎ II‎ III‎ IV‎ V‎ VI‎ …‎ IX‎ X‎ XI‎ …‎ MMMCMXCIX‎ I̅V̅‎ I̅V̅I‎ …‎ D̅M̅L̅C̅I̅X̅CMXCIX‎ M̅‎ M̅I
+- [`ArmenianLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianLower.html): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ …‎ ժգ‎ ժդ‎ ժե‎ ժզ‎ ժէ‎ …‎ յղզ‎ յղէ‎ յղը‎ յղթ‎ ն
+- [`ArmenianUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianUpper.html): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ …‎ ԺԳ‎ ԺԴ‎ ԺԵ‎ ԺԶ‎ ԺԷ‎ …‎ ՅՂԶ‎ ՅՂԷ‎ ՅՂԸ‎ ՅՂԹ‎ Ն
+- [`Bengali`](https://khonsulabs.github.io/nominals/main/nominals/struct.Bengali.html): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২
+- [`Cambodian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Cambodian.html): ០‎ ១‎ ២‎ ៣‎ ៤‎ …‎ ៩‎ ១០‎ ១១‎ ១២‎ …‎ ៩៩‎ ១០០‎ ១០១‎ ១០២
+- [`CjkDecimal`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkDecimal.html): 〇‎ 一‎ 二‎ 三‎ 四‎ …‎ 九‎ 一〇‎ 一一‎ 一二‎ …‎ 九九‎ 一〇〇‎ 一〇一‎ 一〇二
+- [`CjkEarthlyBranch`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkEarthlyBranch.html): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一子‎ 一丑‎ 一寅‎ …‎ 九亥‎ 一〇子‎ 一〇丑‎ 一〇寅
+- [`CjkHeavenlyStem`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkHeavenlyStem.html): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙
+- [`Devanagari`](https://khonsulabs.github.io/nominals/main/nominals/struct.Devanagari.html): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
+- [`EasternArabic`](https://khonsulabs.github.io/nominals/main/nominals/struct.EasternArabic.html): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
+- [`Georgian`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmeniGeorgiananUpper.html): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ …‎ იგ‎ იდ‎ იე‎ ივ‎ იზ‎ …‎ ტჟვ‎ ტჟზ‎ ტჟჱ‎ ტჟთ‎ ჳ
+- [`GreekLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekLower.html): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ‎ …‎ ψω‎ ωα‎ ωβ‎ ωγ
+- [`GreekUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekUpper.html): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
+- [`Gujarati`](https://khonsulabs.github.io/nominals/main/nominals/struct.Devanagari.html): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
+- [`Gurmukhi`](https://khonsulabs.github.io/nominals/main/nominals/struct.Gurmukhi.html): ੦‎ ੧‎ ੨‎ ੩‎ ੪‎ …‎ ੯‎ ੧੦‎ ੧੧‎ ੧੨‎ …‎ ੯੯‎ ੧੦੦‎ ੧੦੧‎ ੧੦੨
+- [`HangeulFormal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulFormal.html): 영‎ 일‎ 이‎ …‎ 구‎ 일십‎ 일십일‎ …‎ 일십구‎ 이십‎ 이십일‎ …‎ 구십구‎ 일백‎ 일백일
+- [`HangeulInformal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulInformal.html): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
+- [`HangeulJamo`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulJamo.html): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ‎ …‎ ㅍㅎ‎ ㅎㄱ‎ ㅎㄴ‎ ㅎㄷ
+- [`HangeulSyllable`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulSyllable.html): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다‎ …‎ 파하‎ 하가‎ 하나‎ 하다
+- [`HanjaFormal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HanjaFormal.html): 壹‎ 貳‎ 參‎ …‎ 九‎ 壹拾‎ …‎ 壹拾參‎ 壹拾四‎ 壹拾五‎ 壹拾六‎ 壹拾七‎ …‎ 參百九拾六‎ 參百九拾七‎ 參百九拾八‎ 參百九拾九‎ 四百
+- [`Hebrew`](https://khonsulabs.github.io/nominals/main/nominals/struct.Hebrew.html): ׳א״‎ ׳ב״‎ ׳ג״‎ …‎ ׳ט״‎ ׳י״‎ …‎ יג‎ יד‎ ט״ו‎ ט״ז‎ יז‎ …‎ שצו‎ שצז‎ שצח‎ שצט‎ ׳ת״
+- [`HexLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.HexLower.html): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ f‎ 10‎ 11‎ 12‎ …‎ ff‎ 100‎ 101‎ 102
+- [`HexUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.HexUpper.html): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ F‎ 10‎ 11‎ 12‎ …‎ FF‎ 100‎ 101‎ 102
+- [`Hiragana`](https://khonsulabs.github.io/nominals/main/nominals/struct.Hiragana.html): あ‎ い‎ う‎ え‎ お‎ …‎ ん‎ ああ‎ あい‎ あう‎ …‎ をん‎ んあ‎ んい‎ んう
+- [`HiraganaIroha`](https://khonsulabs.github.io/nominals/main/nominals/struct.HiraganaIroha.html): い‎ ろ‎ は‎ に‎ ほ‎ …‎ す‎ いい‎ いろ‎ いは‎ …‎ せす‎ すい‎ すろ‎ すは
+- [`JapaneseFormal`](https://khonsulabs.github.io/nominals/main/nominals/struct.JapaneseFormal.html): 零‎ 壱‎ 弐‎ …‎ 九‎ 壱拾‎ 壱拾壱‎ …‎ 壱拾九‎ 弐拾‎ 弐拾壱‎ …‎ 九拾九‎ 壱百‎ 壱百壱
+- [`JapaneseInformal`](https://khonsulabs.github.io/nominals/main/nominals/struct.JapaneseInformal.html): 〇‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
+- [`Kannada`](https://khonsulabs.github.io/nominals/main/nominals/struct.Kannada.html): ೦‎ ೧‎ ೨‎ ೩‎ ೪‎ …‎ ೯‎ ೧೦‎ ೧೧‎ ೧೨‎ …‎ ೯೯‎ ೧೦೦‎ ೧೦೧‎ ೧೦೨
+- [`Katakana`](https://khonsulabs.github.io/nominals/main/nominals/struct.Katakana.html): ア‎ イ‎ ウ‎ エ‎ オ‎ …‎ ン‎ アア‎ アイ‎ アウ‎ …‎ ヲン‎ ンア‎ ンイ‎ ンウ
+- [`KatakanaIroha`](https://khonsulabs.github.io/nominals/main/nominals/struct.KatakanaIroha.html): イ‎ ロ‎ ハ‎ ニ‎ ホ‎ …‎ ス‎ イイ‎ イロ‎ イハ‎ …‎ セス‎ スイ‎ スロ‎ スハ
+- [`Lao`](https://khonsulabs.github.io/nominals/main/nominals/struct.Lao.html): ໐‎ ໑‎ ໒‎ ໓‎ ໔‎ …‎ ໙‎ ໑໐‎ ໑໑‎ ໑໒‎ …‎ ໙໙‎ ໑໐໐‎ ໑໐໑‎ ໑໐໒
+- [`Malayalam`](https://khonsulabs.github.io/nominals/main/nominals/struct.Malayalam.html): ൦‎ ൧‎ ൨‎ ൩‎ ൪‎ …‎ ൯‎ ൧൦‎ ൧൧‎ ൧൨‎ …‎ ൯൯‎ ൧൦൦‎ ൧൦൧‎ ൧൦൨
+- [`Mongolian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Mongolian.html): ᠐‎ ᠑‎ ᠒‎ ᠓‎ ᠔‎ …‎ ᠙‎ ᠑᠐‎ ᠑᠑‎ ᠑᠒‎ …‎ ᠙᠙‎ ᠑᠐᠐‎ ᠑᠐᠑‎ ᠑᠐᠒
+- [`Myanmar`](https://khonsulabs.github.io/nominals/main/nominals/struct.Myanmar.html): ၀‎ ၁‎ ၂‎ ၃‎ ၄‎ …‎ ၉‎ ၁၀‎ ၁၁‎ ၁၂‎ …‎ ၉၉‎ ၁၀၀‎ ၁၀၁‎ ၁၀၂
+- [`Oriya`](https://khonsulabs.github.io/nominals/main/nominals/struct.Oriya.html): ୦‎ ୧‎ ୨‎ ୩‎ ୪‎ …‎ ୯‎ ୧୦‎ ୧୧‎ ୧୨‎ …‎ ୯୯‎ ୧୦୦‎ ୧୦୧‎ ୧୦୨
+- [`Persian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Persian.html): ۰‎ ۱‎ ۲‎ ۳‎ ۴‎ …‎ ۹‎ ۱۰‎ ۱۱‎ ۱۲‎ …‎ ۹۹‎ ۱۰۰‎ ۱۰۱‎ ۱۰۲
+- [`Tamil`](https://khonsulabs.github.io/nominals/main/nominals/struct.Tamil.html): ௦‎ ௧‎ ௨‎ ௩‎ ௪‎ …‎ ௯‎ ௧௦‎ ௧௧‎ ௧௨‎ …‎ ௯௯‎ ௧௦௦‎ ௧௦௧‎ ௧௦௨
+- [`Telugu`](https://khonsulabs.github.io/nominals/main/nominals/struct.Telugu.html): ౦‎ ౧‎ ౨‎ ౩‎ ౪‎ …‎ ౯‎ ౧౦‎ ౧౧‎ ౧౨‎ …‎ ౯౯‎ ౧౦౦‎ ౧౦౧‎ ౧౦౨
+- [`Thai`](https://khonsulabs.github.io/nominals/main/nominals/struct.Thai.html): ๐‎ ๑‎ ๒‎ ๓‎ ๔‎ …‎ ๙‎ ๑๐‎ ๑๑‎ ๑๒‎ …‎ ๙๙‎ ๑๐๐‎ ๑๐๑‎ ๑๐๒
+- [`Tibetan`](https://khonsulabs.github.io/nominals/main/nominals/struct.Tibetan.html): ༠‎ ༡‎ ༢‎ ༣‎ ༤‎ …‎ ༩‎ ༡༠‎ ༡༡‎ ༡༢‎ …‎ ༩༩‎ ༡༠༠‎ ༡༠༡‎ ༡༠༢
 - [`Chinese::simplified()`](https://khonsulabs.github.io/nominals/main/nominals/struct.Chinese.html#method.simplified): 零‎ 壹‎ 贰‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 贰拾‎ 贰拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹
 - [`Chinese::traditional()`](https://khonsulabs.github.io/nominals/main/nominals/struct.Chinese.html#method.traditional): 零‎ 壹‎ 貳‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 貳拾‎ 貳拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹
 

@@ -5,11 +5,11 @@
 #[cfg(feature = "alloc")]
 extern crate alloc;
 
+mod additive;
 #[cfg(feature = "chinese")]
 mod chinese;
 mod hebrew;
 mod nominalstring;
-mod roman;
 
 mod sealed {
     /// A trait that marks a type as performing integer-style division with its
@@ -23,19 +23,17 @@ mod digital;
 use core::fmt::Debug;
 use core::ops::{Div, Rem, Sub};
 
+pub use additive::*;
 #[cfg(feature = "chinese")]
 pub use chinese::Chinese;
 pub use digital::*;
 pub use hebrew::Hebrew;
 pub use nominalstring::{NominalString, OutOfMemoryError};
-pub use roman::{RomanLower, RomanUpper};
 
 /// A system of ordered nominal identifiers.
 pub trait NominalSystem<T>
 where
     T: Nominal,
-    <T as TryFrom<usize>>::Error: core::fmt::Debug,
-    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
     /// Formats `nominal` using this system.
     fn format_nominal(&self, nominal: T) -> NominalString {
@@ -56,8 +54,6 @@ where
 impl<T> NominalSystem<T> for alloc::boxed::Box<dyn NominalSystem<T>>
 where
     T: Nominal,
-    <T as TryFrom<usize>>::Error: core::fmt::Debug,
-    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
     fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
         self.as_ref().try_format_nominal(nominal)
@@ -68,8 +64,6 @@ where
 impl<T> NominalSystem<T> for alloc::rc::Rc<dyn NominalSystem<T>>
 where
     T: Nominal,
-    <T as TryFrom<usize>>::Error: core::fmt::Debug,
-    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
     fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
         self.as_ref().try_format_nominal(nominal)
@@ -80,8 +74,6 @@ where
 impl<T> NominalSystem<T> for alloc::sync::Arc<dyn NominalSystem<T>>
 where
     T: Nominal,
-    <T as TryFrom<usize>>::Error: core::fmt::Debug,
-    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
     fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
         self.as_ref().try_format_nominal(nominal)
@@ -99,11 +91,7 @@ fn boxing() {
 }
 
 /// A type that can be formatted with a [`NominalSystem`].
-pub trait Nominal: UnsignedInteger
-where
-    <Self as TryFrom<usize>>::Error: core::fmt::Debug,
-    <Self as TryInto<usize>>::Error: core::fmt::Debug,
-{
+pub trait Nominal: UnsignedInteger {
     /// Returns `self` formatted as a nominal identifier using `system`.
     fn to_nominal<N>(self, system: &N) -> NominalString
     where
@@ -185,8 +173,6 @@ pub enum Error<T> {
 impl<T> Error<T>
 where
     T: Nominal,
-    <T as TryFrom<usize>>::Error: core::fmt::Debug,
-    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
     /// Converts this error to a nominal string in decimal form.
     ///
@@ -214,8 +200,6 @@ pub trait UnwrapOrDecimal {
 impl<T> UnwrapOrDecimal for Result<NominalString, Error<T>>
 where
     T: Nominal,
-    <T as TryFrom<usize>>::Error: core::fmt::Debug,
-    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
     fn unwrap_or_decimal(self) -> NominalString {
         match self {

@@ -81,12 +81,12 @@ where
         false
     }
 
-    fn len(&self) -> usize {
-        self.0.len()
+    fn len(&self, digit: usize) -> usize {
+        self.0.len(digit)
     }
 
-    fn digit(&self, index: usize) -> char {
-        self.0.digit(index)
+    fn digit(&self, index: usize, digit_index: usize) -> char {
+        self.0.digit(index, digit_index)
     }
 }
 
@@ -112,12 +112,12 @@ macro_rules! impl_digit_set {
                     DIGITS.zero_based()
                 }
 
-                fn len(&self) -> usize {
-                    DIGITS.len()
+                fn len(&self, digit: usize) -> usize {
+                    DIGITS.len(digit)
                 }
 
-                fn digit(&self, index: usize) -> char {
-                    DIGITS.digit(index)
+                fn digit(&self, index: usize, digit_index: usize) -> char {
+                    DIGITS.digit(index, digit_index)
                 }
             }
         };
@@ -137,13 +137,176 @@ impl_digit_set!(
 );
 
 impl_digit_set!(
-    /// Persian/Urdu numeric digits.
-    ///
-    /// The Unicode codepoints for both Persian and Urdu numeric digits are
-    /// identical. The glyph selection comes from using different fonts based on
-    /// the language desired.
+    /// Persian numeric digits.
     Persian,
     DigitSet<10, true> = DigitSet::new(['\u{06F0}', '\u{06F1}', '\u{06F2}', '\u{06F3}', '\u{06F4}', '\u{06F5}', '\u{06F6}', '\u{06F7}', '\u{06F8}', '\u{06F9}'])
+);
+
+/// Urdu numeric digits.
+///
+/// The Unicode codepoints for both [`Persian`] and Urdu numeric digits are
+/// identical. The glyph selection comes from using different fonts based on the
+/// language desired.
+pub type Urdu = Persian;
+
+impl_digit_set!(
+    /// Bengali numeric digits.
+    Bengali,
+    DigitSet<10, true> = DigitSet::new(['\u{9E6}','\u{9E7}','\u{9E8}','\u{9E9}','\u{9EA}','\u{9EB}','\u{9EC}','\u{9ED}','\u{9EE}','\u{9EF}'])
+);
+
+impl_digit_set!(
+    /// Cambodian numeric digits.
+    Cambodian,
+    DigitSet<10, true> = DigitSet::new(['\u{17E0}','\u{17E1}','\u{17E2}','\u{17E3}','\u{17E4}','\u{17E5}','\u{17E6}','\u{17E7}','\u{17E8}','\u{17E9}'])
+);
+
+/// Khmer numeric digits.
+///
+/// This set utilizes the same unicode code points as [`Cambodian`].
+pub type Khmer = Cambodian;
+
+impl_digit_set!(
+    /// CJK Han decimal digits.
+    CjkDecimal,
+    DigitSet<10, true> = DigitSet::new(['\u{3007}','\u{4E00}','\u{4E8C}','\u{4E09}','\u{56DB}','\u{4E94}','\u{516D}','\u{4E03}','\u{516B}','\u{4E5D}'])
+);
+
+/// CJK Heavenly Stems symbols.
+///
+/// This digit collection falls back to [`CjkDecimal`] after the set is
+/// enumerated.
+#[doc = include_str!("./previews/CjkHeavenlyStem.md")]
+pub struct CjkHeavenlyStem;
+
+impl DigitCollection for CjkHeavenlyStem {
+    fn has_zero_digit(&self) -> bool {
+        true
+    }
+
+    fn len(&self, _digit: usize) -> usize {
+        10
+    }
+
+    fn digit(&self, index: usize, digit_index: usize) -> char {
+        if digit_index == 0 {
+            [
+                '\u{7532}', '\u{4E59}', '\u{4E19}', '\u{4E01}', '\u{620A}', '\u{5DF1}', '\u{5E9A}',
+                '\u{8F9B}', '\u{58EC}', '\u{7678}',
+            ][index]
+        } else {
+            CjkDecimal.digit(index, digit_index)
+        }
+    }
+}
+
+/// CJK Earthly Branch symbols.
+///
+/// This digit collection back to [`CjkDecimal`] after the set is enumerated.
+#[doc = include_str!("./previews/CjkEarthlyBranch.md")]
+pub struct CjkEarthlyBranch;
+
+impl DigitCollection for CjkEarthlyBranch {
+    fn has_zero_digit(&self) -> bool {
+        true
+    }
+
+    fn len(&self, digit: usize) -> usize {
+        if digit == 0 {
+            12
+        } else {
+            10
+        }
+    }
+
+    fn digit(&self, index: usize, digit_index: usize) -> char {
+        if digit_index == 0 {
+            [
+                '\u{5B50}', '\u{4E11}', '\u{5BC5}', '\u{536F}', '\u{8FB0}', '\u{5DF3}', '\u{5348}',
+                '\u{672A}', '\u{7533}', '\u{9149}', '\u{620C}', '\u{4EA5}',
+            ][index]
+        } else {
+            CjkDecimal.digit(index, digit_index)
+        }
+    }
+}
+
+impl_digit_set!(
+    /// Devanagari numeric digits.
+    Devanagari,
+    DigitSet<10, true> = DigitSet::new(['\u{966}','\u{967}','\u{968}','\u{969}','\u{96A}','\u{96B}','\u{96C}','\u{96D}','\u{96E}','\u{96F}'])
+);
+
+impl_digit_set!(
+    /// Gujarati numeric digits.
+    Gujarati,
+    DigitSet<10, true> = DigitSet::new(['\u{AE6}','\u{AE7}','\u{AE8}','\u{AE9}','\u{AEA}','\u{AEB}','\u{AEC}','\u{AED}','\u{AEE}','\u{AEF}'])
+);
+
+impl_digit_set!(
+    /// Gurmukhi numeric digits.
+    Gurmukhi,
+    DigitSet<10, true> = DigitSet::new(['\u{A66}','\u{A67}','\u{A68}','\u{A69}','\u{A6A}','\u{A6B}','\u{A6C}','\u{A6D}','\u{A6E}','\u{A6F}'])
+);
+
+impl_digit_set!(
+    /// Kannada numeric digits.
+    Kannada,
+    DigitSet<10, true> = DigitSet::new(['\u{CE6}','\u{CE7}','\u{CE8}','\u{CE9}','\u{CEA}','\u{CEB}','\u{CEC}','\u{CED}','\u{CEE}','\u{CEF}'])
+);
+
+impl_digit_set!(
+    /// Lao numeric digits.
+    Lao,
+    DigitSet<10, true> = DigitSet::new(['\u{ED0}','\u{ED1}','\u{ED2}','\u{ED3}','\u{ED4}','\u{ED5}','\u{ED6}','\u{ED7}','\u{ED8}','\u{ED9}'])
+);
+
+impl_digit_set!(
+    /// Malayalam numeric digits.
+    Malayalam,
+    DigitSet<10, true> = DigitSet::new(['\u{D66}','\u{D67}','\u{D68}','\u{D69}','\u{D6A}','\u{D6B}','\u{D6C}','\u{D6D}','\u{D6E}','\u{D6F}'])
+);
+
+impl_digit_set!(
+    /// Mongolian numeric digits.
+    Mongolian,
+    DigitSet<10, true> = DigitSet::new(['\u{1810}','\u{1811}','\u{1812}','\u{1813}','\u{1814}','\u{1815}','\u{1816}','\u{1817}','\u{1818}','\u{1819}'])
+);
+
+impl_digit_set!(
+    /// Myanmar numeric digits.
+    Myanmar,
+    DigitSet<10, true> = DigitSet::new(['\u{1040}','\u{1041}','\u{1042}','\u{1043}','\u{1044}','\u{1045}','\u{1046}','\u{1047}','\u{1048}','\u{1049}'])
+);
+
+impl_digit_set!(
+    /// Oriya numeric digits.
+    Oriya,
+    DigitSet<10, true> = DigitSet::new(['\u{B66}','\u{B67}','\u{B68}','\u{B69}','\u{B6A}','\u{B6B}','\u{B6C}','\u{B6D}','\u{B6E}','\u{B6F}'])
+);
+
+impl_digit_set!(
+    /// Tamil numeric digits.
+    Tamil,
+    DigitSet<10, true> = DigitSet::new(['\u{BE6}','\u{BE7}','\u{BE8}','\u{BE9}','\u{BEA}','\u{BEB}','\u{BEC}','\u{BED}','\u{BEE}','\u{BEF}'])
+);
+
+impl_digit_set!(
+    /// Telugu numeric digits.
+    Telugu,
+    DigitSet<10, true> = DigitSet::new(['\u{C66}','\u{C67}','\u{C68}','\u{C69}','\u{C6A}','\u{C6B}','\u{C6C}','\u{C6D}','\u{C6E}','\u{C6F}'])
+);
+
+impl_digit_set!(
+    /// Thai numeric digits.
+    Thai,
+    DigitSet<10, true> = DigitSet::new(['\u{E50}','\u{E51}','\u{E52}','\u{E53}','\u{E54}','\u{E55}','\u{E56}','\u{E57}','\u{E58}','\u{E59}'])
+);
+
+impl_digit_set!(
+    /// Tibetan numeric digits.
+    Tibetan,
+    DigitSet<10, true> = DigitSet::new(['\u{F20}','\u{F21}','\u{F22}','\u{F23}','\u{F24}','\u{F25}','\u{F26}','\u{F27}','\u{F28}','\u{F29}'])
 );
 
 impl_digit_set!(
@@ -270,15 +433,15 @@ where
         self.a.zero_based()
     }
 
-    fn len(&self) -> usize {
-        self.a.len() + self.b.len()
+    fn len(&self, digit: usize) -> usize {
+        self.a.len(digit) + self.b.len(digit)
     }
 
-    fn digit(&self, index: usize) -> char {
-        if let Some(index) = index.checked_sub(self.a.len()) {
-            self.b.digit(index)
+    fn digit(&self, index: usize, digit_index: usize) -> char {
+        if let Some(index) = index.checked_sub(self.a.len(digit_index)) {
+            self.b.digit(index, digit_index)
         } else {
-            self.a.digit(index)
+            self.a.digit(index, digit_index)
         }
     }
 }
@@ -305,12 +468,12 @@ where
         self.0.zero_based()
     }
 
-    fn len(&self) -> usize {
+    fn len(&self, _digit_index: usize) -> usize {
         self.1
     }
 
-    fn digit(&self, index: usize) -> char {
-        self.0.digit(index)
+    fn digit(&self, index: usize, digit_index: usize) -> char {
+        self.0.digit(index, digit_index)
     }
 }
 
@@ -337,15 +500,11 @@ impl<const N: usize> DigitCollection for DigitSet<N, false> {
         false
     }
 
-    fn zero_based(&self) -> bool {
-        true
-    }
-
-    fn len(&self) -> usize {
+    fn len(&self, _digit_index: usize) -> usize {
         N
     }
 
-    fn digit(&self, index: usize) -> char {
+    fn digit(&self, index: usize, _digit_index: usize) -> char {
         self.digits[index]
     }
 }
@@ -355,15 +514,11 @@ impl<const N: usize> DigitCollection for DigitSet<N, true> {
         true
     }
 
-    fn zero_based(&self) -> bool {
-        true
-    }
-
-    fn len(&self) -> usize {
+    fn len(&self, _digit_index: usize) -> usize {
         N
     }
 
-    fn digit(&self, index: usize) -> char {
+    fn digit(&self, index: usize, _digit_index: usize) -> char {
         self.digits[index]
     }
 }
@@ -372,13 +527,17 @@ impl<T, D> NominalSystem<T> for D
 where
     D: DigitCollection,
     T: Nominal + UnsignedInteger,
-    <T as TryFrom<usize>>::Error: core::fmt::Debug,
-    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
     fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
-        let Ok(count) = T::try_from(self.len()) else {
+        let mut digit_index = 0;
+        let Ok(mut count) = T::try_from(self.len(digit_index)) else {
             return Ok(NominalString::from(
-                self.digit((nominal).try_into().expect("numeric < len")),
+                self.digit(
+                    (nominal)
+                        .try_into()
+                        .map_err(|_| Error::OutOfBounds(nominal))?,
+                    digit_index,
+                ),
             ));
         };
         let one = T::from(1_u8);
@@ -398,10 +557,20 @@ where
 
             formatted
                 .try_push_front(
-                    self.digit((remaining % count).try_into().expect("count <= usize::MAX")),
+                    self.digit(
+                        (remaining % count)
+                            .try_into()
+                            .map_err(|_| Error::OutOfBounds(nominal))?,
+                        digit_index,
+                    ),
                 )
                 .with_nominal(nominal)?;
             remaining = remaining / count;
+            digit_index += 1;
+            count = match T::try_from(self.len(digit_index)) {
+                Ok(count) => count,
+                Err(_) => return Err(Error::OutOfBounds(nominal)),
+            };
         }
 
         Ok(formatted)
@@ -416,15 +585,17 @@ pub trait DigitCollection {
     fn has_zero_digit(&self) -> bool;
     /// Returns true if this collection should start counting at 1 instead of 0.
     /// This function is only called if `has_zero_digit()` returns false.
-    fn zero_based(&self) -> bool;
+    fn zero_based(&self) -> bool {
+        true
+    }
     /// Returns the number of digits in this collection.
-    fn len(&self) -> usize;
+    fn len(&self, digit: usize) -> usize;
     /// Returns the digit at location `index`.
     ///
     /// # Panics
     ///
     /// This function can panic if `index >= self.len()`.
-    fn digit(&self, index: usize) -> char;
+    fn digit(&self, index: usize, digit_index: usize) -> char;
 
     /// Chains `self` and `other` into a single [`DigitCollection`].
     fn and<Other>(self, other: Other) -> Chain<Self, Other>

@@ -1,20 +1,46 @@
-- [`Decimal`]($Decimal$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ 9‎ 10‎ 11‎ 12
-- [`EasternArabic`]($EasternArabic$): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢
-- [`GreekLower`]($GreekLower$): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ
-- [`GreekUpper`]($GreekUpper$): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ
-- [`HangeulJamo`]($HangeulJamo$): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ
-- [`HangeulSyllable`]($HangeulSyllable$): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다
-- [`Hebrew`]($Hebrew$): ׳א״‎ ׳ב״‎ ׳ג״‎ …‎ ׳ט״‎ ׳י״‎ …‎ יג‎ יד‎ ט״ו‎ ט״ז‎ יז‎ …‎ שצו‎ שצז‎ שצח‎ שצט‎ ׳ת״
-- [`HexLower`]($HexLower$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ f‎ 10‎ 11‎ 12
-- [`HexUpper`]($HexUpper$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ F‎ 10‎ 11‎ 12
-- [`Hiragana`]($Hiragana$): あ‎ い‎ う‎ え‎ お‎ …‎ ん‎ ああ‎ あい‎ あう
-- [`HiraganaIroha`]($HiraganaIroha$): い‎ ろ‎ は‎ に‎ ほ‎ …‎ す‎ いい‎ いろ‎ いは
-- [`Katakana`]($Katakana$): ア‎ イ‎ ウ‎ エ‎ オ‎ …‎ ン‎ アア‎ アイ‎ アウ
-- [`KatakanaIroha`]($KatakanaIroha$): イ‎ ロ‎ ハ‎ ニ‎ ホ‎ …‎ ス‎ イイ‎ イロ‎ イハ
-- [`LetterLower`]($LetterLower$): a‎ b‎ c‎ d‎ e‎ …‎ z‎ aa‎ ab‎ ac
-- [`LetterUpper`]($LetterUpper$): A‎ B‎ C‎ D‎ E‎ …‎ Z‎ AA‎ AB‎ AC
-- [`Persian`]($Persian$): ۰‎ ۱‎ ۲‎ ۳‎ ۴‎ …‎ ۹‎ ۱۰‎ ۱۱‎ ۱۲
+- [`Decimal`]($Decimal$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ 9‎ 10‎ 11‎ 12‎ …‎ 99‎ 100‎ 101‎ 102
+- [`LetterLower`]($LetterLower$): a‎ b‎ c‎ d‎ e‎ …‎ z‎ aa‎ ab‎ ac‎ …‎ yz‎ za‎ zb‎ zc
+- [`LetterUpper`]($LetterUpper$): A‎ B‎ C‎ D‎ E‎ …‎ Z‎ AA‎ AB‎ AC‎ …‎ YZ‎ ZA‎ ZB‎ ZC
 - [`RomanLower`]($RomanLower$): i‎ ii‎ iii‎ iv‎ v‎ vi‎ …‎ ix‎ x‎ xi‎ …‎ mmmcmxcix‎ i̅v̅‎ i̅v̅i‎ …‎ d̅m̅l̅c̅i̅x̅cmxcix‎ m̅‎ m̅i
 - [`RomanUpper`]($RomanUpper$): I‎ II‎ III‎ IV‎ V‎ VI‎ …‎ IX‎ X‎ XI‎ …‎ MMMCMXCIX‎ I̅V̅‎ I̅V̅I‎ …‎ D̅M̅L̅C̅I̅X̅CMXCIX‎ M̅‎ M̅I
+- [`ArmenianLower`]($ArmenianLower$): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ …‎ ժգ‎ ժդ‎ ժե‎ ժզ‎ ժէ‎ …‎ յղզ‎ յղէ‎ յղը‎ յղթ‎ ն
+- [`ArmenianUpper`]($ArmenianUpper$): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ …‎ ԺԳ‎ ԺԴ‎ ԺԵ‎ ԺԶ‎ ԺԷ‎ …‎ ՅՂԶ‎ ՅՂԷ‎ ՅՂԸ‎ ՅՂԹ‎ Ն
+- [`Bengali`]($Bengali$): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২
+- [`Cambodian`]($Cambodian$): ០‎ ១‎ ២‎ ៣‎ ៤‎ …‎ ៩‎ ១០‎ ១១‎ ១២‎ …‎ ៩៩‎ ១០០‎ ១០១‎ ១០២
 - [`Chinese::simplified()`]($simplified-chinese$): 零‎ 壹‎ 贰‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 贰拾‎ 贰拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹
 - [`Chinese::traditional()`]($traditional-chinese$): 零‎ 壹‎ 貳‎ …‎ 玖‎ 拾‎ 拾壹‎ …‎ 拾玖‎ 貳拾‎ 貳拾壹‎ …‎ 玖拾玖‎ 壹佰‎ 壹佰零壹
+- [`CjkDecimal`]($CjkDecimal$): 〇‎ 一‎ 二‎ 三‎ 四‎ …‎ 九‎ 一〇‎ 一一‎ 一二‎ …‎ 九九‎ 一〇〇‎ 一〇一‎ 一〇二
+- [`CjkEarthlyBranch`]($CjkEarthlyBranch$): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一子‎ 一丑‎ 一寅‎ …‎ 九亥‎ 一〇子‎ 一〇丑‎ 一〇寅
+- [`CjkHeavenlyStem`]($CjkHeavenlyStem$): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙
+- [`Devanagari`]($Devanagari$): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
+- [`EasternArabic`]($EasternArabic$): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
+- [`Georgian`]($Georgian$): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ …‎ იგ‎ იდ‎ იე‎ ივ‎ იზ‎ …‎ ტჟვ‎ ტჟზ‎ ტჟჱ‎ ტჟთ‎ ჳ
+- [`GreekLower`]($GreekLower$): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ‎ …‎ ψω‎ ωα‎ ωβ‎ ωγ
+- [`GreekUpper`]($GreekUpper$): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
+- [`Gujarati`]($Gujarati$): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
+- [`Gurmukhi`]($Gurmukhi$): ੦‎ ੧‎ ੨‎ ੩‎ ੪‎ …‎ ੯‎ ੧੦‎ ੧੧‎ ੧੨‎ …‎ ੯੯‎ ੧੦੦‎ ੧੦੧‎ ੧੦੨
+- [`HangeulFormal`]($HangeulFormal$): 영‎ 일‎ 이‎ …‎ 구‎ 일십‎ 일십일‎ …‎ 일십구‎ 이십‎ 이십일‎ …‎ 구십구‎ 일백‎ 일백일
+- [`HangeulInformal`]($HangeulInformal$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
+- [`HangeulJamo`]($HangeulJamo$): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ‎ …‎ ㅍㅎ‎ ㅎㄱ‎ ㅎㄴ‎ ㅎㄷ
+- [`HangeulSyllable`]($HangeulSyllable$): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다‎ …‎ 파하‎ 하가‎ 하나‎ 하다
+- [`HanjaFormal`]($HanjaFormal$): 壹‎ 貳‎ 參‎ …‎ 九‎ 壹拾‎ …‎ 壹拾參‎ 壹拾四‎ 壹拾五‎ 壹拾六‎ 壹拾七‎ …‎ 參百九拾六‎ 參百九拾七‎ 參百九拾八‎ 參百九拾九‎ 四百
+- [`Hebrew`]($Hebrew$): ׳א״‎ ׳ב״‎ ׳ג״‎ …‎ ׳ט״‎ ׳י״‎ …‎ יג‎ יד‎ ט״ו‎ ט״ז‎ יז‎ …‎ שצו‎ שצז‎ שצח‎ שצט‎ ׳ת״
+- [`HexLower`]($HexLower$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ f‎ 10‎ 11‎ 12‎ …‎ ff‎ 100‎ 101‎ 102
+- [`HexUpper`]($HexUpper$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ F‎ 10‎ 11‎ 12‎ …‎ FF‎ 100‎ 101‎ 102
+- [`Hiragana`]($Hiragana$): あ‎ い‎ う‎ え‎ お‎ …‎ ん‎ ああ‎ あい‎ あう‎ …‎ をん‎ んあ‎ んい‎ んう
+- [`HiraganaIroha`]($HiraganaIroha$): い‎ ろ‎ は‎ に‎ ほ‎ …‎ す‎ いい‎ いろ‎ いは‎ …‎ せす‎ すい‎ すろ‎ すは
+- [`JapaneseFormal`]($JapaneseFormal$): 零‎ 壱‎ 弐‎ …‎ 九‎ 壱拾‎ 壱拾壱‎ …‎ 壱拾九‎ 弐拾‎ 弐拾壱‎ …‎ 九拾九‎ 壱百‎ 壱百壱
+- [`JapaneseInformal`]($JapaneseInformal$): 〇‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
+- [`Kannada`]($Kannada$): ೦‎ ೧‎ ೨‎ ೩‎ ೪‎ …‎ ೯‎ ೧೦‎ ೧೧‎ ೧೨‎ …‎ ೯೯‎ ೧೦೦‎ ೧೦೧‎ ೧೦೨
+- [`Katakana`]($Katakana$): ア‎ イ‎ ウ‎ エ‎ オ‎ …‎ ン‎ アア‎ アイ‎ アウ‎ …‎ ヲン‎ ンア‎ ンイ‎ ンウ
+- [`KatakanaIroha`]($KatakanaIroha$): イ‎ ロ‎ ハ‎ ニ‎ ホ‎ …‎ ス‎ イイ‎ イロ‎ イハ‎ …‎ セス‎ スイ‎ スロ‎ スハ
+- [`Lao`]($Lao$): ໐‎ ໑‎ ໒‎ ໓‎ ໔‎ …‎ ໙‎ ໑໐‎ ໑໑‎ ໑໒‎ …‎ ໙໙‎ ໑໐໐‎ ໑໐໑‎ ໑໐໒
+- [`Malayalam`]($Malayalam$): ൦‎ ൧‎ ൨‎ ൩‎ ൪‎ …‎ ൯‎ ൧൦‎ ൧൧‎ ൧൨‎ …‎ ൯൯‎ ൧൦൦‎ ൧൦൧‎ ൧൦൨
+- [`Mongolian`]($Mongolian$): ᠐‎ ᠑‎ ᠒‎ ᠓‎ ᠔‎ …‎ ᠙‎ ᠑᠐‎ ᠑᠑‎ ᠑᠒‎ …‎ ᠙᠙‎ ᠑᠐᠐‎ ᠑᠐᠑‎ ᠑᠐᠒
+- [`Myanmar`]($Myanmar$): ၀‎ ၁‎ ၂‎ ၃‎ ၄‎ …‎ ၉‎ ၁၀‎ ၁၁‎ ၁၂‎ …‎ ၉၉‎ ၁၀၀‎ ၁၀၁‎ ၁၀၂
+- [`Oriya`]($Oriya$): ୦‎ ୧‎ ୨‎ ୩‎ ୪‎ …‎ ୯‎ ୧୦‎ ୧୧‎ ୧୨‎ …‎ ୯୯‎ ୧୦୦‎ ୧୦୧‎ ୧୦୨
+- [`Persian`]($Persian$): ۰‎ ۱‎ ۲‎ ۳‎ ۴‎ …‎ ۹‎ ۱۰‎ ۱۱‎ ۱۲‎ …‎ ۹۹‎ ۱۰۰‎ ۱۰۱‎ ۱۰۲
+- [`Tamil`]($Tamil$): ௦‎ ௧‎ ௨‎ ௩‎ ௪‎ …‎ ௯‎ ௧௦‎ ௧௧‎ ௧௨‎ …‎ ௯௯‎ ௧௦௦‎ ௧௦௧‎ ௧௦௨
+- [`Telugu`]($Telugu$): ౦‎ ౧‎ ౨‎ ౩‎ ౪‎ …‎ ౯‎ ౧౦‎ ౧౧‎ ౧౨‎ …‎ ౯౯‎ ౧౦౦‎ ౧౦౧‎ ౧౦౨
+- [`Thai`]($Thai$): ๐‎ ๑‎ ๒‎ ๓‎ ๔‎ …‎ ๙‎ ๑๐‎ ๑๑‎ ๑๒‎ …‎ ๙๙‎ ๑๐๐‎ ๑๐๑‎ ๑๐๒
+- [`Tibetan`]($Tibetan$): ༠‎ ༡‎ ༢‎ ༣‎ ༤‎ …‎ ༩‎ ༡༠‎ ༡༡‎ ༡༢‎ …‎ ༩༩‎ ༡༠༠‎ ༡༠༡‎ ༡༠༢

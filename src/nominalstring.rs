@@ -42,9 +42,16 @@ impl NominalString {
     }
 
     /// Returns an empty string, optimized for
-    /// [`push_front()`](Self::push_front) calls.
+    /// [`try_push_front()`](Self::try_push_front) calls.
     ///
-    /// While the string can fit on the stack ([`Self::INLINE_CAPACITY`]),
+    /// The returned string has identical "observable" behavior to a string
+    /// returned from [`NominalString::new()`]. Calling the same series of push
+    /// operations on either kind of string will result in identical strings.
+    /// These constructors only affect the performance.
+    ///
+    /// While this string is on the stack, it fills its data starting at the end
+    /// of the inline buffer. This allows `try_push_front()` to operate in
+    /// `O(1)` time until it overflows on the stack.
     #[must_use]
     pub const fn new_reverse() -> Self {
         Self(MaybeInline::reverse())

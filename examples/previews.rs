@@ -7,10 +7,13 @@ use std::io::{stdout, Write};
 use std::path::Path;
 
 use nominals::{
-    Chinese, Decimal, DigitCollection, EasternArabic, GreekLower, GreekUpper, HangeulJamo,
-    HangeulSyllable, Hebrew, HexLower, HexUpper, Hiragana, HiraganaIroha, Katakana, KatakanaIroha,
-    LetterLower, LetterUpper, Nominal, NominalString, NominalSystem, Persian, RomanLower,
-    RomanUpper,
+    ArmenianLower, ArmenianUpper, Bengali, Cambodian, Chinese, CjkDecimal, CjkEarthlyBranch,
+    CjkHeavenlyStem, Decimal, Devanagari, DigitCollection, EasternArabic, Georgian, GreekLower,
+    GreekUpper, Gujarati, Gurmukhi, HangeulFormal, HangeulInformal, HangeulJamo, HangeulSyllable,
+    HanjaFormal, Hebrew, HexLower, HexUpper, Hiragana, HiraganaIroha, JapaneseFormal,
+    JapaneseInformal, Kannada, Katakana, KatakanaIroha, Lao, LetterLower, LetterUpper, Malayalam,
+    Mongolian, Myanmar, Nominal, NominalString, NominalSystem, Oriya, Persian, RomanLower,
+    RomanUpper, Tamil, Telugu, Thai, Tibetan,
 };
 use unicode_segmentation::UnicodeSegmentation;
 use unicode_width::UnicodeWidthStr;
@@ -19,25 +22,51 @@ fn main() {
     let mut file = open_preview_file_if_saving("index");
     for (name, summary) in vec![
         preview(&DigitPreview(Decimal)),
+        preview(&DigitPreview(LetterLower)),
+        preview(&DigitPreview(LetterUpper)),
+        preview(&RomanLower),
+        preview(&RomanUpper),
+        preview(&ArmenianLower),
+        preview(&ArmenianUpper),
+        preview(&DigitPreview(Bengali)),
+        preview(&DigitPreview(Cambodian)),
+        preview(&SimplifiedChinese),
+        preview(&TraditionalChinese),
+        preview(&DigitPreview(CjkDecimal)),
+        preview(&DigitPreview(CjkEarthlyBranch)),
+        preview(&DigitPreview(CjkHeavenlyStem)),
+        preview(&DigitPreview(Devanagari)),
         preview(&DigitPreview(EasternArabic)),
+        preview(&Georgian),
         preview(&DigitPreview(GreekLower)),
         preview(&DigitPreview(GreekUpper)),
+        preview(&DigitPreview(Gujarati)),
+        preview(&DigitPreview(Gurmukhi)),
+        preview(&HangeulFormal),
+        preview(&HangeulInformal),
         preview(&DigitPreview(HangeulJamo)),
         preview(&DigitPreview(HangeulSyllable)),
+        preview(&HanjaFormal),
         preview(&Hebrew),
         preview(&DigitPreview(HexLower)),
         preview(&DigitPreview(HexUpper)),
         preview(&DigitPreview(Hiragana)),
         preview(&DigitPreview(HiraganaIroha)),
+        preview(&JapaneseFormal),
+        preview(&JapaneseInformal),
+        preview(&DigitPreview(Kannada)),
         preview(&DigitPreview(Katakana)),
         preview(&DigitPreview(KatakanaIroha)),
-        preview(&DigitPreview(LetterLower)),
-        preview(&DigitPreview(LetterUpper)),
+        preview(&DigitPreview(Lao)),
+        preview(&DigitPreview(Malayalam)),
+        preview(&DigitPreview(Mongolian)),
+        preview(&DigitPreview(Myanmar)),
+        preview(&DigitPreview(Oriya)),
         preview(&DigitPreview(Persian)),
-        preview(&RomanLower),
-        preview(&RomanUpper),
-        preview(&SimplifiedChinese),
-        preview(&TraditionalChinese),
+        preview(&DigitPreview(Tamil)),
+        preview(&DigitPreview(Telugu)),
+        preview(&DigitPreview(Thai)),
+        preview(&DigitPreview(Tibetan)),
     ] {
         print(file.as_mut(), format_args!("- {name}: {summary}\n"));
     }
@@ -168,7 +197,7 @@ where
     }
 
     fn preview_values(&self) -> Vec<u32> {
-        let count = u32::try_from(self.0.len()).expect("too many digits");
+        let count = u32::try_from(self.0.len(0)).expect("too many digits");
 
         let mut values = Vec::new();
         let base = u32::from(!(self.0.has_zero_digit() || self.0.zero_based()));
@@ -185,6 +214,13 @@ where
         values.push(base + count);
         values.push(base + count + 1);
         values.push(base + count + 2);
+
+        // Show the hundreds transition
+        let tens_count = u32::try_from(self.0.len(1)).expect("too many digits");
+        values.push(base + tens_count * count - 1);
+        values.push(base + tens_count * count);
+        values.push(base + tens_count * count + 1);
+        values.push(base + tens_count * count + 2);
 
         values
     }
@@ -208,9 +244,13 @@ fn roman_values() -> Vec<u32> {
     ]
 }
 
+fn additive_values() -> Vec<u32> {
+    vec![1, 2, 3, 9, 10, 13, 14, 15, 16, 17, 396, 397, 398, 399, 400]
+}
+
 impl Previewable for Hebrew {
     fn preview_values(&self) -> Vec<u32> {
-        vec![1, 2, 3, 9, 10, 13, 14, 15, 16, 17, 396, 397, 398, 399, 400]
+        additive_values()
     }
 }
 
@@ -234,7 +274,7 @@ impl Previewable for SimplifiedChinese {
     }
 
     fn preview_values(&self) -> Vec<u32> {
-        chinese_values()
+        cjk_values()
     }
 }
 
@@ -254,7 +294,7 @@ impl Previewable for TraditionalChinese {
     }
 
     fn preview_values(&self) -> Vec<u32> {
-        chinese_values()
+        cjk_values()
     }
 }
 
@@ -267,6 +307,54 @@ impl NominalSystem<u32> for TraditionalChinese {
     }
 }
 
-fn chinese_values() -> Vec<u32> {
+fn cjk_values() -> Vec<u32> {
     vec![0, 1, 2, 9, 10, 11, 19, 20, 21, 99, 100, 101]
+}
+
+impl Previewable for HangeulFormal {
+    fn preview_values(&self) -> Vec<u32> {
+        cjk_values()
+    }
+}
+
+impl Previewable for HangeulInformal {
+    fn preview_values(&self) -> Vec<u32> {
+        cjk_values()
+    }
+}
+
+impl Previewable for JapaneseFormal {
+    fn preview_values(&self) -> Vec<u32> {
+        cjk_values()
+    }
+}
+
+impl Previewable for JapaneseInformal {
+    fn preview_values(&self) -> Vec<u32> {
+        cjk_values()
+    }
+}
+
+impl Previewable for ArmenianLower {
+    fn preview_values(&self) -> Vec<u32> {
+        additive_values()
+    }
+}
+
+impl Previewable for ArmenianUpper {
+    fn preview_values(&self) -> Vec<u32> {
+        additive_values()
+    }
+}
+
+impl Previewable for Georgian {
+    fn preview_values(&self) -> Vec<u32> {
+        additive_values()
+    }
+}
+
+impl Previewable for HanjaFormal {
+    fn preview_values(&self) -> Vec<u32> {
+        additive_values()
+    }
 }

@@ -7,8 +7,6 @@ pub struct Hebrew;
 impl<T> NominalSystem<T> for Hebrew
 where
     T: Nominal + UnsignedInteger + TryFrom<u32> + From<u8>,
-    <T as TryFrom<usize>>::Error: core::fmt::Debug,
-    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
     fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
         let mut remaining = nominal;

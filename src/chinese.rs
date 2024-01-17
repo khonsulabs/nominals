@@ -56,8 +56,6 @@ impl Chinese {
 impl<T> NominalSystem<T> for Chinese
 where
     T: Nominal + NumberToChinese + Copy,
-    <T as TryFrom<usize>>::Error: core::fmt::Debug,
-    <T as TryInto<usize>>::Error: core::fmt::Debug,
 {
     fn try_format_nominal(&self, numeric: T) -> Result<NominalString, Error<T>> {
         let formatted = numeric
