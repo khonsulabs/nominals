@@ -486,7 +486,7 @@ impl MaybeInline {
                 }
                 #[cfg(not(feature = "alloc"))]
                 {
-                    Err(OutOfMemoryError);
+                    Err(OutOfMemoryError)
                 }
             }
             #[cfg(feature = "alloc")]
