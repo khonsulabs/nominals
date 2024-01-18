@@ -58,7 +58,7 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`RomanLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.RomanLower.html): i‎ ii‎ iii‎ iv‎ v‎ vi‎ …‎ ix‎ x‎ xi‎ …‎ mmmcmxcix‎ i̅v̅‎ i̅v̅i‎ …‎ d̅m̅l̅c̅i̅x̅cmxcix‎ m̅‎ m̅i
 - [`RomanUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.RomanUpper.html): I‎ II‎ III‎ IV‎ V‎ VI‎ …‎ IX‎ X‎ XI‎ …‎ MMMCMXCIX‎ I̅V̅‎ I̅V̅I‎ …‎ D̅M̅L̅C̅I̅X̅CMXCIX‎ M̅‎ M̅I
 - [`ArmenianLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianLower.html): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ ժա‎ ժբ‎ …‎ ղթ‎ ճ‎ ճա
-- [`ArmenianUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianUpper.html): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ ԺԱ ‎ ԺԲ‎ …‎ ՂԹ‎ Ճ‎ ՃԱ
+- [`ArmenianUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianUpper.html): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ ԺԱ ‎ ԺԲ‎ …‎ ՂԹ‎ Ճ‎ ՃԱ 
 - [`Bengali`](https://khonsulabs.github.io/nominals/main/nominals/struct.Bengali.html): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২
 - [`Cambodian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Cambodian.html): ០‎ ១‎ ២‎ ៣‎ ៤‎ …‎ ៩‎ ១០‎ ១១‎ ១២‎ …‎ ៩៩‎ ១០០‎ ១០១‎ ១០២
 - [`SimplifiedChineseInformal`](https://khonsulabs.github.io/nominals/main/nominals/struct.SimplifiedChineseInformal.html): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
@@ -70,7 +70,7 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`CjkHeavenlyStem`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkHeavenlyStem.html): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙
 - [`Devanagari`](https://khonsulabs.github.io/nominals/main/nominals/struct.Devanagari.html): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
 - [`EasternArabic`](https://khonsulabs.github.io/nominals/main/nominals/struct.EasternArabic.html): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
-- [`Ethiopic`](https://khonsulabs.github.io/nominals/main/nominals/struct.Ethiopic.html): ፪‎ ፫‎ …‎ ፲‎ ፲፩‎ ፲፪‎ …‎ ፺፱‎ ፻‎ ፻፩‎ …‎ ፱፻፺፱‎ ፲፻‎ ፲፻፩
+- [`Ethiopic`](https://khonsulabs.github.io/nominals/main/nominals/struct.Ethiopic.html): ፩‎ ፪‎ ፫‎ …‎ ፲‎ ፲፩‎ ፲፪‎ …‎ ፺፱‎ ፻‎ ፻፩‎ …‎ ፱፻፺፱‎ ፲፻‎ ፲፻፩
 - [`Georgian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Georgian.html): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ ია‎ იბ‎ …‎ ჟთ‎ რ‎ რა
 - [`GreekLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekLower.html): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ‎ …‎ ψω‎ ωα‎ ωβ‎ ωγ
 - [`GreekUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekUpper.html): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
