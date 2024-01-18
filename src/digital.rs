@@ -97,7 +97,7 @@ macro_rules! impl_digit_set {
         // temporarily comment this out or add an empty file until the new
         // variant has been added to the previews example.
         #[doc = include_str!(concat!("./previews/",stringify!($name), ".md"))]
-        #[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
+        #[derive(Default, Debug, Clone, Copy, Eq, PartialEq, Hash)]
         pub struct $name;
 
         const _: () = {
@@ -147,7 +147,7 @@ impl_digit_set!(
 /// The Unicode codepoints for both [`Persian`] and Urdu numeric digits are
 /// identical. The glyph selection comes from using different fonts based on the
 /// language desired.
-pub type Urdu = Persian;
+pub use Persian as Urdu;
 
 impl_digit_set!(
     /// Bengali numeric digits.
@@ -164,7 +164,7 @@ impl_digit_set!(
 /// Khmer numeric digits.
 ///
 /// This set utilizes the same unicode code points as [`Cambodian`].
-pub type Khmer = Cambodian;
+pub use Cambodian as Khmer;
 
 impl_digit_set!(
     /// CJK Han decimal digits.

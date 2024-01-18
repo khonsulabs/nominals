@@ -33,8 +33,9 @@ fn format_ethiopic<T: Nominal>(nominal: T) -> Result<NominalString, OutOfMemoryE
         let second_is_zero = second.is_zero();
         let first_is_one = first == T::from(1);
         let group_is_odd = group_index % 2 == 1;
+        let not_first_group = group_index > 0;
 
-        if group_index > 0 {
+        if not_first_group {
             if !group_is_odd {
                 formatted.try_push_front('\u{137C}')?;
             } else if !(first_is_zero && second_is_zero) {
@@ -43,7 +44,10 @@ fn format_ethiopic<T: Nominal>(nominal: T) -> Result<NominalString, OutOfMemoryE
         }
 
         let remove_digits = (first_is_zero && second_is_zero)
-            || ((remaining.is_zero() || group_is_odd) && second_is_zero && first_is_one);
+            || ((remaining.is_zero() || group_is_odd)
+                && not_first_group
+                && second_is_zero
+                && first_is_one);
 
         if !remove_digits {
             if !first_is_zero {
@@ -73,7 +77,9 @@ where
 
 #[test]
 fn ethiopic() {
+    assert_eq!(1_u32.to_nominal(&Ethiopic), "፩");
     assert_eq!(100_u32.to_nominal(&Ethiopic), "፻");
+    assert_eq!(101_u32.to_nominal(&Ethiopic), "፻፩");
     assert_eq!(78_010_092_u32.to_nominal(&Ethiopic), "፸፰፻፩፼፺፪");
     assert_eq!(780_100_000_092_u64.to_nominal(&Ethiopic), "፸፰፻፩፼፼፺፪");
 }
