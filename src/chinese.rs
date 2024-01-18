@@ -63,9 +63,9 @@ where
 
     let mut remaining = nominal;
     let ones = remaining % ten;
-    remaining = remaining / ten;
+    remaining /= ten;
     let tens = remaining % ten;
-    remaining = remaining / ten;
+    remaining /= ten;
     let hundreds = remaining % ten;
     let thousands = remaining / ten;
 
@@ -77,7 +77,7 @@ where
             formatted.try_push(characters[0])?;
         }
     } else {
-        formatted.try_push(characters[thousands.try_into().map_err(|_| unreachable!("< 10"))?])?;
+        formatted.try_push(characters[thousands.as_usize()])?;
         formatted.try_push(characters[12])?;
         *last_char_is_zero = false;
     }
@@ -88,7 +88,7 @@ where
             formatted.try_push(characters[0])?;
         }
     } else {
-        formatted.try_push(characters[hundreds.try_into().map_err(|_| unreachable!("< 10"))?])?;
+        formatted.try_push(characters[hundreds.as_usize()])?;
         formatted.try_push(characters[11])?;
         *last_char_is_zero = false;
     }
@@ -102,14 +102,14 @@ where
         let omit_digit =
             !(FORMAL || (!formatted.is_empty() || !no_prefix) || *last_char_is_zero || tens != one);
         if !omit_digit {
-            formatted.try_push(characters[tens.try_into().map_err(|_| unreachable!("< 10"))?])?;
+            formatted.try_push(characters[tens.as_usize()])?;
         }
         formatted.try_push(characters[10])?;
         *last_char_is_zero = false;
     }
 
     if !ones.is_zero() {
-        formatted.try_push(characters[ones.try_into().map_err(|_| unreachable!("< 10"))?])?;
+        formatted.try_push(characters[ones.as_usize()])?;
         *last_char_is_zero = false;
     }
 
@@ -200,7 +200,7 @@ impl ChineseScale {
                 return Err(ChineseFormatError::OutOfBounds);
             }
 
-            remaining = remaining % scale;
+            remaining %= scale;
 
             if rank_value.is_zero() {
                 if !formatted.is_empty() && !last_was_zero {
@@ -208,11 +208,7 @@ impl ChineseScale {
                     formatted.try_push(characters[0])?;
                 }
             } else {
-                formatted.try_push(
-                    characters[rank_value
-                        .try_into()
-                        .map_err(|_| ChineseFormatError::OutOfBounds)?],
-                )?;
+                formatted.try_push(characters[rank_value.as_usize()])?;
                 formatted.try_push(large_characters[rank])?;
                 last_was_zero = false;
             }

@@ -7,6 +7,7 @@ extern crate alloc;
 
 mod additive;
 mod chinese;
+mod ethiopic;
 mod hebrew;
 mod nominalstring;
 
@@ -20,11 +21,12 @@ mod sealed {
 mod digital;
 
 use core::fmt::Debug;
-use core::ops::{Div, Mul, Rem, Sub};
+use core::ops::{Div, DivAssign, Mul, MulAssign, Rem, RemAssign, Sub, SubAssign};
 
 pub use additive::*;
 pub use chinese::*;
 pub use digital::*;
+pub use ethiopic::*;
 pub use hebrew::Hebrew;
 pub use nominalstring::{NominalString, OutOfMemoryError};
 
@@ -128,6 +130,10 @@ pub trait UnsignedInteger:
     + Div<Output = Self>
     + Mul<Output = Self>
     + Rem<Output = Self>
+    + SubAssign
+    + DivAssign
+    + MulAssign
+    + RemAssign
     + Copy
     + Sized
     + sealed::IntegerDivision
@@ -136,6 +142,13 @@ pub trait UnsignedInteger:
 {
     /// Returns true if `self` is 0.
     fn is_zero(self) -> bool;
+
+    /// Casts `self` as a usize.
+    ///
+    /// This function should only be invoked when it is guaranteed the value is
+    /// within the range of a usize. Otherwise, using fallible operations and
+    /// returning an [`Error::OutOfBounds`] is preferred.
+    fn as_usize(self) -> usize;
 }
 
 macro_rules! impl_positive_integer {
@@ -144,6 +157,10 @@ macro_rules! impl_positive_integer {
         impl UnsignedInteger for $type {
             fn is_zero(self) -> bool {
                 self == 0
+            }
+
+            fn as_usize(self) -> usize {
+                self as usize
             }
         }
     };

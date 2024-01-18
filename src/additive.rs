@@ -56,7 +56,7 @@ where
                 continue;
             };
             while remaining >= value_as_t {
-                remaining = remaining - value_as_t;
+                remaining -= value_as_t;
                 formatted.try_push_str(symbol).with_nominal(nominal)?;
             }
         }

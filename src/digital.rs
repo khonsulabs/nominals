@@ -532,12 +532,7 @@ where
         let mut digit_index = 0;
         let Ok(mut count) = T::try_from(self.len(digit_index)) else {
             return Ok(NominalString::from(
-                self.digit(
-                    (nominal)
-                        .try_into()
-                        .map_err(|_| Error::OutOfBounds(nominal))?,
-                    digit_index,
-                ),
+                self.digit(nominal.as_usize(), digit_index),
             ));
         };
         let one = T::from(1_u8);
@@ -551,21 +546,14 @@ where
                     return Err(Error::NoZeroSymbol);
                 }
 
-                remaining = remaining - one;
+                remaining -= one;
             }
             first_loop = false;
 
             formatted
-                .try_push_front(
-                    self.digit(
-                        (remaining % count)
-                            .try_into()
-                            .map_err(|_| Error::OutOfBounds(nominal))?,
-                        digit_index,
-                    ),
-                )
+                .try_push_front(self.digit((remaining % count).as_usize(), digit_index))
                 .with_nominal(nominal)?;
-            remaining = remaining / count;
+            remaining /= count;
             digit_index += 1;
             count = match T::try_from(self.len(digit_index)) {
                 Ok(count) => count,

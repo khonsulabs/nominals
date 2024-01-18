@@ -62,7 +62,7 @@ where
                 if single_symbol {
                     formatted.try_push('׳').with_nominal(nominal)?;
                 }
-                remaining = remaining - value;
+                remaining -= value;
                 formatted.try_push(symbol).with_nominal(nominal)?;
                 if single_symbol {
                     formatted.try_push('״').with_nominal(nominal)?;

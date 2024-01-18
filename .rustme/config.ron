@@ -82,8 +82,13 @@ Configuration(
                 release: "https://docs.rs/nominals/latest/nominals/struct.EasternArabic.html",
                 for_docs: "EasternArabic",
             ),
+            "Ethiopic": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Ethiopic.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.Ethiopic.html",
+                for_docs: "Ethiopic",
+            ),
             "Georgian": (
-                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.ArmeniGeorgiananUpper.html",
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Georgian.html",
                 release: "https://docs.rs/nominals/latest/nominals/struct.Georgian.html",
                 for_docs: "Georgian",
             ),

@@ -70,7 +70,8 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`CjkHeavenlyStem`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkHeavenlyStem.html): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙
 - [`Devanagari`](https://khonsulabs.github.io/nominals/main/nominals/struct.Devanagari.html): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
 - [`EasternArabic`](https://khonsulabs.github.io/nominals/main/nominals/struct.EasternArabic.html): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
-- [`Georgian`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmeniGeorgiananUpper.html): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ ია‎ იბ‎ …‎ ჟთ‎ რ‎ რა
+- [`Ethiopic`](https://khonsulabs.github.io/nominals/main/nominals/struct.Ethiopic.html): ፪‎ ፫‎ …‎ ፲‎ ፲፩‎ ፲፪‎ …‎ ፺፱‎ ፻‎ ፻፩‎ …‎ ፱፻፺፱‎ ፲፻‎ ፲፻፩
+- [`Georgian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Georgian.html): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ ია‎ იბ‎ …‎ ჟთ‎ რ‎ რა
 - [`GreekLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekLower.html): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ‎ …‎ ψω‎ ωα‎ ωβ‎ ωγ
 - [`GreekUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekUpper.html): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
 - [`Gujarati`](https://khonsulabs.github.io/nominals/main/nominals/struct.Devanagari.html): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨

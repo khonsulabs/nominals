@@ -14,8 +14,6 @@ repository = "https://github.com/khonsulabs/nominals"
 default = ["alloc"]
 alloc = []
 
-[dependencies]
-
 [lints.rust]
 unsafe_code = "deny"
 missing_docs = "warn"

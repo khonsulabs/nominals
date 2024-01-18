@@ -8,13 +8,13 @@ use std::path::Path;
 
 use nominals::{
     ArmenianLower, ArmenianUpper, Bengali, Cambodian, CjkDecimal, CjkEarthlyBranch,
-    CjkHeavenlyStem, Decimal, Devanagari, DigitCollection, EasternArabic, Georgian, GreekLower,
-    GreekUpper, Gujarati, Gurmukhi, HangeulFormal, HangeulInformal, HangeulJamo, HangeulSyllable,
-    HanjaFormal, Hebrew, HexLower, HexUpper, Hiragana, HiraganaIroha, JapaneseFormal,
-    JapaneseInformal, Kannada, Katakana, KatakanaIroha, Lao, LetterLower, LetterUpper, Malayalam,
-    Mongolian, Myanmar, Nominal, NominalString, NominalSystem, Oriya, Persian, RomanLower,
-    RomanUpper, SimplifiedChineseFormal, SimplifiedChineseInformal, Tamil, Telugu, Thai, Tibetan,
-    TraditionalChineseFormal, TraditionalChineseInformal,
+    CjkHeavenlyStem, Decimal, Devanagari, DigitCollection, EasternArabic, Ethiopic, Georgian,
+    GreekLower, GreekUpper, Gujarati, Gurmukhi, HangeulFormal, HangeulInformal, HangeulJamo,
+    HangeulSyllable, HanjaFormal, Hebrew, HexLower, HexUpper, Hiragana, HiraganaIroha,
+    JapaneseFormal, JapaneseInformal, Kannada, Katakana, KatakanaIroha, Lao, LetterLower,
+    LetterUpper, Malayalam, Mongolian, Myanmar, Nominal, NominalString, NominalSystem, Oriya,
+    Persian, RomanLower, RomanUpper, SimplifiedChineseFormal, SimplifiedChineseInformal, Tamil,
+    Telugu, Thai, Tibetan, TraditionalChineseFormal, TraditionalChineseInformal,
 };
 use unicode_segmentation::UnicodeSegmentation;
 use unicode_width::UnicodeWidthStr;
@@ -40,6 +40,7 @@ fn main() {
         preview(&DigitPreview(CjkHeavenlyStem)),
         preview(&DigitPreview(Devanagari)),
         preview(&DigitPreview(EasternArabic)),
+        preview(&Ethiopic),
         preview(&Georgian),
         preview(&DigitPreview(GreekLower)),
         preview(&DigitPreview(GreekUpper)),
@@ -342,5 +343,11 @@ impl Previewable for Georgian {
 impl Previewable for HanjaFormal {
     fn preview_values(&self) -> Vec<u32> {
         cjk_values()
+    }
+}
+
+impl Previewable for Ethiopic {
+    fn preview_values(&self) -> Vec<u32> {
+        vec![1, 2, 3, 10, 11, 12, 99, 100, 101, 999, 1000, 1001]
     }
 }

@@ -16,6 +16,7 @@
 - [`CjkHeavenlyStem`]($CjkHeavenlyStem$): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙
 - [`Devanagari`]($Devanagari$): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
 - [`EasternArabic`]($EasternArabic$): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
+- [`Ethiopic`]($Ethiopic$): ፪‎ ፫‎ …‎ ፲‎ ፲፩‎ ፲፪‎ …‎ ፺፱‎ ፻‎ ፻፩‎ …‎ ፱፻፺፱‎ ፲፻‎ ፲፻፩
 - [`Georgian`]($Georgian$): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ ია‎ იბ‎ …‎ ჟთ‎ რ‎ რა
 - [`GreekLower`]($GreekLower$): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ‎ …‎ ψω‎ ωα‎ ωβ‎ ωγ
 - [`GreekUpper`]($GreekUpper$): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
