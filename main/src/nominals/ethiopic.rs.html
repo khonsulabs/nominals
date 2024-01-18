@@ -83,6 +83,8 @@
 <a href="#81" id="81">81</a>
 <a href="#82" id="82">82</a>
 <a href="#83" id="83">83</a>
+<a href="#84" id="84">84</a>
+<a href="#85" id="85">85</a>
 </pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, OutOfMemoryError};
 
 <span class="doccomment">/// Ethiopic numerical system.
@@ -118,19 +120,21 @@
         <span class="kw">let </span>second_is_zero = second.is_zero();
         <span class="kw">let </span>first_is_one = first == T::from(<span class="number">1</span>);
         <span class="kw">let </span>group_is_odd = group_index % <span class="number">2 </span>== <span class="number">1</span>;
+        <span class="kw">let </span>not_first_group = group_index &gt; <span class="number">0</span>;
 
-        <span class="kw">if </span>group_index &gt; <span class="number">0 </span>{
+        <span class="kw">if </span>not_first_group {
             <span class="kw">if </span>!group_is_odd {
                 formatted.try_push_front(<span class="string">'\u{137C}'</span>)<span class="question-mark">?</span>;
             } <span class="kw">else if </span>!(first_is_zero &amp;&amp; second_is_zero) {
                 formatted.try_push_front(<span class="string">'\u{137B}'</span>)<span class="question-mark">?</span>;
             }
-        } <span class="kw">else if </span>first_is_one &amp;&amp; second_is_zero &amp;&amp; remaining.is_zero() {
-            <span class="kw">return </span><span class="prelude-val">Ok</span>(NominalString::from(ONES[<span class="number">1</span>]));
         }
 
         <span class="kw">let </span>remove_digits = (first_is_zero &amp;&amp; second_is_zero)
-            || ((remaining.is_zero() || group_is_odd) &amp;&amp; second_is_zero &amp;&amp; first_is_one);
+            || ((remaining.is_zero() || group_is_odd)
+                &amp;&amp; not_first_group
+                &amp;&amp; second_is_zero
+                &amp;&amp; first_is_one);
 
         <span class="kw">if </span>!remove_digits {
             <span class="kw">if </span>!first_is_zero {
