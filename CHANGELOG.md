@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-disable no-duplicate-heading -->
 
-## v0.2.0
+## v0.2.1 (2023-01-18)
+
+### Fixed
+
+- A compilation error for no-alloc targets has been fixed.
+
+## v0.2.0 (2023-01-18)
 
 ### Breaking Changes
 
@@ -64,6 +70,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Thai`
   - `Tibetan`
 
-## v0.1.0 (2023-12-18)
+## v0.1.0 (2023-01-15)
 
-This is the initial alpha release of Cushy.
+This is the initial release.
