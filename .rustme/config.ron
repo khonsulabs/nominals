@@ -247,15 +247,25 @@ Configuration(
                 release: "https://docs.rs/nominals/latest/nominals/struct.Tibetan.html",
                 for_docs: "Tibetan",
             ),
-            "simplified-chinese": (
-                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Chinese.html#method.simplified",
-                release: "https://docs.rs/nominals/latest/nominals/struct.Chinese.html#method.simplified",
-                for_docs: "Chinese::simplified",
+            "SimplifiedChineseInformal": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.SimplifiedChineseInformal.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.SimplifiedChineseInformal.html",
+                for_docs: "SimplifiedChineseInformal",
             ),
-            "traditional-chinese": (
-                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Chinese.html#method.traditional",
-                release: "https://docs.rs/nominals/latest/nominals/struct.Chinese.html#method.traditional",
-                for_docs: "Chinese::traditional",
+            "SimplifiedChineseFormal": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.SimplifiedChineseFormal.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.SimplifiedChineseFormal.html",
+                for_docs: "SimplifiedChineseFormal",
+            ),
+            "TraditionalChineseInformal": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.TraditionalChineseInformal.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.TraditionalChineseInformal.html",
+                for_docs: "TraditionalChineseInformal",
+            ),
+            "TraditionalChineseFormal": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.TraditionalChineseFormal.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.TraditionalChineseFormal.html",
+                for_docs: "TraditionalChineseFormal",
             ),
             "CjkHeavenlyStem": (
                 default: "https://khonsulabs.github.io/nominals/main/nominals/struct.CjkHeavenlyStem.html",

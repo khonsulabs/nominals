@@ -20,8 +20,7 @@ $../examples/basics.rs:readme$
 ## `no_std` support
 
 This crate is `no_std` compatible, and can operate both with and without
-`alloc`. Some systems, such as Chinese, require `alloc` due to reliance on
-dependencies that require alloc.
+`alloc`.
 
 [cushy]: https://github.com/khonsulabs/cushy
 [typst]: https://github.com/typst/typst

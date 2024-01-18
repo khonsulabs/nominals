@@ -7,13 +7,14 @@ use std::io::{stdout, Write};
 use std::path::Path;
 
 use nominals::{
-    ArmenianLower, ArmenianUpper, Bengali, Cambodian, Chinese, CjkDecimal, CjkEarthlyBranch,
+    ArmenianLower, ArmenianUpper, Bengali, Cambodian, CjkDecimal, CjkEarthlyBranch,
     CjkHeavenlyStem, Decimal, Devanagari, DigitCollection, EasternArabic, Georgian, GreekLower,
     GreekUpper, Gujarati, Gurmukhi, HangeulFormal, HangeulInformal, HangeulJamo, HangeulSyllable,
     HanjaFormal, Hebrew, HexLower, HexUpper, Hiragana, HiraganaIroha, JapaneseFormal,
     JapaneseInformal, Kannada, Katakana, KatakanaIroha, Lao, LetterLower, LetterUpper, Malayalam,
     Mongolian, Myanmar, Nominal, NominalString, NominalSystem, Oriya, Persian, RomanLower,
-    RomanUpper, Tamil, Telugu, Thai, Tibetan,
+    RomanUpper, SimplifiedChineseFormal, SimplifiedChineseInformal, Tamil, Telugu, Thai, Tibetan,
+    TraditionalChineseFormal, TraditionalChineseInformal,
 };
 use unicode_segmentation::UnicodeSegmentation;
 use unicode_width::UnicodeWidthStr;
@@ -30,8 +31,10 @@ fn main() {
         preview(&ArmenianUpper),
         preview(&DigitPreview(Bengali)),
         preview(&DigitPreview(Cambodian)),
-        preview(&SimplifiedChinese),
-        preview(&TraditionalChinese),
+        preview(&SimplifiedChineseInformal::default()),
+        preview(&TraditionalChineseInformal::default()),
+        preview(&SimplifiedChineseFormal::default()),
+        preview(&TraditionalChineseFormal::default()),
         preview(&DigitPreview(CjkDecimal)),
         preview(&DigitPreview(CjkEarthlyBranch)),
         preview(&DigitPreview(CjkHeavenlyStem)),
@@ -266,44 +269,27 @@ impl Previewable for RomanUpper {
     }
 }
 
-struct SimplifiedChinese;
-
-impl Previewable for SimplifiedChinese {
-    fn doc_link(&self) -> String {
-        markdown_link_to("Chinese::simplified()", "simplified-chinese")
-    }
-
+impl Previewable for SimplifiedChineseInformal {
     fn preview_values(&self) -> Vec<u32> {
         cjk_values()
     }
 }
 
-impl NominalSystem<u32> for SimplifiedChinese {
-    fn try_format_nominal(
-        &self,
-        nominal: u32,
-    ) -> Result<nominals::NominalString, nominals::Error<u32>> {
-        Chinese::simplified().try_format_nominal(nominal)
-    }
-}
-struct TraditionalChinese;
-
-impl Previewable for TraditionalChinese {
-    fn doc_link(&self) -> String {
-        markdown_link_to("Chinese::traditional()", "traditional-chinese")
-    }
-
+impl Previewable for TraditionalChineseInformal {
     fn preview_values(&self) -> Vec<u32> {
         cjk_values()
     }
 }
 
-impl NominalSystem<u32> for TraditionalChinese {
-    fn try_format_nominal(
-        &self,
-        nominal: u32,
-    ) -> Result<nominals::NominalString, nominals::Error<u32>> {
-        Chinese::traditional().try_format_nominal(nominal)
+impl Previewable for SimplifiedChineseFormal {
+    fn preview_values(&self) -> Vec<u32> {
+        cjk_values()
+    }
+}
+
+impl Previewable for TraditionalChineseFormal {
+    fn preview_values(&self) -> Vec<u32> {
+        cjk_values()
     }
 }
 

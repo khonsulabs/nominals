@@ -455,7 +455,7 @@ impl MaybeInline {
                 }
             }
             #[cfg(feature = "alloc")]
-            MaybeInline::Heap(s) => s.insert(0, ch),
+            MaybeInline::Heap(s) => s.push(ch),
         }
         Ok(())
     }

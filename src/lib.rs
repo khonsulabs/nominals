@@ -6,7 +6,6 @@
 extern crate alloc;
 
 mod additive;
-#[cfg(feature = "chinese")]
 mod chinese;
 mod hebrew;
 mod nominalstring;
@@ -21,11 +20,10 @@ mod sealed {
 mod digital;
 
 use core::fmt::Debug;
-use core::ops::{Div, Rem, Sub};
+use core::ops::{Div, Mul, Rem, Sub};
 
 pub use additive::*;
-#[cfg(feature = "chinese")]
-pub use chinese::Chinese;
+pub use chinese::*;
 pub use digital::*;
 pub use hebrew::Hebrew;
 pub use nominalstring::{NominalString, OutOfMemoryError};
@@ -128,6 +126,7 @@ pub trait UnsignedInteger:
     + From<u8>
     + Sub<Output = Self>
     + Div<Output = Self>
+    + Mul<Output = Self>
     + Rem<Output = Self>
     + Copy
     + Sized
