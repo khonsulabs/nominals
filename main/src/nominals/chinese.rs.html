@@ -909,20 +909,6 @@
 <a href="#907" id="907">907</a>
 <a href="#908" id="908">908</a>
 <a href="#909" id="909">909</a>
-<a href="#910" id="910">910</a>
-<a href="#911" id="911">911</a>
-<a href="#912" id="912">912</a>
-<a href="#913" id="913">913</a>
-<a href="#914" id="914">914</a>
-<a href="#915" id="915">915</a>
-<a href="#916" id="916">916</a>
-<a href="#917" id="917">917</a>
-<a href="#918" id="918">918</a>
-<a href="#919" id="919">919</a>
-<a href="#920" id="920">920</a>
-<a href="#921" id="921">921</a>
-<a href="#922" id="922">922</a>
-<a href="#923" id="923">923</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>core::array;
 
 <span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, OutOfMemoryError};
@@ -994,9 +980,7 @@
     <span class="kw">let </span>hundreds = remaining % ten;
     <span class="kw">let </span>thousands = remaining / ten;
 
-    <span class="comment">// let mut digit_index = 0;
-    // let mut remaining = nominal;
-    </span><span class="kw">let </span><span class="kw-2">mut </span>formatted = NominalString::new();
+    <span class="kw">let </span><span class="kw-2">mut </span>formatted = NominalString::new();
 
     <span class="kw">if </span>thousands.is_zero() {
         <span class="kw">if </span>!no_prefix &amp;&amp; !<span class="kw-2">*</span>last_char_is_zero &amp;&amp; !hundreds.is_zero() {
@@ -1197,10 +1181,7 @@
     <span class="kw">where
         </span>T: Nominal + TryFrom&lt;u128&gt;,
     {
-        <span class="comment">// let low = nominal % scales[0].expect("always present");
-        // let remaining = nominal / scales[0].expect("always present");
-
-        </span><span class="self">Self</span>::format_scaled_rank::&lt;T, FORMAL, N&gt;(
+        <span class="self">Self</span>::format_scaled_rank::&lt;T, FORMAL, N&gt;(
             <span class="number">10</span>,
             scales,
             characters,
@@ -1277,14 +1258,8 @@
             }
         }
         <span class="kw">let </span><span class="kw-2">mut </span>formatted = <span class="kw">if </span>rank_value.is_zero() {
-            <span class="comment">// if remaining.is_zero() || no_prefix || *last_char_is_zero {
-            </span>NominalString::new()
-            <span class="comment">// } else {
-            //     NominalString::new()
-            //     // *last_char_is_zero = true;
-            //     // NominalString::from(characters[0])
-            // }
-        </span>} <span class="kw">else </span>{
+            NominalString::new()
+        } <span class="kw">else </span>{
             <span class="kw">let </span><span class="kw-2">mut </span>rank_formatted = <span class="self">Self</span>::format_next_scaled_rank::&lt;T, FORMAL, N&gt;(
                 rank,
                 scales,
@@ -1294,10 +1269,7 @@
                 no_prefix,
                 last_char_is_zero,
             )<span class="question-mark">?</span>;
-            <span class="kw">if </span>!rank_formatted.is_empty()
-            <span class="comment">// &amp;&amp; rank &gt; 0
-            // &amp;&amp; rank_value * scale &gt;= scales[rank - 1].expect("rank was valid")
-            </span>{
+            <span class="kw">if </span>!rank_formatted.is_empty() {
                 rank_formatted.try_push(large_characters[rank])<span class="question-mark">?</span>;
                 <span class="kw-2">*</span>last_char_is_zero = <span class="bool-val">false</span>;
             }
