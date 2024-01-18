@@ -5,7 +5,7 @@
 
 ![nominals is considered alpha](https://img.shields.io/badge/status-alpha-orange)
 [![crate version](https://img.shields.io/crates/v/nominals.svg)](https://crates.io/crates/nominals)
-[![Documentation for `v0.2.0`](https://img.shields.io/badge/docs-v0.2.0-informational)](https://docs.rs/nominals)
+[![Documentation for `v0.2.1`](https://img.shields.io/badge/docs-v0.2.1-informational)](https://docs.rs/nominals)
 
 This type of formatting can be used for list identifiers when creating ordered
 lists similar to HTML's `<ol>` tag. The crate was written to power the
