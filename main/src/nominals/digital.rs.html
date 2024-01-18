@@ -774,7 +774,7 @@
 /// The Unicode codepoints for both [`Persian`] and Urdu numeric digits are
 /// identical. The glyph selection comes from using different fonts based on the
 /// language desired.
-</span><span class="kw">pub type </span>Urdu = Persian;
+</span><span class="kw">pub use </span>Persian <span class="kw">as </span>Urdu;
 
 <span class="macro">impl_digit_set!</span>(
     <span class="doccomment">/// Bengali numeric digits.
@@ -791,7 +791,7 @@
 <span class="doccomment">/// Khmer numeric digits.
 ///
 /// This set utilizes the same unicode code points as [`Cambodian`].
-</span><span class="kw">pub type </span>Khmer = Cambodian;
+</span><span class="kw">pub use </span>Cambodian <span class="kw">as </span>Khmer;
 
 <span class="macro">impl_digit_set!</span>(
     <span class="doccomment">/// CJK Han decimal digits.

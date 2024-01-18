@@ -79,6 +79,10 @@
 <a href="#77" id="77">77</a>
 <a href="#78" id="78">78</a>
 <a href="#79" id="79">79</a>
+<a href="#80" id="80">80</a>
+<a href="#81" id="81">81</a>
+<a href="#82" id="82">82</a>
+<a href="#83" id="83">83</a>
 </pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, OutOfMemoryError};
 
 <span class="doccomment">/// Ethiopic numerical system.
@@ -121,6 +125,8 @@
             } <span class="kw">else if </span>!(first_is_zero &amp;&amp; second_is_zero) {
                 formatted.try_push_front(<span class="string">'\u{137B}'</span>)<span class="question-mark">?</span>;
             }
+        } <span class="kw">else if </span>first_is_one &amp;&amp; second_is_zero &amp;&amp; remaining.is_zero() {
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(NominalString::from(ONES[<span class="number">1</span>]));
         }
 
         <span class="kw">let </span>remove_digits = (first_is_zero &amp;&amp; second_is_zero)
@@ -154,7 +160,9 @@
 
 <span class="attr">#[test]
 </span><span class="kw">fn </span>ethiopic() {
+    <span class="macro">assert_eq!</span>(<span class="number">1_u32</span>.to_nominal(<span class="kw-2">&amp;</span>Ethiopic), <span class="string">"፩"</span>);
     <span class="macro">assert_eq!</span>(<span class="number">100_u32</span>.to_nominal(<span class="kw-2">&amp;</span>Ethiopic), <span class="string">"፻"</span>);
+    <span class="macro">assert_eq!</span>(<span class="number">101_u32</span>.to_nominal(<span class="kw-2">&amp;</span>Ethiopic), <span class="string">"፻፩"</span>);
     <span class="macro">assert_eq!</span>(<span class="number">78_010_092_u32</span>.to_nominal(<span class="kw-2">&amp;</span>Ethiopic), <span class="string">"፸፰፻፩፼፺፪"</span>);
     <span class="macro">assert_eq!</span>(<span class="number">780_100_000_092_u64</span>.to_nominal(<span class="kw-2">&amp;</span>Ethiopic), <span class="string">"፸፰፻፩፼፼፺፪"</span>);
 }
