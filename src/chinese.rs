@@ -69,8 +69,6 @@ where
     let hundreds = remaining % ten;
     let thousands = remaining / ten;
 
-    // let mut digit_index = 0;
-    // let mut remaining = nominal;
     let mut formatted = NominalString::new();
 
     if thousands.is_zero() {
@@ -272,9 +270,6 @@ impl ChineseScale {
     where
         T: Nominal + TryFrom<u128>,
     {
-        // let low = nominal % scales[0].expect("always present");
-        // let remaining = nominal / scales[0].expect("always present");
-
         Self::format_scaled_rank::<T, FORMAL, N>(
             10,
             scales,
@@ -352,13 +347,7 @@ impl ChineseScale {
             }
         }
         let mut formatted = if rank_value.is_zero() {
-            // if remaining.is_zero() || no_prefix || *last_char_is_zero {
             NominalString::new()
-            // } else {
-            //     NominalString::new()
-            //     // *last_char_is_zero = true;
-            //     // NominalString::from(characters[0])
-            // }
         } else {
             let mut rank_formatted = Self::format_next_scaled_rank::<T, FORMAL, N>(
                 rank,
@@ -369,10 +358,7 @@ impl ChineseScale {
                 no_prefix,
                 last_char_is_zero,
             )?;
-            if !rank_formatted.is_empty()
-            // && rank > 0
-            // && rank_value * scale >= scales[rank - 1].expect("rank was valid")
-            {
+            if !rank_formatted.is_empty() {
                 rank_formatted.try_push(large_characters[rank])?;
                 *last_char_is_zero = false;
             }
