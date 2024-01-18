@@ -670,7 +670,7 @@
                 <span class="kw">continue</span>;
             };
             <span class="kw">while </span>remaining &gt;= value_as_t {
-                remaining = remaining - value_as_t;
+                remaining -= value_as_t;
                 formatted.try_push_str(symbol).with_nominal(nominal)<span class="question-mark">?</span>;
             }
         }

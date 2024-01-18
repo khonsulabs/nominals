@@ -625,18 +625,6 @@
 <a href="#623" id="623">623</a>
 <a href="#624" id="624">624</a>
 <a href="#625" id="625">625</a>
-<a href="#626" id="626">626</a>
-<a href="#627" id="627">627</a>
-<a href="#628" id="628">628</a>
-<a href="#629" id="629">629</a>
-<a href="#630" id="630">630</a>
-<a href="#631" id="631">631</a>
-<a href="#632" id="632">632</a>
-<a href="#633" id="633">633</a>
-<a href="#634" id="634">634</a>
-<a href="#635" id="635">635</a>
-<a href="#636" id="636">636</a>
-<a href="#637" id="637">637</a>
 </pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 <span class="doccomment">/// An ordered set of characters that can be treated as digits.
@@ -1171,12 +1159,7 @@
         <span class="kw">let </span><span class="kw-2">mut </span>digit_index = <span class="number">0</span>;
         <span class="kw">let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>count) = T::try_from(<span class="self">self</span>.len(digit_index)) <span class="kw">else </span>{
             <span class="kw">return </span><span class="prelude-val">Ok</span>(NominalString::from(
-                <span class="self">self</span>.digit(
-                    (nominal)
-                        .try_into()
-                        .map_err(|<span class="kw">_</span>| Error::OutOfBounds(nominal))<span class="question-mark">?</span>,
-                    digit_index,
-                ),
+                <span class="self">self</span>.digit(nominal.as_usize(), digit_index),
             ));
         };
         <span class="kw">let </span>one = T::from(<span class="number">1_u8</span>);
@@ -1190,21 +1173,14 @@
                     <span class="kw">return </span><span class="prelude-val">Err</span>(Error::NoZeroSymbol);
                 }
 
-                remaining = remaining - one;
+                remaining -= one;
             }
             first_loop = <span class="bool-val">false</span>;
 
             formatted
-                .try_push_front(
-                    <span class="self">self</span>.digit(
-                        (remaining % count)
-                            .try_into()
-                            .map_err(|<span class="kw">_</span>| Error::OutOfBounds(nominal))<span class="question-mark">?</span>,
-                        digit_index,
-                    ),
-                )
+                .try_push_front(<span class="self">self</span>.digit((remaining % count).as_usize(), digit_index))
                 .with_nominal(nominal)<span class="question-mark">?</span>;
-            remaining = remaining / count;
+            remaining /= count;
             digit_index += <span class="number">1</span>;
             count = <span class="kw">match </span>T::try_from(<span class="self">self</span>.len(digit_index)) {
                 <span class="prelude-val">Ok</span>(count) =&gt; count,

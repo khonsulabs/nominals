@@ -149,7 +149,7 @@
                 <span class="kw">if </span>single_symbol {
                     formatted.try_push(<span class="string">'׳'</span>).with_nominal(nominal)<span class="question-mark">?</span>;
                 }
-                remaining = remaining - value;
+                remaining -= value;
                 formatted.try_push(symbol).with_nominal(nominal)<span class="question-mark">?</span>;
                 <span class="kw">if </span>single_symbol {
                     formatted.try_push(<span class="string">'״'</span>).with_nominal(nominal)<span class="question-mark">?</span>;

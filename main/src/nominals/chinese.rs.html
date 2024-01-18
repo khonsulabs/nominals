@@ -905,10 +905,6 @@
 <a href="#903" id="903">903</a>
 <a href="#904" id="904">904</a>
 <a href="#905" id="905">905</a>
-<a href="#906" id="906">906</a>
-<a href="#907" id="907">907</a>
-<a href="#908" id="908">908</a>
-<a href="#909" id="909">909</a>
 </pre></div><pre class="rust"><code><span class="kw">use </span>core::array;
 
 <span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, OutOfMemoryError};
@@ -974,9 +970,9 @@
 
     <span class="kw">let </span><span class="kw-2">mut </span>remaining = nominal;
     <span class="kw">let </span>ones = remaining % ten;
-    remaining = remaining / ten;
+    remaining /= ten;
     <span class="kw">let </span>tens = remaining % ten;
-    remaining = remaining / ten;
+    remaining /= ten;
     <span class="kw">let </span>hundreds = remaining % ten;
     <span class="kw">let </span>thousands = remaining / ten;
 
@@ -988,7 +984,7 @@
             formatted.try_push(characters[<span class="number">0</span>])<span class="question-mark">?</span>;
         }
     } <span class="kw">else </span>{
-        formatted.try_push(characters[thousands.try_into().map_err(|<span class="kw">_</span>| <span class="macro">unreachable!</span>(<span class="string">"&lt; 10"</span>))<span class="question-mark">?</span>])<span class="question-mark">?</span>;
+        formatted.try_push(characters[thousands.as_usize()])<span class="question-mark">?</span>;
         formatted.try_push(characters[<span class="number">12</span>])<span class="question-mark">?</span>;
         <span class="kw-2">*</span>last_char_is_zero = <span class="bool-val">false</span>;
     }
@@ -999,7 +995,7 @@
             formatted.try_push(characters[<span class="number">0</span>])<span class="question-mark">?</span>;
         }
     } <span class="kw">else </span>{
-        formatted.try_push(characters[hundreds.try_into().map_err(|<span class="kw">_</span>| <span class="macro">unreachable!</span>(<span class="string">"&lt; 10"</span>))<span class="question-mark">?</span>])<span class="question-mark">?</span>;
+        formatted.try_push(characters[hundreds.as_usize()])<span class="question-mark">?</span>;
         formatted.try_push(characters[<span class="number">11</span>])<span class="question-mark">?</span>;
         <span class="kw-2">*</span>last_char_is_zero = <span class="bool-val">false</span>;
     }
@@ -1013,14 +1009,14 @@
         <span class="kw">let </span>omit_digit =
             !(FORMAL || (!formatted.is_empty() || !no_prefix) || <span class="kw-2">*</span>last_char_is_zero || tens != one);
         <span class="kw">if </span>!omit_digit {
-            formatted.try_push(characters[tens.try_into().map_err(|<span class="kw">_</span>| <span class="macro">unreachable!</span>(<span class="string">"&lt; 10"</span>))<span class="question-mark">?</span>])<span class="question-mark">?</span>;
+            formatted.try_push(characters[tens.as_usize()])<span class="question-mark">?</span>;
         }
         formatted.try_push(characters[<span class="number">10</span>])<span class="question-mark">?</span>;
         <span class="kw-2">*</span>last_char_is_zero = <span class="bool-val">false</span>;
     }
 
     <span class="kw">if </span>!ones.is_zero() {
-        formatted.try_push(characters[ones.try_into().map_err(|<span class="kw">_</span>| <span class="macro">unreachable!</span>(<span class="string">"&lt; 10"</span>))<span class="question-mark">?</span>])<span class="question-mark">?</span>;
+        formatted.try_push(characters[ones.as_usize()])<span class="question-mark">?</span>;
         <span class="kw-2">*</span>last_char_is_zero = <span class="bool-val">false</span>;
     }
 
@@ -1111,7 +1107,7 @@
                 <span class="kw">return </span><span class="prelude-val">Err</span>(ChineseFormatError::OutOfBounds);
             }
 
-            remaining = remaining % scale;
+            remaining %= scale;
 
             <span class="kw">if </span>rank_value.is_zero() {
                 <span class="kw">if </span>!formatted.is_empty() &amp;&amp; !last_was_zero {
@@ -1119,11 +1115,7 @@
                     formatted.try_push(characters[<span class="number">0</span>])<span class="question-mark">?</span>;
                 }
             } <span class="kw">else </span>{
-                formatted.try_push(
-                    characters[rank_value
-                        .try_into()
-                        .map_err(|<span class="kw">_</span>| ChineseFormatError::OutOfBounds)<span class="question-mark">?</span>],
-                )<span class="question-mark">?</span>;
+                formatted.try_push(characters[rank_value.as_usize()])<span class="question-mark">?</span>;
                 formatted.try_push(large_characters[rank])<span class="question-mark">?</span>;
                 last_was_zero = <span class="bool-val">false</span>;
             }
