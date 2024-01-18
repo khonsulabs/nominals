@@ -58,7 +58,7 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`RomanLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.RomanLower.html): i‎ ii‎ iii‎ iv‎ v‎ vi‎ …‎ ix‎ x‎ xi‎ …‎ mmmcmxcix‎ i̅v̅‎ i̅v̅i‎ …‎ d̅m̅l̅c̅i̅x̅cmxcix‎ m̅‎ m̅i
 - [`RomanUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.RomanUpper.html): I‎ II‎ III‎ IV‎ V‎ VI‎ …‎ IX‎ X‎ XI‎ …‎ MMMCMXCIX‎ I̅V̅‎ I̅V̅I‎ …‎ D̅M̅L̅C̅I̅X̅CMXCIX‎ M̅‎ M̅I
 - [`ArmenianLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianLower.html): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ ժա‎ ժբ‎ …‎ ղթ‎ ճ‎ ճա
-- [`ArmenianUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianUpper.html): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ ԺԱ ‎ ԺԲ‎ …‎ ՂԹ‎ Ճ‎ ՃԱ 
+- [`ArmenianUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianUpper.html): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ ԺԱ ‎ ԺԲ‎ …‎ ՂԹ‎ Ճ‎ ՃԱ
 - [`Bengali`](https://khonsulabs.github.io/nominals/main/nominals/struct.Bengali.html): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২
 - [`Cambodian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Cambodian.html): ០‎ ១‎ ២‎ ៣‎ ៤‎ …‎ ៩‎ ១០‎ ១១‎ ១២‎ …‎ ៩៩‎ ១០០‎ ១០១‎ ១០២
 - [`SimplifiedChineseInformal`](https://khonsulabs.github.io/nominals/main/nominals/struct.SimplifiedChineseInformal.html): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一

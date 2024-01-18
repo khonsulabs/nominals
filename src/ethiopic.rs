@@ -40,6 +40,8 @@ fn format_ethiopic<T: Nominal>(nominal: T) -> Result<NominalString, OutOfMemoryE
             } else if !(first_is_zero && second_is_zero) {
                 formatted.try_push_front('\u{137B}')?;
             }
+        } else if first_is_one && second_is_zero && remaining.is_zero() {
+            return Ok(NominalString::from(ONES[1]));
         }
 
         let remove_digits = (first_is_zero && second_is_zero)
@@ -73,7 +75,9 @@ where
 
 #[test]
 fn ethiopic() {
+    assert_eq!(1_u32.to_nominal(&Ethiopic), "፩");
     assert_eq!(100_u32.to_nominal(&Ethiopic), "፻");
+    assert_eq!(101_u32.to_nominal(&Ethiopic), "፻፩");
     assert_eq!(78_010_092_u32.to_nominal(&Ethiopic), "፸፰፻፩፼፺፪");
     assert_eq!(780_100_000_092_u64.to_nominal(&Ethiopic), "፸፰፻፩፼፼፺፪");
 }

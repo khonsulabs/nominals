@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- markdownlint-disable no-duplicate-heading -->
 
+## Unreleased
+
+### Changed
+
+- `Urdu` and `Khmer` now utilize re-exports rather than type aliases. This
+  allows the type constructors to be invoked.
+
+### Fixed
+
+- Ethiopic now returns the correct result for 1.
+
 ## v0.2.1 (2023-01-18)
 
 ### Fixed
