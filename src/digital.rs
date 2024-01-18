@@ -97,7 +97,7 @@ macro_rules! impl_digit_set {
         // temporarily comment this out or add an empty file until the new
         // variant has been added to the previews example.
         #[doc = include_str!(concat!("./previews/",stringify!($name), ".md"))]
-        #[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
+        #[derive(Default, Debug, Clone, Copy, Eq, PartialEq, Hash)]
         pub struct $name;
 
         const _: () = {
