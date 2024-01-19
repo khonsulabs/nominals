@@ -5,7 +5,7 @@
 
 ![nominals is considered alpha](https://img.shields.io/badge/status-alpha-orange)
 [![crate version](https://img.shields.io/crates/v/nominals.svg)](https://crates.io/crates/nominals)
-[![Documentation for `v0.2.2`](https://img.shields.io/badge/docs-v0.2.2-informational)](https://docs.rs/nominals)
+[![Documentation for `v0.3.0`](https://img.shields.io/badge/docs-v0.3.0-informational)](https://docs.rs/nominals)
 
 This type of formatting can be used for list identifiers when creating ordered
 lists similar to HTML's `<ol>` tag. The crate was written to power the
@@ -66,8 +66,8 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`SimplifiedChineseFormal`](https://docs.rs/nominals/latest/nominals/struct.SimplifiedChineseFormal.html): 零‎ 一‎ 二‎ …‎ 九‎ 一十‎ 一十一‎ …‎ 一十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
 - [`TraditionalChineseFormal`](https://docs.rs/nominals/latest/nominals/struct.TraditionalChineseFormal.html): 零‎ 一‎ 二‎ …‎ 九‎ 一十‎ 一十一‎ …‎ 一十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
 - [`CjkDecimal`](https://docs.rs/nominals/latest/nominals/struct.CjkDecimal.html): 〇‎ 一‎ 二‎ 三‎ 四‎ …‎ 九‎ 一〇‎ 一一‎ 一二‎ …‎ 九九‎ 一〇〇‎ 一〇一‎ 一〇二
-- [`CjkEarthlyBranch`](https://docs.rs/nominals/latest/nominals/struct.CjkEarthlyBranch.html): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一子‎ 一丑‎ 一寅‎ …‎ 九亥‎ 一〇子‎ 一〇丑‎ 一〇寅
-- [`CjkHeavenlyStem`](https://docs.rs/nominals/latest/nominals/struct.CjkHeavenlyStem.html): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙
+- [`CjkEarthlyBranch`](https://docs.rs/nominals/latest/nominals/struct.CjkEarthlyBranch.html): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一三‎ 一四‎ 一五‎ …‎ 一四四‎ 一四五‎ 一四六‎ 一四七
+- [`CjkHeavenlyStem`](https://docs.rs/nominals/latest/nominals/struct.CjkHeavenlyStem.html): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一一‎ 一二‎ 一三‎ …‎ 一〇〇‎ 一〇一‎ 一〇二‎ 一〇三
 - [`Devanagari`](https://docs.rs/nominals/latest/nominals/struct.Devanagari.html): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
 - [`EasternArabic`](https://docs.rs/nominals/latest/nominals/struct.EasternArabic.html): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
 - [`Ethiopic`](https://docs.rs/nominals/latest/nominals/struct.Ethiopic.html): ፩‎ ፪‎ ፫‎ …‎ ፲‎ ፲፩‎ ፲፪‎ …‎ ፺፱‎ ፻‎ ፻፩‎ …‎ ፱፻፺፱‎ ፲፻‎ ፲፻፩
@@ -76,8 +76,8 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`GreekUpper`](https://docs.rs/nominals/latest/nominals/struct.GreekUpper.html): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
 - [`Gujarati`](https://docs.rs/nominals/latest/nominals/struct.Gujarati.html): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
 - [`Gurmukhi`](https://docs.rs/nominals/latest/nominals/struct.Gurmukhi.html): ੦‎ ੧‎ ੨‎ ੩‎ ੪‎ …‎ ੯‎ ੧੦‎ ੧੧‎ ੧੨‎ …‎ ੯੯‎ ੧੦੦‎ ੧੦੧‎ ੧੦੨
+- [`HanjaInformal`](https://docs.rs/nominals/latest/nominals/struct.HanjaInformal.html): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
 - [`HangeulFormal`](https://docs.rs/nominals/latest/nominals/struct.HangeulFormal.html): 영‎ 일‎ 이‎ …‎ 구‎ 일십‎ 일십일‎ …‎ 일십구‎ 이십‎ 이십일‎ …‎ 구십구‎ 일백‎ 일백일
-- [`HangeulInformal`](https://docs.rs/nominals/latest/nominals/struct.HangeulInformal.html): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
 - [`HangeulJamo`](https://docs.rs/nominals/latest/nominals/struct.HangeulJamo.html): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ‎ …‎ ㅍㅎ‎ ㅎㄱ‎ ㅎㄴ‎ ㅎㄷ
 - [`HangeulSyllable`](https://docs.rs/nominals/latest/nominals/struct.HangeulSyllable.html): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다‎ …‎ 파하‎ 하가‎ 하나‎ 하다
 - [`HanjaFormal`](https://docs.rs/nominals/latest/nominals/struct.HanjaFormal.html): 零‎ 壹‎ 貳‎ …‎ 九‎ 壹拾‎ 壹拾壹‎ …‎ 壹拾九‎ 貳拾‎ 貳拾壹‎ …‎ 九拾九‎ 壹百‎ 壹百壹

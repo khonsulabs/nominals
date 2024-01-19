@@ -12,8 +12,8 @@
 - [`SimplifiedChineseFormal`]($SimplifiedChineseFormal$): 零‎ 一‎ 二‎ …‎ 九‎ 一十‎ 一十一‎ …‎ 一十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
 - [`TraditionalChineseFormal`]($TraditionalChineseFormal$): 零‎ 一‎ 二‎ …‎ 九‎ 一十‎ 一十一‎ …‎ 一十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
 - [`CjkDecimal`]($CjkDecimal$): 〇‎ 一‎ 二‎ 三‎ 四‎ …‎ 九‎ 一〇‎ 一一‎ 一二‎ …‎ 九九‎ 一〇〇‎ 一〇一‎ 一〇二
-- [`CjkEarthlyBranch`]($CjkEarthlyBranch$): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一子‎ 一丑‎ 一寅‎ …‎ 九亥‎ 一〇子‎ 一〇丑‎ 一〇寅
-- [`CjkHeavenlyStem`]($CjkHeavenlyStem$): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙
+- [`CjkEarthlyBranch`]($CjkEarthlyBranch$): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一三‎ 一四‎ 一五‎ …‎ 一四四‎ 一四五‎ 一四六‎ 一四七
+- [`CjkHeavenlyStem`]($CjkHeavenlyStem$): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一一‎ 一二‎ 一三‎ …‎ 一〇〇‎ 一〇一‎ 一〇二‎ 一〇三
 - [`Devanagari`]($Devanagari$): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
 - [`EasternArabic`]($EasternArabic$): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
 - [`Ethiopic`]($Ethiopic$): ፩‎ ፪‎ ፫‎ …‎ ፲‎ ፲፩‎ ፲፪‎ …‎ ፺፱‎ ፻‎ ፻፩‎ …‎ ፱፻፺፱‎ ፲፻‎ ፲፻፩
@@ -22,8 +22,8 @@
 - [`GreekUpper`]($GreekUpper$): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
 - [`Gujarati`]($Gujarati$): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
 - [`Gurmukhi`]($Gurmukhi$): ੦‎ ੧‎ ੨‎ ੩‎ ੪‎ …‎ ੯‎ ੧੦‎ ੧੧‎ ੧੨‎ …‎ ੯੯‎ ੧੦੦‎ ੧੦੧‎ ੧੦੨
+- [`HanjaInformal`]($HanjaInformal$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
 - [`HangeulFormal`]($HangeulFormal$): 영‎ 일‎ 이‎ …‎ 구‎ 일십‎ 일십일‎ …‎ 일십구‎ 이십‎ 이십일‎ …‎ 구십구‎ 일백‎ 일백일
-- [`HangeulInformal`]($HangeulInformal$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
 - [`HangeulJamo`]($HangeulJamo$): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ‎ …‎ ㅍㅎ‎ ㅎㄱ‎ ㅎㄴ‎ ㅎㄷ
 - [`HangeulSyllable`]($HangeulSyllable$): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다‎ …‎ 파하‎ 하가‎ 하나‎ 하다
 - [`HanjaFormal`]($HanjaFormal$): 零‎ 壹‎ 貳‎ …‎ 九‎ 壹拾‎ 壹拾壹‎ …‎ 壹拾九‎ 貳拾‎ 貳拾壹‎ …‎ 九拾九‎ 壹百‎ 壹百壹

@@ -455,7 +455,9 @@ where
     }
 }
 
-/// Korean Hangeul numbering.
+/// Korean Hangeul/Hangul numbering.
+///
+/// [Why Hangeul and not Hangul?](https://github.com/khonsulabs/nominals/issues/6)
 #[doc = include_str!("./previews/HangeulFormal.md")]
 pub struct HangeulFormal;
 
@@ -507,11 +509,11 @@ where
     }
 }
 
-/// Informal Korean Hangeul numbering.
-#[doc = include_str!("./previews/HangeulInformal.md")]
-pub struct HangeulInformal;
+/// Informal Korean Hanja numbering.
+#[doc = include_str!("./previews/HanjaInformal.md")]
+pub struct HanjaInformal;
 
-impl<T> NominalSystem<T> for HangeulInformal
+impl<T> NominalSystem<T> for HanjaInformal
 where
     T: Nominal + TryFrom<u128>,
 {

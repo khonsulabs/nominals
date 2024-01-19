@@ -36,7 +36,7 @@ Configuration(
             // "msrv": "1.70",
             "ref-name": (
                 default: "main",
-                release: "v0.2.2",
+                release: "v0.3.0",
             ),
             "docs": (
                 default: "https://khonsulabs.github.io/nominals/main/nominals/",
@@ -122,6 +122,11 @@ Configuration(
                 release: "https://docs.rs/nominals/latest/nominals/struct.HanjaFormal.html",
                 for_docs: "HanjaFormal",
             ),
+            "HanjaInformal": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.HanjaInformal.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.HanjaInformal.html",
+                for_docs: "HanjaInformal",
+            ),
             "HangeulJamo": (
                 default: "https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulJamo.html",
                 release: "https://docs.rs/nominals/latest/nominals/struct.HangeulJamo.html",
@@ -136,11 +141,6 @@ Configuration(
                 default: "https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulFormal.html",
                 release: "https://docs.rs/nominals/latest/nominals/struct.HangeulFormal.html",
                 for_docs: "HangeulFormal",
-            ),
-            "HangeulInformal": (
-                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulInformal.html",
-                release: "https://docs.rs/nominals/latest/nominals/struct.HangeulInformal.html",
-                for_docs: "HangeulInformal",
             ),
             "Hebrew": (
                 default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Hebrew.html",

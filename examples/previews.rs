@@ -9,8 +9,8 @@ use std::path::Path;
 use nominals::{
     ArmenianLower, ArmenianUpper, Bengali, Cambodian, CjkDecimal, CjkEarthlyBranch,
     CjkHeavenlyStem, Decimal, Devanagari, DigitCollection, EasternArabic, Ethiopic, Georgian,
-    GreekLower, GreekUpper, Gujarati, Gurmukhi, HangeulFormal, HangeulInformal, HangeulJamo,
-    HangeulSyllable, HanjaFormal, Hebrew, HexLower, HexUpper, Hiragana, HiraganaIroha,
+    GreekLower, GreekUpper, Gujarati, Gurmukhi, HangeulFormal, HangeulJamo, HangeulSyllable,
+    HanjaFormal, HanjaInformal, Hebrew, HexLower, HexUpper, Hiragana, HiraganaIroha,
     JapaneseFormal, JapaneseInformal, Kannada, Katakana, KatakanaIroha, Lao, LetterLower,
     LetterUpper, Malayalam, Mongolian, Myanmar, Nominal, NominalString, NominalSystem, Oriya,
     Persian, RomanLower, RomanUpper, SimplifiedChineseFormal, SimplifiedChineseInformal, Tamil,
@@ -46,8 +46,8 @@ fn main() {
         preview(&DigitPreview(GreekUpper)),
         preview(&DigitPreview(Gujarati)),
         preview(&DigitPreview(Gurmukhi)),
+        preview(&HanjaInformal),
         preview(&HangeulFormal),
-        preview(&HangeulInformal),
         preview(&DigitPreview(HangeulJamo)),
         preview(&DigitPreview(HangeulSyllable)),
         preview(&HanjaFormal),
@@ -201,7 +201,7 @@ where
     }
 
     fn preview_values(&self) -> Vec<u32> {
-        let count = u32::try_from(self.0.len(0)).expect("too many digits");
+        let count = u32::try_from(self.0.len()).expect("too many digits");
 
         let mut values = Vec::new();
         let base = u32::from(!(self.0.has_zero_digit() || self.0.zero_based()));
@@ -220,11 +220,11 @@ where
         values.push(base + count + 2);
 
         // Show the hundreds transition
-        let tens_count = u32::try_from(self.0.len(1)).expect("too many digits");
-        values.push(base + tens_count * count - 1);
-        values.push(base + tens_count * count);
-        values.push(base + tens_count * count + 1);
-        values.push(base + tens_count * count + 2);
+        let hundred = count * count;
+        values.push(base + hundred - 1);
+        values.push(base + hundred);
+        values.push(base + hundred + 1);
+        values.push(base + hundred + 2);
 
         values
     }
@@ -304,7 +304,7 @@ impl Previewable for HangeulFormal {
     }
 }
 
-impl Previewable for HangeulInformal {
+impl Previewable for HanjaInformal {
     fn preview_values(&self) -> Vec<u32> {
         cjk_values()
     }
