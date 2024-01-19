@@ -629,6 +629,80 @@
 <a href="#627" id="627">627</a>
 <a href="#628" id="628">628</a>
 <a href="#629" id="629">629</a>
+<a href="#630" id="630">630</a>
+<a href="#631" id="631">631</a>
+<a href="#632" id="632">632</a>
+<a href="#633" id="633">633</a>
+<a href="#634" id="634">634</a>
+<a href="#635" id="635">635</a>
+<a href="#636" id="636">636</a>
+<a href="#637" id="637">637</a>
+<a href="#638" id="638">638</a>
+<a href="#639" id="639">639</a>
+<a href="#640" id="640">640</a>
+<a href="#641" id="641">641</a>
+<a href="#642" id="642">642</a>
+<a href="#643" id="643">643</a>
+<a href="#644" id="644">644</a>
+<a href="#645" id="645">645</a>
+<a href="#646" id="646">646</a>
+<a href="#647" id="647">647</a>
+<a href="#648" id="648">648</a>
+<a href="#649" id="649">649</a>
+<a href="#650" id="650">650</a>
+<a href="#651" id="651">651</a>
+<a href="#652" id="652">652</a>
+<a href="#653" id="653">653</a>
+<a href="#654" id="654">654</a>
+<a href="#655" id="655">655</a>
+<a href="#656" id="656">656</a>
+<a href="#657" id="657">657</a>
+<a href="#658" id="658">658</a>
+<a href="#659" id="659">659</a>
+<a href="#660" id="660">660</a>
+<a href="#661" id="661">661</a>
+<a href="#662" id="662">662</a>
+<a href="#663" id="663">663</a>
+<a href="#664" id="664">664</a>
+<a href="#665" id="665">665</a>
+<a href="#666" id="666">666</a>
+<a href="#667" id="667">667</a>
+<a href="#668" id="668">668</a>
+<a href="#669" id="669">669</a>
+<a href="#670" id="670">670</a>
+<a href="#671" id="671">671</a>
+<a href="#672" id="672">672</a>
+<a href="#673" id="673">673</a>
+<a href="#674" id="674">674</a>
+<a href="#675" id="675">675</a>
+<a href="#676" id="676">676</a>
+<a href="#677" id="677">677</a>
+<a href="#678" id="678">678</a>
+<a href="#679" id="679">679</a>
+<a href="#680" id="680">680</a>
+<a href="#681" id="681">681</a>
+<a href="#682" id="682">682</a>
+<a href="#683" id="683">683</a>
+<a href="#684" id="684">684</a>
+<a href="#685" id="685">685</a>
+<a href="#686" id="686">686</a>
+<a href="#687" id="687">687</a>
+<a href="#688" id="688">688</a>
+<a href="#689" id="689">689</a>
+<a href="#690" id="690">690</a>
+<a href="#691" id="691">691</a>
+<a href="#692" id="692">692</a>
+<a href="#693" id="693">693</a>
+<a href="#694" id="694">694</a>
+<a href="#695" id="695">695</a>
+<a href="#696" id="696">696</a>
+<a href="#697" id="697">697</a>
+<a href="#698" id="698">698</a>
+<a href="#699" id="699">699</a>
+<a href="#700" id="700">700</a>
+<a href="#701" id="701">701</a>
+<a href="#702" id="702">702</a>
+<a href="#703" id="703">703</a>
 </pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, UnsignedInteger, WithNominal};
 
 <span class="doccomment">/// An ordered set of characters that can be treated as digits.
@@ -704,6 +778,8 @@
 <span class="kw">where
     </span>T: DigitCollection,
 {
+    <span class="kw">type </span>Fallback = T::Fallback;
+
     <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="self">self</span>.<span class="number">0</span>.has_zero_digit()
     }
@@ -712,17 +788,20 @@
         <span class="bool-val">false
     </span>}
 
-    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>, digit: usize) -&gt; usize {
-        <span class="self">self</span>.<span class="number">0</span>.len(digit)
+    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.<span class="number">0</span>.len()
     }
 
-    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize, digit_index: usize) -&gt; char {
-        <span class="self">self</span>.<span class="number">0</span>.digit(index, digit_index)
+    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; char {
+        <span class="self">self</span>.<span class="number">0</span>.digit(index)
     }
 }
 
 <span class="macro">macro_rules! </span>impl_digit_set {
     ($(#<span class="macro-nonterminal">$doc</span>:tt)* <span class="macro-nonterminal">$name</span>:ident, <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty </span>= <span class="macro-nonterminal">$digits</span>:expr) =&gt; {
+        <span class="macro">impl_digit_set!</span>($(#<span class="macro-nonterminal">$doc</span>)* <span class="macro-nonterminal">$name</span>, NoFallback, <span class="macro-nonterminal">$</span><span class="kw">type </span>= <span class="macro-nonterminal">$digits</span>);
+    };
+    ($(#<span class="macro-nonterminal">$doc</span>:tt)* <span class="macro-nonterminal">$name</span>:ident, <span class="macro-nonterminal">$fallback</span>:ty, <span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty </span>= <span class="macro-nonterminal">$digits</span>:expr) =&gt; {
         $(#<span class="macro-nonterminal">$doc</span>)*
         <span class="comment">// When adding a new variant and getting an error here, either
         // temporarily comment this out or add an empty file until the new
@@ -735,6 +814,8 @@
             <span class="kw">static </span>DIGITS: <span class="macro-nonterminal">$</span><span class="kw">type </span>= <span class="macro-nonterminal">$digits</span>;
 
             <span class="kw">impl </span>DigitCollection <span class="kw">for </span><span class="macro-nonterminal">$name </span>{
+                <span class="kw">type </span>Fallback = <span class="macro-nonterminal">$fallback</span>;
+
                 <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
                     DIGITS.has_zero_digit()
                 }
@@ -743,12 +824,12 @@
                     DIGITS.zero_based()
                 }
 
-                <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>, digit: usize) -&gt; usize {
-                    DIGITS.len(digit)
+                <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+                    DIGITS.len()
                 }
 
-                <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize, digit_index: usize) -&gt; char {
-                    DIGITS.digit(index, digit_index)
+                <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; char {
+                    DIGITS.digit(index)
                 }
             }
         };
@@ -811,54 +892,63 @@
 </span><span class="kw">pub struct </span>CjkHeavenlyStem;
 
 <span class="kw">impl </span>DigitCollection <span class="kw">for </span>CjkHeavenlyStem {
-    <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+    <span class="kw">type </span>Fallback = CjkDecimal;
+
+    <span class="kw">fn </span>fixed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="bool-val">true
     </span>}
 
-    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>, _digit: usize) -&gt; usize {
+    <span class="kw">fn </span>zero_based(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">false
+    </span>}
+
+    <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">false
+    </span>}
+
+    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         <span class="number">10
     </span>}
 
-    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize, digit_index: usize) -&gt; char {
-        <span class="kw">if </span>digit_index == <span class="number">0 </span>{
-            [
-                <span class="string">'\u{7532}'</span>, <span class="string">'\u{4E59}'</span>, <span class="string">'\u{4E19}'</span>, <span class="string">'\u{4E01}'</span>, <span class="string">'\u{620A}'</span>, <span class="string">'\u{5DF1}'</span>, <span class="string">'\u{5E9A}'</span>,
-                <span class="string">'\u{8F9B}'</span>, <span class="string">'\u{58EC}'</span>, <span class="string">'\u{7678}'</span>,
-            ][index]
-        } <span class="kw">else </span>{
-            CjkDecimal.digit(index, digit_index)
-        }
+    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; char {
+        [
+            <span class="string">'\u{7532}'</span>, <span class="string">'\u{4E59}'</span>, <span class="string">'\u{4E19}'</span>, <span class="string">'\u{4E01}'</span>, <span class="string">'\u{620A}'</span>, <span class="string">'\u{5DF1}'</span>, <span class="string">'\u{5E9A}'</span>,
+            <span class="string">'\u{8F9B}'</span>, <span class="string">'\u{58EC}'</span>, <span class="string">'\u{7678}'</span>,
+        ][index]
     }
 }
 
 <span class="doccomment">/// CJK Earthly Branch symbols.
 ///
-/// This digit collection back to [`CjkDecimal`] after the set is enumerated.
+/// This digit collection falls back to [`CjkDecimal`] after the set is
+/// enumerated.
 </span><span class="attr">#[doc = <span class="macro">include_str!</span>(<span class="string">"./previews/CjkEarthlyBranch.md"</span>)]
 </span><span class="kw">pub struct </span>CjkEarthlyBranch;
 
 <span class="kw">impl </span>DigitCollection <span class="kw">for </span>CjkEarthlyBranch {
-    <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+    <span class="kw">type </span>Fallback = CjkDecimal;
+
+    <span class="kw">fn </span>fixed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="bool-val">true
     </span>}
 
-    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>, digit: usize) -&gt; usize {
-        <span class="kw">if </span>digit == <span class="number">0 </span>{
-            <span class="number">12
-        </span>} <span class="kw">else </span>{
-            <span class="number">10
-        </span>}
-    }
+    <span class="kw">fn </span>zero_based(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">false
+    </span>}
 
-    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize, digit_index: usize) -&gt; char {
-        <span class="kw">if </span>digit_index == <span class="number">0 </span>{
-            [
-                <span class="string">'\u{5B50}'</span>, <span class="string">'\u{4E11}'</span>, <span class="string">'\u{5BC5}'</span>, <span class="string">'\u{536F}'</span>, <span class="string">'\u{8FB0}'</span>, <span class="string">'\u{5DF3}'</span>, <span class="string">'\u{5348}'</span>,
-                <span class="string">'\u{672A}'</span>, <span class="string">'\u{7533}'</span>, <span class="string">'\u{9149}'</span>, <span class="string">'\u{620C}'</span>, <span class="string">'\u{4EA5}'</span>,
-            ][index]
-        } <span class="kw">else </span>{
-            CjkDecimal.digit(index, digit_index)
-        }
+    <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">false
+    </span>}
+
+    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="number">12
+    </span>}
+
+    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; char {
+        [
+            <span class="string">'\u{5B50}'</span>, <span class="string">'\u{4E11}'</span>, <span class="string">'\u{5BC5}'</span>, <span class="string">'\u{536F}'</span>, <span class="string">'\u{8FB0}'</span>, <span class="string">'\u{5DF3}'</span>, <span class="string">'\u{5348}'</span>,
+            <span class="string">'\u{672A}'</span>, <span class="string">'\u{7533}'</span>, <span class="string">'\u{9149}'</span>, <span class="string">'\u{620C}'</span>, <span class="string">'\u{4EA5}'</span>,
+        ][index]
     }
 }
 
@@ -1043,6 +1133,7 @@
 <span class="doccomment">/// A combination of two [`DigitCollection`] implementations.
 ///
 /// Digits from `A` will be selected before digits from `B`.
+</span><span class="attr">#[derive(Debug, Default, Clone, Copy, Eq, PartialEq)]
 </span><span class="kw">pub struct </span>Chain&lt;A, B&gt; {
     a: A,
     b: B,
@@ -1060,6 +1151,8 @@
     </span>A: DigitCollection,
     B: DigitCollection,
 {
+    <span class="kw">type </span>Fallback = Chain&lt;A::Fallback, B::Fallback&gt;;
+
     <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="self">self</span>.a.has_zero_digit()
     }
@@ -1068,20 +1161,21 @@
         <span class="self">self</span>.a.zero_based()
     }
 
-    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>, digit: usize) -&gt; usize {
-        <span class="self">self</span>.a.len(digit) + <span class="self">self</span>.b.len(digit)
+    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.a.len() + <span class="self">self</span>.b.len()
     }
 
-    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize, digit_index: usize) -&gt; char {
-        <span class="kw">if let </span><span class="prelude-val">Some</span>(index) = index.checked_sub(<span class="self">self</span>.a.len(digit_index)) {
-            <span class="self">self</span>.b.digit(index, digit_index)
+    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; char {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(index) = index.checked_sub(<span class="self">self</span>.a.len()) {
+            <span class="self">self</span>.b.digit(index)
         } <span class="kw">else </span>{
-            <span class="self">self</span>.a.digit(index, digit_index)
+            <span class="self">self</span>.a.digit(index)
         }
     }
 }
 
 <span class="doccomment">/// Restricts a set of digits to a specific length.
+</span><span class="attr">#[derive(Debug, Default, Clone, Copy, Eq, PartialEq)]
 </span><span class="kw">pub struct </span>Restrict&lt;T&gt;(T, usize);
 
 <span class="kw">impl</span>&lt;T&gt; Restrict&lt;T&gt; {
@@ -1095,6 +1189,8 @@
 <span class="kw">where
     </span>T: DigitCollection,
 {
+    <span class="kw">type </span>Fallback = T::Fallback;
+
     <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="self">self</span>.<span class="number">0</span>.has_zero_digit()
     }
@@ -1103,12 +1199,12 @@
         <span class="self">self</span>.<span class="number">0</span>.zero_based()
     }
 
-    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>, _digit_index: usize) -&gt; usize {
+    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         <span class="self">self</span>.<span class="number">1
     </span>}
 
-    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize, digit_index: usize) -&gt; char {
-        <span class="self">self</span>.<span class="number">0</span>.digit(index, digit_index)
+    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; char {
+        <span class="self">self</span>.<span class="number">0</span>.digit(index)
     }
 }
 
@@ -1131,29 +1227,33 @@
 }
 
 <span class="kw">impl</span>&lt;<span class="kw">const </span>N: usize&gt; DigitCollection <span class="kw">for </span>DigitSet&lt;N, <span class="bool-val">false</span>&gt; {
+    <span class="kw">type </span>Fallback = NoFallback;
+
     <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="bool-val">false
     </span>}
 
-    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>, _digit_index: usize) -&gt; usize {
+    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         N
     }
 
-    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize, _digit_index: usize) -&gt; char {
+    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; char {
         <span class="self">self</span>.digits[index]
     }
 }
 
 <span class="kw">impl</span>&lt;<span class="kw">const </span>N: usize&gt; DigitCollection <span class="kw">for </span>DigitSet&lt;N, <span class="bool-val">true</span>&gt; {
+    <span class="kw">type </span>Fallback = NoFallback;
+
     <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="bool-val">true
     </span>}
 
-    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>, _digit_index: usize) -&gt; usize {
+    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
         N
     }
 
-    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize, _digit_index: usize) -&gt; char {
+    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; char {
         <span class="self">self</span>.digits[index]
     }
 }
@@ -1164,12 +1264,24 @@
     T: Nominal + UnsignedInteger,
 {
     <span class="kw">fn </span>try_format_nominal(<span class="kw-2">&amp;</span><span class="self">self</span>, nominal: T) -&gt; <span class="prelude-ty">Result</span>&lt;NominalString, Error&lt;T&gt;&gt; {
-        <span class="kw">let </span><span class="kw-2">mut </span>digit_index = <span class="number">0</span>;
-        <span class="kw">let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>count) = T::try_from(<span class="self">self</span>.len(digit_index)) <span class="kw">else </span>{
-            <span class="kw">return </span><span class="prelude-val">Ok</span>(NominalString::from(
-                <span class="self">self</span>.digit(nominal.as_usize(), digit_index),
-            ));
+        <span class="kw">let </span><span class="prelude-val">Ok</span>(<span class="kw-2">mut </span>count) = T::try_from(<span class="self">self</span>.len()) <span class="kw">else </span>{
+            <span class="kw">return </span><span class="prelude-val">Ok</span>(NominalString::from(<span class="self">self</span>.digit(nominal.as_usize())));
         };
+        <span class="kw">if </span><span class="self">self</span>.fixed()
+            &amp;&amp; (<span class="kw">if </span><span class="self">self</span>.zero_based() {
+                nominal &gt;= count
+            } <span class="kw">else </span>{
+                nominal &gt; count
+            })
+        {
+            <span class="kw">let </span>fallback = &lt;D::Fallback&gt;::default();
+            <span class="kw">return if </span>fallback.is_empty() {
+                <span class="prelude-val">Err</span>(Error::OutOfBounds(nominal))
+            } <span class="kw">else </span>{
+                fallback.try_format_nominal(nominal)
+            };
+        }
+
         <span class="kw">let </span>one = T::from(<span class="number">1_u8</span>);
         <span class="kw">let </span><span class="kw-2">mut </span>formatted = NominalString::new_reverse();
 
@@ -1186,11 +1298,10 @@
             first_loop = <span class="bool-val">false</span>;
 
             formatted
-                .try_push_front(<span class="self">self</span>.digit((remaining % count).as_usize(), digit_index))
+                .try_push_front(<span class="self">self</span>.digit((remaining % count).as_usize()))
                 .with_nominal(nominal)<span class="question-mark">?</span>;
             remaining /= count;
-            digit_index += <span class="number">1</span>;
-            count = <span class="kw">match </span>T::try_from(<span class="self">self</span>.len(digit_index)) {
+            count = <span class="kw">match </span>T::try_from(<span class="self">self</span>.len()) {
                 <span class="prelude-val">Ok</span>(count) =&gt; count,
                 <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return </span><span class="prelude-val">Err</span>(Error::OutOfBounds(nominal)),
             };
@@ -1200,9 +1311,39 @@
     }
 }
 
+<span class="doccomment">/// An empty [`DigitCollection`] that is intended to be used to indicate no
+/// fallback should be used as a [`DigitCollection::Fallback`].
+</span><span class="attr">#[derive(Default, Clone, Copy, Debug, Eq, PartialEq)]
+</span><span class="kw">pub struct </span>NoFallback;
+
+<span class="kw">impl </span>DigitCollection <span class="kw">for </span>NoFallback {
+    <span class="kw">type </span>Fallback = <span class="self">Self</span>;
+
+    <span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">false
+    </span>}
+
+    <span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="number">0
+    </span>}
+
+    <span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, _index: usize) -&gt; char {
+        <span class="macro">unreachable!</span>()
+    }
+}
+
 <span class="doccomment">/// An ordered collection of digits that can be used as a [`NominalSystem`].
-</span><span class="attr">#[allow(clippy::len_without_is_empty)]
+
 </span><span class="kw">pub trait </span>DigitCollection {
+    <span class="doccomment">/// The digit collection that should be used after this collection's range
+    /// is exhausted.
+    </span><span class="kw">type </span>Fallback: DigitCollection + Default;
+
+    <span class="doccomment">/// If true, this digit collection can only produce a single digit.
+    </span><span class="kw">fn </span>fixed(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="bool-val">false
+    </span>}
+
     <span class="doccomment">/// Returns true if this collection has a symbol representing `0` at index
     /// 0.
     </span><span class="kw">fn </span>has_zero_digit(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
@@ -1211,14 +1352,21 @@
     </span><span class="kw">fn </span>zero_based(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="bool-val">true
     </span>}
+
     <span class="doccomment">/// Returns the number of digits in this collection.
-    </span><span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>, digit: usize) -&gt; usize;
+    </span><span class="kw">fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize;
+
+    <span class="doccomment">/// Returns true if this collection's length is 0.
+    </span><span class="kw">fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.len() == <span class="number">0
+    </span>}
+
     <span class="doccomment">/// Returns the digit at location `index`.
     ///
     /// # Panics
     ///
     /// This function can panic if `index &gt;= self.len()`.
-    </span><span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize, digit_index: usize) -&gt; char;
+    </span><span class="kw">fn </span>digit(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; char;
 
     <span class="doccomment">/// Chains `self` and `other` into a single [`DigitCollection`].
     </span><span class="kw">fn </span>and&lt;Other&gt;(<span class="self">self</span>, other: Other) -&gt; Chain&lt;<span class="self">Self</span>, Other&gt;
