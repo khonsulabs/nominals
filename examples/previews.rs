@@ -220,11 +220,11 @@ where
         values.push(base + count + 2);
 
         // Show the hundreds transition
-        let tens_count = u32::try_from(self.0.len()).expect("too many digits");
-        values.push(base + tens_count * count - 1);
-        values.push(base + tens_count * count);
-        values.push(base + tens_count * count + 1);
-        values.push(base + tens_count * count + 2);
+        let hundred = count * count;
+        values.push(base + hundred - 1);
+        values.push(base + hundred);
+        values.push(base + hundred + 1);
+        values.push(base + hundred + 2);
 
         values
     }
