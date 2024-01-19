@@ -612,6 +612,8 @@
 <a href="#610" id="610">610</a>
 <a href="#611" id="611">611</a>
 <a href="#612" id="612">612</a>
+<a href="#613" id="613">613</a>
+<a href="#614" id="614">614</a>
 </pre></div><pre class="rust"><code><span class="kw">use crate</span>::{Error, Nominal, NominalString, NominalSystem, WithNominal};
 
 <span class="doccomment">/// A set of additive symbols that form a [`NominalSystem`].
@@ -1069,7 +1071,9 @@
     }
 }
 
-<span class="doccomment">/// Korean Hangeul numbering.
+<span class="doccomment">/// Korean Hangeul/Hangul numbering.
+///
+/// [Why Hangeul and not Hangul?](https://github.com/khonsulabs/nominals/issues/6)
 </span><span class="attr">#[doc = <span class="macro">include_str!</span>(<span class="string">"./previews/HangeulFormal.md"</span>)]
 </span><span class="kw">pub struct </span>HangeulFormal;
 
