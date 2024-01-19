@@ -455,7 +455,9 @@ where
     }
 }
 
-/// Korean Hangeul numbering.
+/// Korean Hangeul/Hangul numbering.
+///
+/// [Why Hangeul and not Hangul?](https://github.com/khonsulabs/nominals/issues/6)
 #[doc = include_str!("./previews/HangeulFormal.md")]
 pub struct HangeulFormal;
 

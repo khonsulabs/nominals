@@ -390,7 +390,9 @@ impl_digit_set!(
 );
 
 impl_digit_set!(
-    /// Korean Hangul Jamo alphabet.
+    /// Korean Hangeul/Hangul Jamo alphabet.
+    ///
+    /// [Why Hangeul and not Hangul?](https://github.com/khonsulabs/nominals/issues/6)
     HangeulJamo,
     DigitSet<14, false> = DigitSet::zeroless([
         'ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ',
@@ -398,7 +400,9 @@ impl_digit_set!(
 );
 
 impl_digit_set!(
-    /// Korean Hangul alphabet as pronounced.
+    /// Korean Hangeul/Hangul alphabet as pronounced.
+    ///
+    /// [Why Hangeul and not Hangul?](https://github.com/khonsulabs/nominals/issues/6)
     HangeulSyllable,
     DigitSet<14, false> = DigitSet::zeroless([
         '가', '나', '다', '라', '마', '바', '사', '아', '자', '차', '카', '타', '파', '하',
