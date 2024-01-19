@@ -9,8 +9,8 @@ use std::path::Path;
 use nominals::{
     ArmenianLower, ArmenianUpper, Bengali, Cambodian, CjkDecimal, CjkEarthlyBranch,
     CjkHeavenlyStem, Decimal, Devanagari, DigitCollection, EasternArabic, Ethiopic, Georgian,
-    GreekLower, GreekUpper, Gujarati, Gurmukhi, HangeulFormal, HangeulInformal, HangeulJamo,
-    HangeulSyllable, HanjaFormal, Hebrew, HexLower, HexUpper, Hiragana, HiraganaIroha,
+    GreekLower, GreekUpper, Gujarati, Gurmukhi, HangeulFormal, HangeulJamo, HangeulSyllable,
+    HanjaFormal, HanjaInformal, Hebrew, HexLower, HexUpper, Hiragana, HiraganaIroha,
     JapaneseFormal, JapaneseInformal, Kannada, Katakana, KatakanaIroha, Lao, LetterLower,
     LetterUpper, Malayalam, Mongolian, Myanmar, Nominal, NominalString, NominalSystem, Oriya,
     Persian, RomanLower, RomanUpper, SimplifiedChineseFormal, SimplifiedChineseInformal, Tamil,
@@ -47,7 +47,7 @@ fn main() {
         preview(&DigitPreview(Gujarati)),
         preview(&DigitPreview(Gurmukhi)),
         preview(&HangeulFormal),
-        preview(&HangeulInformal),
+        preview(&HanjaInformal),
         preview(&DigitPreview(HangeulJamo)),
         preview(&DigitPreview(HangeulSyllable)),
         preview(&HanjaFormal),
@@ -304,7 +304,7 @@ impl Previewable for HangeulFormal {
     }
 }
 
-impl Previewable for HangeulInformal {
+impl Previewable for HanjaInformal {
     fn preview_values(&self) -> Vec<u32> {
         cjk_values()
     }

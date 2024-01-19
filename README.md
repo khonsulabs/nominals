@@ -77,7 +77,7 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`Gujarati`](https://khonsulabs.github.io/nominals/main/nominals/struct.Devanagari.html): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
 - [`Gurmukhi`](https://khonsulabs.github.io/nominals/main/nominals/struct.Gurmukhi.html): ੦‎ ੧‎ ੨‎ ੩‎ ੪‎ …‎ ੯‎ ੧੦‎ ੧੧‎ ੧੨‎ …‎ ੯੯‎ ੧੦੦‎ ੧੦੧‎ ੧੦੨
 - [`HangeulFormal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulFormal.html): 영‎ 일‎ 이‎ …‎ 구‎ 일십‎ 일십일‎ …‎ 일십구‎ 이십‎ 이십일‎ …‎ 구십구‎ 일백‎ 일백일
-- [`HangeulInformal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulInformal.html): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
+- [`HanjaInformal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HanjaInformal.html): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
 - [`HangeulJamo`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulJamo.html): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ‎ …‎ ㅍㅎ‎ ㅎㄱ‎ ㅎㄴ‎ ㅎㄷ
 - [`HangeulSyllable`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulSyllable.html): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다‎ …‎ 파하‎ 하가‎ 하나‎ 하다
 - [`HanjaFormal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HanjaFormal.html): 零‎ 壹‎ 貳‎ …‎ 九‎ 壹拾‎ 壹拾壹‎ …‎ 壹拾九‎ 貳拾‎ 貳拾壹‎ …‎ 九拾九‎ 壹百‎ 壹百壹

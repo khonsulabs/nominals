@@ -23,7 +23,7 @@
 - [`Gujarati`]($Gujarati$): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
 - [`Gurmukhi`]($Gurmukhi$): ੦‎ ੧‎ ੨‎ ੩‎ ੪‎ …‎ ੯‎ ੧੦‎ ੧੧‎ ੧੨‎ …‎ ੯੯‎ ੧੦੦‎ ੧੦੧‎ ੧੦੨
 - [`HangeulFormal`]($HangeulFormal$): 영‎ 일‎ 이‎ …‎ 구‎ 일십‎ 일십일‎ …‎ 일십구‎ 이십‎ 이십일‎ …‎ 구십구‎ 일백‎ 일백일
-- [`HangeulInformal`]($HangeulInformal$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
+- [`HanjaInformal`]($HanjaInformal$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
 - [`HangeulJamo`]($HangeulJamo$): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ‎ …‎ ㅍㅎ‎ ㅎㄱ‎ ㅎㄴ‎ ㅎㄷ
 - [`HangeulSyllable`]($HangeulSyllable$): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다‎ …‎ 파하‎ 하가‎ 하나‎ 하다
 - [`HanjaFormal`]($HanjaFormal$): 零‎ 壹‎ 貳‎ …‎ 九‎ 壹拾‎ 壹拾壹‎ …‎ 壹拾九‎ 貳拾‎ 貳拾壹‎ …‎ 九拾九‎ 壹百‎ 壹百壹
