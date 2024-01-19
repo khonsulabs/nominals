@@ -73,6 +73,8 @@ impl<T> DigitCollection for OneBased<T>
 where
     T: DigitCollection,
 {
+    type Fallback = T::Fallback;
+
     fn has_zero_digit(&self) -> bool {
         self.0.has_zero_digit()
     }
@@ -81,17 +83,20 @@ where
         false
     }
 
-    fn len(&self, digit: usize) -> usize {
-        self.0.len(digit)
+    fn len(&self) -> usize {
+        self.0.len()
     }
 
-    fn digit(&self, index: usize, digit_index: usize) -> char {
-        self.0.digit(index, digit_index)
+    fn digit(&self, index: usize) -> char {
+        self.0.digit(index)
     }
 }
 
 macro_rules! impl_digit_set {
     ($(#$doc:tt)* $name:ident, $type:ty = $digits:expr) => {
+        impl_digit_set!($(#$doc)* $name, NoFallback, $type = $digits);
+    };
+    ($(#$doc:tt)* $name:ident, $fallback:ty, $type:ty = $digits:expr) => {
         $(#$doc)*
         // When adding a new variant and getting an error here, either
         // temporarily comment this out or add an empty file until the new
@@ -104,6 +109,8 @@ macro_rules! impl_digit_set {
             static DIGITS: $type = $digits;
 
             impl DigitCollection for $name {
+                type Fallback = $fallback;
+
                 fn has_zero_digit(&self) -> bool {
                     DIGITS.has_zero_digit()
                 }
@@ -112,12 +119,12 @@ macro_rules! impl_digit_set {
                     DIGITS.zero_based()
                 }
 
-                fn len(&self, digit: usize) -> usize {
-                    DIGITS.len(digit)
+                fn len(&self) -> usize {
+                    DIGITS.len()
                 }
 
-                fn digit(&self, index: usize, digit_index: usize) -> char {
-                    DIGITS.digit(index, digit_index)
+                fn digit(&self, index: usize) -> char {
+                    DIGITS.digit(index)
                 }
             }
         };
@@ -180,54 +187,63 @@ impl_digit_set!(
 pub struct CjkHeavenlyStem;
 
 impl DigitCollection for CjkHeavenlyStem {
-    fn has_zero_digit(&self) -> bool {
+    type Fallback = CjkDecimal;
+
+    fn fixed(&self) -> bool {
         true
     }
 
-    fn len(&self, _digit: usize) -> usize {
+    fn zero_based(&self) -> bool {
+        false
+    }
+
+    fn has_zero_digit(&self) -> bool {
+        false
+    }
+
+    fn len(&self) -> usize {
         10
     }
 
-    fn digit(&self, index: usize, digit_index: usize) -> char {
-        if digit_index == 0 {
-            [
-                '\u{7532}', '\u{4E59}', '\u{4E19}', '\u{4E01}', '\u{620A}', '\u{5DF1}', '\u{5E9A}',
-                '\u{8F9B}', '\u{58EC}', '\u{7678}',
-            ][index]
-        } else {
-            CjkDecimal.digit(index, digit_index)
-        }
+    fn digit(&self, index: usize) -> char {
+        [
+            '\u{7532}', '\u{4E59}', '\u{4E19}', '\u{4E01}', '\u{620A}', '\u{5DF1}', '\u{5E9A}',
+            '\u{8F9B}', '\u{58EC}', '\u{7678}',
+        ][index]
     }
 }
 
 /// CJK Earthly Branch symbols.
 ///
-/// This digit collection back to [`CjkDecimal`] after the set is enumerated.
+/// This digit collection falls back to [`CjkDecimal`] after the set is
+/// enumerated.
 #[doc = include_str!("./previews/CjkEarthlyBranch.md")]
 pub struct CjkEarthlyBranch;
 
 impl DigitCollection for CjkEarthlyBranch {
-    fn has_zero_digit(&self) -> bool {
+    type Fallback = CjkDecimal;
+
+    fn fixed(&self) -> bool {
         true
     }
 
-    fn len(&self, digit: usize) -> usize {
-        if digit == 0 {
-            12
-        } else {
-            10
-        }
+    fn zero_based(&self) -> bool {
+        false
     }
 
-    fn digit(&self, index: usize, digit_index: usize) -> char {
-        if digit_index == 0 {
-            [
-                '\u{5B50}', '\u{4E11}', '\u{5BC5}', '\u{536F}', '\u{8FB0}', '\u{5DF3}', '\u{5348}',
-                '\u{672A}', '\u{7533}', '\u{9149}', '\u{620C}', '\u{4EA5}',
-            ][index]
-        } else {
-            CjkDecimal.digit(index, digit_index)
-        }
+    fn has_zero_digit(&self) -> bool {
+        false
+    }
+
+    fn len(&self) -> usize {
+        12
+    }
+
+    fn digit(&self, index: usize) -> char {
+        [
+            '\u{5B50}', '\u{4E11}', '\u{5BC5}', '\u{536F}', '\u{8FB0}', '\u{5DF3}', '\u{5348}',
+            '\u{672A}', '\u{7533}', '\u{9149}', '\u{620C}', '\u{4EA5}',
+        ][index]
     }
 }
 
@@ -412,6 +428,7 @@ impl_digit_set!(
 /// A combination of two [`DigitCollection`] implementations.
 ///
 /// Digits from `A` will be selected before digits from `B`.
+#[derive(Debug, Default, Clone, Copy, Eq, PartialEq)]
 pub struct Chain<A, B> {
     a: A,
     b: B,
@@ -429,6 +446,8 @@ where
     A: DigitCollection,
     B: DigitCollection,
 {
+    type Fallback = Chain<A::Fallback, B::Fallback>;
+
     fn has_zero_digit(&self) -> bool {
         self.a.has_zero_digit()
     }
@@ -437,20 +456,21 @@ where
         self.a.zero_based()
     }
 
-    fn len(&self, digit: usize) -> usize {
-        self.a.len(digit) + self.b.len(digit)
+    fn len(&self) -> usize {
+        self.a.len() + self.b.len()
     }
 
-    fn digit(&self, index: usize, digit_index: usize) -> char {
-        if let Some(index) = index.checked_sub(self.a.len(digit_index)) {
-            self.b.digit(index, digit_index)
+    fn digit(&self, index: usize) -> char {
+        if let Some(index) = index.checked_sub(self.a.len()) {
+            self.b.digit(index)
         } else {
-            self.a.digit(index, digit_index)
+            self.a.digit(index)
         }
     }
 }
 
 /// Restricts a set of digits to a specific length.
+#[derive(Debug, Default, Clone, Copy, Eq, PartialEq)]
 pub struct Restrict<T>(T, usize);
 
 impl<T> Restrict<T> {
@@ -464,6 +484,8 @@ impl<T> DigitCollection for Restrict<T>
 where
     T: DigitCollection,
 {
+    type Fallback = T::Fallback;
+
     fn has_zero_digit(&self) -> bool {
         self.0.has_zero_digit()
     }
@@ -472,12 +494,12 @@ where
         self.0.zero_based()
     }
 
-    fn len(&self, _digit_index: usize) -> usize {
+    fn len(&self) -> usize {
         self.1
     }
 
-    fn digit(&self, index: usize, digit_index: usize) -> char {
-        self.0.digit(index, digit_index)
+    fn digit(&self, index: usize) -> char {
+        self.0.digit(index)
     }
 }
 
@@ -500,29 +522,33 @@ fn hex() {
 }
 
 impl<const N: usize> DigitCollection for DigitSet<N, false> {
+    type Fallback = NoFallback;
+
     fn has_zero_digit(&self) -> bool {
         false
     }
 
-    fn len(&self, _digit_index: usize) -> usize {
+    fn len(&self) -> usize {
         N
     }
 
-    fn digit(&self, index: usize, _digit_index: usize) -> char {
+    fn digit(&self, index: usize) -> char {
         self.digits[index]
     }
 }
 
 impl<const N: usize> DigitCollection for DigitSet<N, true> {
+    type Fallback = NoFallback;
+
     fn has_zero_digit(&self) -> bool {
         true
     }
 
-    fn len(&self, _digit_index: usize) -> usize {
+    fn len(&self) -> usize {
         N
     }
 
-    fn digit(&self, index: usize, _digit_index: usize) -> char {
+    fn digit(&self, index: usize) -> char {
         self.digits[index]
     }
 }
@@ -533,12 +559,24 @@ where
     T: Nominal + UnsignedInteger,
 {
     fn try_format_nominal(&self, nominal: T) -> Result<NominalString, Error<T>> {
-        let mut digit_index = 0;
-        let Ok(mut count) = T::try_from(self.len(digit_index)) else {
-            return Ok(NominalString::from(
-                self.digit(nominal.as_usize(), digit_index),
-            ));
+        let Ok(mut count) = T::try_from(self.len()) else {
+            return Ok(NominalString::from(self.digit(nominal.as_usize())));
         };
+        if self.fixed()
+            && (if self.zero_based() {
+                nominal >= count
+            } else {
+                nominal > count
+            })
+        {
+            let fallback = <D::Fallback>::default();
+            return if fallback.is_empty() {
+                Err(Error::OutOfBounds(nominal))
+            } else {
+                fallback.try_format_nominal(nominal)
+            };
+        }
+
         let one = T::from(1_u8);
         let mut formatted = NominalString::new_reverse();
 
@@ -555,11 +593,10 @@ where
             first_loop = false;
 
             formatted
-                .try_push_front(self.digit((remaining % count).as_usize(), digit_index))
+                .try_push_front(self.digit((remaining % count).as_usize()))
                 .with_nominal(nominal)?;
             remaining /= count;
-            digit_index += 1;
-            count = match T::try_from(self.len(digit_index)) {
+            count = match T::try_from(self.len()) {
                 Ok(count) => count,
                 Err(_) => return Err(Error::OutOfBounds(nominal)),
             };
@@ -569,9 +606,39 @@ where
     }
 }
 
+/// An empty [`DigitCollection`] that is intended to be used to indicate no
+/// fallback should be used as a [`DigitCollection::Fallback`].
+#[derive(Default, Clone, Copy, Debug, Eq, PartialEq)]
+pub struct NoFallback;
+
+impl DigitCollection for NoFallback {
+    type Fallback = Self;
+
+    fn has_zero_digit(&self) -> bool {
+        false
+    }
+
+    fn len(&self) -> usize {
+        0
+    }
+
+    fn digit(&self, _index: usize) -> char {
+        unreachable!()
+    }
+}
+
 /// An ordered collection of digits that can be used as a [`NominalSystem`].
-#[allow(clippy::len_without_is_empty)]
+
 pub trait DigitCollection {
+    /// The digit collection that should be used after this collection's range
+    /// is exhausted.
+    type Fallback: DigitCollection + Default;
+
+    /// If true, this digit collection can only produce a single digit.
+    fn fixed(&self) -> bool {
+        false
+    }
+
     /// Returns true if this collection has a symbol representing `0` at index
     /// 0.
     fn has_zero_digit(&self) -> bool;
@@ -580,14 +647,21 @@ pub trait DigitCollection {
     fn zero_based(&self) -> bool {
         true
     }
+
     /// Returns the number of digits in this collection.
-    fn len(&self, digit: usize) -> usize;
+    fn len(&self) -> usize;
+
+    /// Returns true if this collection's length is 0.
+    fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+
     /// Returns the digit at location `index`.
     ///
     /// # Panics
     ///
     /// This function can panic if `index >= self.len()`.
-    fn digit(&self, index: usize, digit_index: usize) -> char;
+    fn digit(&self, index: usize) -> char;
 
     /// Chains `self` and `other` into a single [`DigitCollection`].
     fn and<Other>(self, other: Other) -> Chain<Self, Other>

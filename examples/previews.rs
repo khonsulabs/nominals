@@ -201,7 +201,7 @@ where
     }
 
     fn preview_values(&self) -> Vec<u32> {
-        let count = u32::try_from(self.0.len(0)).expect("too many digits");
+        let count = u32::try_from(self.0.len()).expect("too many digits");
 
         let mut values = Vec::new();
         let base = u32::from(!(self.0.has_zero_digit() || self.0.zero_based()));
@@ -220,7 +220,7 @@ where
         values.push(base + count + 2);
 
         // Show the hundreds transition
-        let tens_count = u32::try_from(self.0.len(1)).expect("too many digits");
+        let tens_count = u32::try_from(self.0.len()).expect("too many digits");
         values.push(base + tens_count * count - 1);
         values.push(base + tens_count * count);
         values.push(base + tens_count * count + 1);

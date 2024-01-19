@@ -11,6 +11,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Breaking Changes
 
 - `HangeulInformal` has been renamed to `HanjaInformal`, its correct name.
+- `DigitCollection::len` and `DigitCollection::digit` no longer receive a
+  `digit_index` parameter.
+- `DigitCollection::Fallback` is a new associated type that allows a digit
+  collection to define a fallback digit set. `NoFallback` is a new type that can
+  be used when no fallback should be used.
+
+### Added
+
+- `DigitCollection::fixed` is a new function that indicates the collection
+  should only ever be used to produce a single digit.
+
+### Fixed
+
+- `CjkHeavenlyStem` and `CjkEarthlyBranch` now fall back to `CjkDecimal` in a
+  fashion that matches the cSS specification. Specifically once the symbols have
+  been exhausted, the entire nominal formatting is produced by the fallback
+  rather than only formatting the remaining digits with the fallback.
 
 ## v0.2.2 (2023-01-18)
 
