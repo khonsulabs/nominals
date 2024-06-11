@@ -1,5 +1,6 @@
 //! Generates previews of digit collections in a markdown-compatible table
 //! format.
+//! Run with `SAVE=SAVE cargo run --example previews` to write to disk.
 
 use std::any::type_name;
 use std::fs::{File, OpenOptions};
