@@ -7,14 +7,14 @@ use std::io::{stdout, Write};
 use std::path::Path;
 
 use nominals::{
-    ArmenianLower, ArmenianUpper, Bengali, Cambodian, CjkDecimal, CjkEarthlyBranch,
-    CjkHeavenlyStem, Decimal, Devanagari, DigitCollection, EasternArabic, Ethiopic, Georgian,
-    GreekLower, GreekUpper, Gujarati, Gurmukhi, HangeulFormal, HangeulJamo, HangeulSyllable,
-    HanjaFormal, HanjaInformal, Hebrew, HexLower, HexUpper, Hiragana, HiraganaIroha,
-    JapaneseFormal, JapaneseInformal, Kannada, Katakana, KatakanaIroha, Lao, LetterLower,
-    LetterUpper, Malayalam, Mongolian, Myanmar, Nominal, NominalString, NominalSystem, Oriya,
-    Persian, RomanLower, RomanUpper, SimplifiedChineseFormal, SimplifiedChineseInformal, Tamil,
-    Telugu, Thai, Tibetan, TraditionalChineseFormal, TraditionalChineseInformal,
+    ArmenianLower, ArmenianUpper, Bengali, Cambodian, CircledNumber, CjkDecimal, CjkEarthlyBranch,
+    CjkHeavenlyStem, Decimal, Devanagari, DigitCollection, DoubleCircledNumber, EasternArabic,
+    Ethiopic, Georgian, GreekLower, GreekUpper, Gujarati, Gurmukhi, HangeulFormal,
+    HangeulJamo, HangeulSyllable, HanjaFormal, HanjaInformal, Hebrew, HexLower, HexUpper, Hiragana,
+    HiraganaIroha, JapaneseFormal, JapaneseInformal, Kannada, Katakana, KatakanaIroha, Lao,
+    LetterLower, LetterUpper, Malayalam, Mongolian, Myanmar, Nominal, NominalString, NominalSystem,
+    Oriya, Persian, RomanLower, RomanUpper, SimplifiedChineseFormal, SimplifiedChineseInformal,
+    Tamil, Telugu, Thai, Tibetan, TraditionalChineseFormal, TraditionalChineseInformal,
 };
 use unicode_segmentation::UnicodeSegmentation;
 use unicode_width::UnicodeWidthStr;
@@ -27,6 +27,8 @@ fn main() {
         preview(&DigitPreview(LetterUpper)),
         preview(&RomanLower),
         preview(&RomanUpper),
+        preview(&CircledNumber),
+        preview(&DoubleCircledNumber),
         preview(&ArmenianLower),
         preview(&ArmenianUpper),
         preview(&DigitPreview(Bengali)),
@@ -349,5 +351,17 @@ impl Previewable for HanjaFormal {
 impl Previewable for Ethiopic {
     fn preview_values(&self) -> Vec<u32> {
         vec![1, 2, 3, 10, 11, 12, 99, 100, 101, 999, 1000, 1001]
+    }
+}
+
+impl Previewable for CircledNumber {
+    fn preview_values(&self) -> Vec<u32> {
+        vec![0, 1, 2, 3, 4, 9, 10, 11, 12, 48, 49, 50]
+    }
+}
+
+impl Previewable for DoubleCircledNumber {
+    fn preview_values(&self) -> Vec<u32> {
+        (1..=10).collect()
     }
 }

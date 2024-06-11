@@ -3,6 +3,8 @@
 - [`LetterUpper`]($LetterUpper$): A‎ B‎ C‎ D‎ E‎ …‎ Z‎ AA‎ AB‎ AC‎ …‎ YZ‎ ZA‎ ZB‎ ZC
 - [`RomanLower`]($RomanLower$): i‎ ii‎ iii‎ iv‎ v‎ vi‎ …‎ ix‎ x‎ xi‎ …‎ mmmcmxcix‎ i̅v̅‎ i̅v̅i‎ …‎ d̅m̅l̅c̅i̅x̅cmxcix‎ m̅‎ m̅i
 - [`RomanUpper`]($RomanUpper$): I‎ II‎ III‎ IV‎ V‎ VI‎ …‎ IX‎ X‎ XI‎ …‎ MMMCMXCIX‎ I̅V̅‎ I̅V̅I‎ …‎ D̅M̅L̅C̅I̅X̅CMXCIX‎ M̅‎ M̅I
+- [`CircledNumber`]($CircledNumber$): ⓪‎ ①‎ ②‎ ③‎ ④‎ …‎ ⑨‎ ⑩‎ ⑪‎ ⑫‎ …‎ ㊽‎ ㊾‎ ㊿
+- [`DoubleCircledNumber`]($DoubleCircledNumber$): ⓵‎ ⓶‎ ⓷‎ ⓸‎ ⓹‎ ⓺‎ ⓻‎ ⓼‎ ⓽‎ ⓾
 - [`ArmenianLower`]($ArmenianLower$): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ ժա‎ ժբ‎ …‎ ղթ‎ ճ‎ ճա
 - [`ArmenianUpper`]($ArmenianUpper$): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ ԺԱ ‎ ԺԲ‎ …‎ ՂԹ‎ Ճ‎ ՃԱ 
 - [`Bengali`]($Bengali$): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২

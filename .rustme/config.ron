@@ -67,6 +67,11 @@ Configuration(
                 release: "https://docs.rs/nominals/latest/nominals/struct.Cambodian.html",
                 for_docs: "Cambodian",
             ),
+            "CircledNumber": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.CircledNumber.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.CircledNumber.html",
+                for_docs: "CircledNumber",
+            ),
             "CjkDecimal": (
                 default: "https://khonsulabs.github.io/nominals/main/nominals/struct.CjkDecimal.html",
                 release: "https://docs.rs/nominals/latest/nominals/struct.CjkDecimal.html",
@@ -76,6 +81,11 @@ Configuration(
                 default: "https://khonsulabs.github.io/nominals/main/nominals/struct.Devanagari.html",
                 release: "https://docs.rs/nominals/latest/nominals/struct.Devanagari.html",
                 for_docs: "Devanagari",
+            ),
+            "DoubleCircledNumber": (
+                default: "https://khonsulabs.github.io/nominals/main/nominals/struct.DoubleCircledNumber.html",
+                release: "https://docs.rs/nominals/latest/nominals/struct.DoubleCircledNumber.html",
+                for_docs: "DoubleCircledNumber",
             ),
             "EasternArabic": (
                 default: "https://khonsulabs.github.io/nominals/main/nominals/struct.EasternArabic.html",
