@@ -182,7 +182,7 @@ fn markdown_link(name: &str) -> String {
 }
 
 fn markdown_link_to(name: &str, anchor: &str) -> String {
-    format!("[`{name}`](${anchor}$)")
+    format!("[`{name}`]($NominalSystemDocPrefix${anchor}$NominalSystemDocSuffix$)")
 }
 
 trait Previewable: NominalSystem<u32> + Sized + 'static {

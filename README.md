@@ -76,7 +76,7 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`Georgian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Georgian.html): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ ია‎ იბ‎ …‎ ჟთ‎ რ‎ რა
 - [`GreekLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekLower.html): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ‎ …‎ ψω‎ ωα‎ ωβ‎ ωγ
 - [`GreekUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekUpper.html): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
-- [`Gujarati`](https://khonsulabs.github.io/nominals/main/nominals/struct.Devanagari.html): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
+- [`Gujarati`](https://khonsulabs.github.io/nominals/main/nominals/struct.Gujarati.html): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
 - [`Gurmukhi`](https://khonsulabs.github.io/nominals/main/nominals/struct.Gurmukhi.html): ੦‎ ੧‎ ੨‎ ੩‎ ੪‎ …‎ ੯‎ ੧੦‎ ੧੧‎ ੧੨‎ …‎ ੯੯‎ ੧੦੦‎ ੧੦੧‎ ੧੦੨
 - [`HanjaInformal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HanjaInformal.html): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
 - [`HangeulFormal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulFormal.html): 영‎ 일‎ 이‎ …‎ 구‎ 일십‎ 일십일‎ …‎ 일십구‎ 이십‎ 이십일‎ …‎ 구십구‎ 일백‎ 일백일
