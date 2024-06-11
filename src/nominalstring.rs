@@ -61,7 +61,7 @@ impl NominalString {
     ///
     /// # Errors
     ///
-    /// Returns [`OutOfMemoryError`] if no additiol space is available and the
+    /// Returns [`OutOfMemoryError`] if no additional space is available and the
     /// `alloc` feature is disabled.
     pub fn try_push(&mut self, ch: char) -> Result<(), OutOfMemoryError> {
         self.0.push(ch)
@@ -71,7 +71,7 @@ impl NominalString {
     ///
     /// # Errors
     ///
-    /// Returns [`OutOfMemoryError`] if no additiol space is available and the
+    /// Returns [`OutOfMemoryError`] if no additional space is available and the
     /// `alloc` feature is disabled.
     pub fn try_push_str(&mut self, str: &str) -> Result<(), OutOfMemoryError> {
         self.0.push_str(str)
@@ -81,7 +81,7 @@ impl NominalString {
     ///
     /// # Errors
     ///
-    /// Returns [`OutOfMemoryError`] if no additiol space is available and the
+    /// Returns [`OutOfMemoryError`] if no additional space is available and the
     /// `alloc` feature is disabled.
     pub fn try_push_front(&mut self, ch: char) -> Result<(), OutOfMemoryError> {
         self.0.push_front(ch)
@@ -93,7 +93,7 @@ impl NominalString {
         matches!(self.0, MaybeInline::Inline(_))
     }
 
-    /// Returns the heap-allocated [`String`] inside of `self`, if `self` is
+    /// Returns the heap-allocated [`String`] inside `self`, if `self` is
     /// heap allocated.
     ///
     /// # Errors
@@ -543,7 +543,7 @@ impl MaybeInline {
     }
 }
 
-/// No additional memory was able to be allocated.
+/// Was unable to allocate additional memory.
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
 pub struct OutOfMemoryError;
 

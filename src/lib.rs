@@ -143,10 +143,10 @@ pub trait UnsignedInteger:
     /// Returns true if `self` is 0.
     fn is_zero(self) -> bool;
 
-    /// Casts `self` as a usize.
+    /// Casts `self` as a [`usize`].
     ///
     /// This function should only be invoked when it is guaranteed the value is
-    /// within the range of a usize. Otherwise, using fallible operations and
+    /// within the range of a [`usize`]. Otherwise, using fallible operations and
     /// returning an [`Error::OutOfBounds`] is preferred.
     fn as_usize(self) -> usize;
 }
