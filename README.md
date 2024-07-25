@@ -57,6 +57,8 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`LetterUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.LetterUpper.html): A‎ B‎ C‎ D‎ E‎ …‎ Z‎ AA‎ AB‎ AC‎ …‎ YZ‎ ZA‎ ZB‎ ZC
 - [`RomanLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.RomanLower.html): i‎ ii‎ iii‎ iv‎ v‎ vi‎ …‎ ix‎ x‎ xi‎ …‎ mmmcmxcix‎ i̅v̅‎ i̅v̅i‎ …‎ d̅m̅l̅c̅i̅x̅cmxcix‎ m̅‎ m̅i
 - [`RomanUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.RomanUpper.html): I‎ II‎ III‎ IV‎ V‎ VI‎ …‎ IX‎ X‎ XI‎ …‎ MMMCMXCIX‎ I̅V̅‎ I̅V̅I‎ …‎ D̅M̅L̅C̅I̅X̅CMXCIX‎ M̅‎ M̅I
+- [`CircledNumber`](https://khonsulabs.github.io/nominals/main/nominals/struct.CircledNumber.html): ⓪‎ ①‎ ②‎ ③‎ ④‎ …‎ ⑨‎ ⑩‎ ⑪‎ ⑫‎ …‎ ㊽‎ ㊾‎ ㊿
+- [`DoubleCircledNumber`](https://khonsulabs.github.io/nominals/main/nominals/struct.DoubleCircledNumber.html): ⓵‎ ⓶‎ ⓷‎ ⓸‎ ⓹‎ ⓺‎ ⓻‎ ⓼‎ ⓽‎ ⓾
 - [`ArmenianLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianLower.html): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ ժա‎ ժբ‎ …‎ ղթ‎ ճ‎ ճա
 - [`ArmenianUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.ArmenianUpper.html): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ ԺԱ ‎ ԺԲ‎ …‎ ՂԹ‎ Ճ‎ ՃԱ 
 - [`Bengali`](https://khonsulabs.github.io/nominals/main/nominals/struct.Bengali.html): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২
@@ -66,15 +68,15 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`SimplifiedChineseFormal`](https://khonsulabs.github.io/nominals/main/nominals/struct.SimplifiedChineseFormal.html): 零‎ 一‎ 二‎ …‎ 九‎ 一十‎ 一十一‎ …‎ 一十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
 - [`TraditionalChineseFormal`](https://khonsulabs.github.io/nominals/main/nominals/struct.TraditionalChineseFormal.html): 零‎ 一‎ 二‎ …‎ 九‎ 一十‎ 一十一‎ …‎ 一十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
 - [`CjkDecimal`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkDecimal.html): 〇‎ 一‎ 二‎ 三‎ 四‎ …‎ 九‎ 一〇‎ 一一‎ 一二‎ …‎ 九九‎ 一〇〇‎ 一〇一‎ 一〇二
-- [`CjkEarthlyBranch`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkEarthlyBranch.html): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一子‎ 一丑‎ 一寅‎ …‎ 九亥‎ 一〇子‎ 一〇丑‎ 一〇寅
-- [`CjkHeavenlyStem`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkHeavenlyStem.html): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一甲‎ 一乙‎ 一丙‎ …‎ 九癸‎ 一〇甲‎ 一〇乙‎ 一〇丙
+- [`CjkEarthlyBranch`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkEarthlyBranch.html): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一三‎ 一四‎ 一五‎ …‎ 一四四‎ 一四五‎ 一四六‎ 一四七
+- [`CjkHeavenlyStem`](https://khonsulabs.github.io/nominals/main/nominals/struct.CjkHeavenlyStem.html): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一一‎ 一二‎ 一三‎ …‎ 一〇〇‎ 一〇一‎ 一〇二‎ 一〇三
 - [`Devanagari`](https://khonsulabs.github.io/nominals/main/nominals/struct.Devanagari.html): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
 - [`EasternArabic`](https://khonsulabs.github.io/nominals/main/nominals/struct.EasternArabic.html): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
 - [`Ethiopic`](https://khonsulabs.github.io/nominals/main/nominals/struct.Ethiopic.html): ፩‎ ፪‎ ፫‎ …‎ ፲‎ ፲፩‎ ፲፪‎ …‎ ፺፱‎ ፻‎ ፻፩‎ …‎ ፱፻፺፱‎ ፲፻‎ ፲፻፩
 - [`Georgian`](https://khonsulabs.github.io/nominals/main/nominals/struct.Georgian.html): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ ია‎ იბ‎ …‎ ჟთ‎ რ‎ რა
 - [`GreekLower`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekLower.html): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ‎ …‎ ψω‎ ωα‎ ωβ‎ ωγ
 - [`GreekUpper`](https://khonsulabs.github.io/nominals/main/nominals/struct.GreekUpper.html): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
-- [`Gujarati`](https://khonsulabs.github.io/nominals/main/nominals/struct.Devanagari.html): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
+- [`Gujarati`](https://khonsulabs.github.io/nominals/main/nominals/struct.Gujarati.html): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
 - [`Gurmukhi`](https://khonsulabs.github.io/nominals/main/nominals/struct.Gurmukhi.html): ੦‎ ੧‎ ੨‎ ੩‎ ੪‎ …‎ ੯‎ ੧੦‎ ੧੧‎ ੧੨‎ …‎ ੯੯‎ ੧੦੦‎ ੧੦੧‎ ੧੦੨
 - [`HanjaInformal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HanjaInformal.html): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
 - [`HangeulFormal`](https://khonsulabs.github.io/nominals/main/nominals/struct.HangeulFormal.html): 영‎ 일‎ 이‎ …‎ 구‎ 일십‎ 일십일‎ …‎ 일십구‎ 이십‎ 이십일‎ …‎ 구십구‎ 일백‎ 일백일

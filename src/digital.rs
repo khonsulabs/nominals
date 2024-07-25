@@ -151,7 +151,7 @@ impl_digit_set!(
 
 /// Urdu numeric digits.
 ///
-/// The Unicode codepoints for both [`Persian`] and Urdu numeric digits are
+/// The Unicode code points for both [`Persian`] and Urdu numeric digits are
 /// identical. The glyph selection comes from using different fonts based on the
 /// language desired.
 pub use Persian as Urdu;
@@ -170,7 +170,7 @@ impl_digit_set!(
 
 /// Khmer numeric digits.
 ///
-/// This set utilizes the same unicode code points as [`Cambodian`].
+/// This set utilizes the same Unicode code points as [`Cambodian`].
 pub use Cambodian as Khmer;
 
 impl_digit_set!(
@@ -362,7 +362,7 @@ impl_digit_set!(
 );
 
 impl_digit_set!(
-    /// Japanese Hiaragana Aiueo alphabet.
+    /// Japanese Hiragana Aiueo alphabet.
     Hiragana,
     DigitSet<46, false> = DigitSet::zeroless([
         'あ', 'い', 'う', 'え', 'お', 'か', 'き', 'く', 'け', 'こ', 'さ', 'し', 'す', 'せ', 'そ',
@@ -373,7 +373,7 @@ impl_digit_set!(
 );
 
 impl_digit_set!(
-    /// Japanese Hiaragana Iroha alphabet.
+    /// Japanese Hiragana Iroha alphabet.
     HiraganaIroha,
     DigitSet<47, false> = DigitSet::zeroless([
         'い', 'ろ', 'は', 'に', 'ほ', 'へ', 'と', 'ち', 'り', 'ぬ', 'る', 'を', 'わ', 'か', 'よ',
@@ -504,13 +504,13 @@ where
 }
 
 impl_digit_set!(
-    /// Hexadecimal uppercase ascii characters.
+    /// Hexadecimal uppercase ASCII characters.
     HexUpper,
     Restrict<Chain<Decimal, LetterUpper>> = Restrict::new(16, Chain::new(Decimal, LetterUpper))
 );
 
 impl_digit_set!(
-    /// Hexadecimal lower ascii characters.
+    /// Hexadecimal lower ASCII characters.
     HexLower,
     Restrict<Chain<Decimal, LetterLower>> = Restrict::new(16, Chain::new(Decimal, LetterLower))
 );

@@ -548,7 +548,7 @@ macro_rules! impl_chinese_options {
                 self
             }
 
-            /// Returns a variation that utilizes the mid scale (中數) instead
+            /// Returns a variation that utilizes the mid-scale (中數) instead
             /// of the myriad scale (萬進).
             #[must_use]
             pub const fn mid_scale(mut self) -> Self {

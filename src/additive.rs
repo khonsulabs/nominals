@@ -9,7 +9,7 @@ pub struct AdditiveSet<const N: usize> {
 impl<const N: usize> AdditiveSet<N> {
     /// Creates a new additive set containing `symbols`.
     ///
-    /// `symbols` must be specified in decending value order.
+    /// `symbols` must be specified in descending value order.
     ///
     /// # Panics
     ///
