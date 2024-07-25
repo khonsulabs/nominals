@@ -1,49 +1,51 @@
-- [`Decimal`]($Decimal$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ 9‎ 10‎ 11‎ 12‎ …‎ 99‎ 100‎ 101‎ 102
-- [`LetterLower`]($LetterLower$): a‎ b‎ c‎ d‎ e‎ …‎ z‎ aa‎ ab‎ ac‎ …‎ yz‎ za‎ zb‎ zc
-- [`LetterUpper`]($LetterUpper$): A‎ B‎ C‎ D‎ E‎ …‎ Z‎ AA‎ AB‎ AC‎ …‎ YZ‎ ZA‎ ZB‎ ZC
-- [`RomanLower`]($RomanLower$): i‎ ii‎ iii‎ iv‎ v‎ vi‎ …‎ ix‎ x‎ xi‎ …‎ mmmcmxcix‎ i̅v̅‎ i̅v̅i‎ …‎ d̅m̅l̅c̅i̅x̅cmxcix‎ m̅‎ m̅i
-- [`RomanUpper`]($RomanUpper$): I‎ II‎ III‎ IV‎ V‎ VI‎ …‎ IX‎ X‎ XI‎ …‎ MMMCMXCIX‎ I̅V̅‎ I̅V̅I‎ …‎ D̅M̅L̅C̅I̅X̅CMXCIX‎ M̅‎ M̅I
-- [`ArmenianLower`]($ArmenianLower$): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ ժա‎ ժբ‎ …‎ ղթ‎ ճ‎ ճա
-- [`ArmenianUpper`]($ArmenianUpper$): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ ԺԱ ‎ ԺԲ‎ …‎ ՂԹ‎ Ճ‎ ՃԱ 
-- [`Bengali`]($Bengali$): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২
-- [`Cambodian`]($Cambodian$): ០‎ ១‎ ២‎ ៣‎ ៤‎ …‎ ៩‎ ១០‎ ១១‎ ១២‎ …‎ ៩៩‎ ១០០‎ ១០១‎ ១០២
-- [`SimplifiedChineseInformal`]($SimplifiedChineseInformal$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
-- [`TraditionalChineseInformal`]($TraditionalChineseInformal$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
-- [`SimplifiedChineseFormal`]($SimplifiedChineseFormal$): 零‎ 一‎ 二‎ …‎ 九‎ 一十‎ 一十一‎ …‎ 一十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
-- [`TraditionalChineseFormal`]($TraditionalChineseFormal$): 零‎ 一‎ 二‎ …‎ 九‎ 一十‎ 一十一‎ …‎ 一十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
-- [`CjkDecimal`]($CjkDecimal$): 〇‎ 一‎ 二‎ 三‎ 四‎ …‎ 九‎ 一〇‎ 一一‎ 一二‎ …‎ 九九‎ 一〇〇‎ 一〇一‎ 一〇二
-- [`CjkEarthlyBranch`]($CjkEarthlyBranch$): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一三‎ 一四‎ 一五‎ …‎ 一四四‎ 一四五‎ 一四六‎ 一四七
-- [`CjkHeavenlyStem`]($CjkHeavenlyStem$): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一一‎ 一二‎ 一三‎ …‎ 一〇〇‎ 一〇一‎ 一〇二‎ 一〇三
-- [`Devanagari`]($Devanagari$): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
-- [`EasternArabic`]($EasternArabic$): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
-- [`Ethiopic`]($Ethiopic$): ፩‎ ፪‎ ፫‎ …‎ ፲‎ ፲፩‎ ፲፪‎ …‎ ፺፱‎ ፻‎ ፻፩‎ …‎ ፱፻፺፱‎ ፲፻‎ ፲፻፩
-- [`Georgian`]($Georgian$): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ ია‎ იბ‎ …‎ ჟთ‎ რ‎ რა
-- [`GreekLower`]($GreekLower$): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ‎ …‎ ψω‎ ωα‎ ωβ‎ ωγ
-- [`GreekUpper`]($GreekUpper$): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
-- [`Gujarati`]($Gujarati$): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
-- [`Gurmukhi`]($Gurmukhi$): ੦‎ ੧‎ ੨‎ ੩‎ ੪‎ …‎ ੯‎ ੧੦‎ ੧੧‎ ੧੨‎ …‎ ੯੯‎ ੧੦੦‎ ੧੦੧‎ ੧੦੨
-- [`HanjaInformal`]($HanjaInformal$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
-- [`HangeulFormal`]($HangeulFormal$): 영‎ 일‎ 이‎ …‎ 구‎ 일십‎ 일십일‎ …‎ 일십구‎ 이십‎ 이십일‎ …‎ 구십구‎ 일백‎ 일백일
-- [`HangeulJamo`]($HangeulJamo$): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ‎ …‎ ㅍㅎ‎ ㅎㄱ‎ ㅎㄴ‎ ㅎㄷ
-- [`HangeulSyllable`]($HangeulSyllable$): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다‎ …‎ 파하‎ 하가‎ 하나‎ 하다
-- [`HanjaFormal`]($HanjaFormal$): 零‎ 壹‎ 貳‎ …‎ 九‎ 壹拾‎ 壹拾壹‎ …‎ 壹拾九‎ 貳拾‎ 貳拾壹‎ …‎ 九拾九‎ 壹百‎ 壹百壹
-- [`Hebrew`]($Hebrew$): ׳א״‎ ׳ב״‎ ׳ג״‎ …‎ ׳ט״‎ ׳י״‎ …‎ יג‎ יד‎ ט״ו‎ ט״ז‎ יז‎ …‎ שצו‎ שצז‎ שצח‎ שצט‎ ׳ת״
-- [`HexLower`]($HexLower$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ f‎ 10‎ 11‎ 12‎ …‎ ff‎ 100‎ 101‎ 102
-- [`HexUpper`]($HexUpper$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ F‎ 10‎ 11‎ 12‎ …‎ FF‎ 100‎ 101‎ 102
-- [`Hiragana`]($Hiragana$): あ‎ い‎ う‎ え‎ お‎ …‎ ん‎ ああ‎ あい‎ あう‎ …‎ をん‎ んあ‎ んい‎ んう
-- [`HiraganaIroha`]($HiraganaIroha$): い‎ ろ‎ は‎ に‎ ほ‎ …‎ す‎ いい‎ いろ‎ いは‎ …‎ せす‎ すい‎ すろ‎ すは
-- [`JapaneseFormal`]($JapaneseFormal$): 零‎ 壱‎ 弐‎ …‎ 九‎ 壱拾‎ 壱拾壱‎ …‎ 壱拾九‎ 弐拾‎ 弐拾壱‎ …‎ 九拾九‎ 壱百‎ 壱百壱
-- [`JapaneseInformal`]($JapaneseInformal$): 〇‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
-- [`Kannada`]($Kannada$): ೦‎ ೧‎ ೨‎ ೩‎ ೪‎ …‎ ೯‎ ೧೦‎ ೧೧‎ ೧೨‎ …‎ ೯೯‎ ೧೦೦‎ ೧೦೧‎ ೧೦೨
-- [`Katakana`]($Katakana$): ア‎ イ‎ ウ‎ エ‎ オ‎ …‎ ン‎ アア‎ アイ‎ アウ‎ …‎ ヲン‎ ンア‎ ンイ‎ ンウ
-- [`KatakanaIroha`]($KatakanaIroha$): イ‎ ロ‎ ハ‎ ニ‎ ホ‎ …‎ ス‎ イイ‎ イロ‎ イハ‎ …‎ セス‎ スイ‎ スロ‎ スハ
-- [`Lao`]($Lao$): ໐‎ ໑‎ ໒‎ ໓‎ ໔‎ …‎ ໙‎ ໑໐‎ ໑໑‎ ໑໒‎ …‎ ໙໙‎ ໑໐໐‎ ໑໐໑‎ ໑໐໒
-- [`Malayalam`]($Malayalam$): ൦‎ ൧‎ ൨‎ ൩‎ ൪‎ …‎ ൯‎ ൧൦‎ ൧൧‎ ൧൨‎ …‎ ൯൯‎ ൧൦൦‎ ൧൦൧‎ ൧൦൨
-- [`Mongolian`]($Mongolian$): ᠐‎ ᠑‎ ᠒‎ ᠓‎ ᠔‎ …‎ ᠙‎ ᠑᠐‎ ᠑᠑‎ ᠑᠒‎ …‎ ᠙᠙‎ ᠑᠐᠐‎ ᠑᠐᠑‎ ᠑᠐᠒
-- [`Myanmar`]($Myanmar$): ၀‎ ၁‎ ၂‎ ၃‎ ၄‎ …‎ ၉‎ ၁၀‎ ၁၁‎ ၁၂‎ …‎ ၉၉‎ ၁၀၀‎ ၁၀၁‎ ၁၀၂
-- [`Oriya`]($Oriya$): ୦‎ ୧‎ ୨‎ ୩‎ ୪‎ …‎ ୯‎ ୧୦‎ ୧୧‎ ୧୨‎ …‎ ୯୯‎ ୧୦୦‎ ୧୦୧‎ ୧୦୨
-- [`Persian`]($Persian$): ۰‎ ۱‎ ۲‎ ۳‎ ۴‎ …‎ ۹‎ ۱۰‎ ۱۱‎ ۱۲‎ …‎ ۹۹‎ ۱۰۰‎ ۱۰۱‎ ۱۰۲
-- [`Tamil`]($Tamil$): ௦‎ ௧‎ ௨‎ ௩‎ ௪‎ …‎ ௯‎ ௧௦‎ ௧௧‎ ௧௨‎ …‎ ௯௯‎ ௧௦௦‎ ௧௦௧‎ ௧௦௨
-- [`Telugu`]($Telugu$): ౦‎ ౧‎ ౨‎ ౩‎ ౪‎ …‎ ౯‎ ౧౦‎ ౧౧‎ ౧౨‎ …‎ ౯౯‎ ౧౦౦‎ ౧౦౧‎ ౧౦౨
-- [`Thai`]($Thai$): ๐‎ ๑‎ ๒‎ ๓‎ ๔‎ …‎ ๙‎ ๑๐‎ ๑๑‎ ๑๒‎ …‎ ๙๙‎ ๑๐๐‎ ๑๐๑‎ ๑๐๒
-- [`Tibetan`]($Tibetan$): ༠‎ ༡‎ ༢‎ ༣‎ ༤‎ …‎ ༩‎ ༡༠‎ ༡༡‎ ༡༢‎ …‎ ༩༩‎ ༡༠༠‎ ༡༠༡‎ ༡༠༢
+- [`Decimal`]($NominalSystemDocPrefix$Decimal$NominalSystemDocSuffix$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ 9‎ 10‎ 11‎ 12‎ …‎ 99‎ 100‎ 101‎ 102
+- [`LetterLower`]($NominalSystemDocPrefix$LetterLower$NominalSystemDocSuffix$): a‎ b‎ c‎ d‎ e‎ …‎ z‎ aa‎ ab‎ ac‎ …‎ yz‎ za‎ zb‎ zc
+- [`LetterUpper`]($NominalSystemDocPrefix$LetterUpper$NominalSystemDocSuffix$): A‎ B‎ C‎ D‎ E‎ …‎ Z‎ AA‎ AB‎ AC‎ …‎ YZ‎ ZA‎ ZB‎ ZC
+- [`RomanLower`]($NominalSystemDocPrefix$RomanLower$NominalSystemDocSuffix$): i‎ ii‎ iii‎ iv‎ v‎ vi‎ …‎ ix‎ x‎ xi‎ …‎ mmmcmxcix‎ i̅v̅‎ i̅v̅i‎ …‎ d̅m̅l̅c̅i̅x̅cmxcix‎ m̅‎ m̅i
+- [`RomanUpper`]($NominalSystemDocPrefix$RomanUpper$NominalSystemDocSuffix$): I‎ II‎ III‎ IV‎ V‎ VI‎ …‎ IX‎ X‎ XI‎ …‎ MMMCMXCIX‎ I̅V̅‎ I̅V̅I‎ …‎ D̅M̅L̅C̅I̅X̅CMXCIX‎ M̅‎ M̅I
+- [`CircledNumber`]($NominalSystemDocPrefix$CircledNumber$NominalSystemDocSuffix$): ⓪‎ ①‎ ②‎ ③‎ ④‎ …‎ ⑨‎ ⑩‎ ⑪‎ ⑫‎ …‎ ㊽‎ ㊾‎ ㊿
+- [`DoubleCircledNumber`]($NominalSystemDocPrefix$DoubleCircledNumber$NominalSystemDocSuffix$): ⓵‎ ⓶‎ ⓷‎ ⓸‎ ⓹‎ ⓺‎ ⓻‎ ⓼‎ ⓽‎ ⓾
+- [`ArmenianLower`]($NominalSystemDocPrefix$ArmenianLower$NominalSystemDocSuffix$): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ ժա‎ ժբ‎ …‎ ղթ‎ ճ‎ ճա
+- [`ArmenianUpper`]($NominalSystemDocPrefix$ArmenianUpper$NominalSystemDocSuffix$): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ ԺԱ ‎ ԺԲ‎ …‎ ՂԹ‎ Ճ‎ ՃԱ 
+- [`Bengali`]($NominalSystemDocPrefix$Bengali$NominalSystemDocSuffix$): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২
+- [`Cambodian`]($NominalSystemDocPrefix$Cambodian$NominalSystemDocSuffix$): ០‎ ១‎ ២‎ ៣‎ ៤‎ …‎ ៩‎ ១០‎ ១១‎ ១២‎ …‎ ៩៩‎ ១០០‎ ១០១‎ ១០២
+- [`SimplifiedChineseInformal`]($NominalSystemDocPrefix$SimplifiedChineseInformal$NominalSystemDocSuffix$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
+- [`TraditionalChineseInformal`]($NominalSystemDocPrefix$TraditionalChineseInformal$NominalSystemDocSuffix$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
+- [`SimplifiedChineseFormal`]($NominalSystemDocPrefix$SimplifiedChineseFormal$NominalSystemDocSuffix$): 零‎ 一‎ 二‎ …‎ 九‎ 一十‎ 一十一‎ …‎ 一十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
+- [`TraditionalChineseFormal`]($NominalSystemDocPrefix$TraditionalChineseFormal$NominalSystemDocSuffix$): 零‎ 一‎ 二‎ …‎ 九‎ 一十‎ 一十一‎ …‎ 一十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 一百‎ 一百零一
+- [`CjkDecimal`]($NominalSystemDocPrefix$CjkDecimal$NominalSystemDocSuffix$): 〇‎ 一‎ 二‎ 三‎ 四‎ …‎ 九‎ 一〇‎ 一一‎ 一二‎ …‎ 九九‎ 一〇〇‎ 一〇一‎ 一〇二
+- [`CjkEarthlyBranch`]($NominalSystemDocPrefix$CjkEarthlyBranch$NominalSystemDocSuffix$): 子‎ 丑‎ 寅‎ 卯‎ 辰‎ …‎ 亥‎ 一三‎ 一四‎ 一五‎ …‎ 一四四‎ 一四五‎ 一四六‎ 一四七
+- [`CjkHeavenlyStem`]($NominalSystemDocPrefix$CjkHeavenlyStem$NominalSystemDocSuffix$): 甲‎ 乙‎ 丙‎ 丁‎ 戊‎ …‎ 癸‎ 一一‎ 一二‎ 一三‎ …‎ 一〇〇‎ 一〇一‎ 一〇二‎ 一〇三
+- [`Devanagari`]($NominalSystemDocPrefix$Devanagari$NominalSystemDocSuffix$): ०‎ १‎ २‎ ३‎ ४‎ …‎ ९‎ १०‎ ११‎ १२‎ …‎ ९९‎ १००‎ १०१‎ १०२
+- [`EasternArabic`]($NominalSystemDocPrefix$EasternArabic$NominalSystemDocSuffix$): ٠‎ ١‎ ٢‎ ٣‎ ٤‎ …‎ ٩‎ ١٠‎ ١١‎ ١٢‎ …‎ ٩٩‎ ١٠٠‎ ١٠١‎ ١٠٢
+- [`Ethiopic`]($NominalSystemDocPrefix$Ethiopic$NominalSystemDocSuffix$): ፩‎ ፪‎ ፫‎ …‎ ፲‎ ፲፩‎ ፲፪‎ …‎ ፺፱‎ ፻‎ ፻፩‎ …‎ ፱፻፺፱‎ ፲፻‎ ፲፻፩
+- [`Georgian`]($NominalSystemDocPrefix$Georgian$NominalSystemDocSuffix$): ა‎ ბ‎ გ‎ …‎ თ‎ ი‎ ია‎ იბ‎ …‎ ჟთ‎ რ‎ რა
+- [`GreekLower`]($NominalSystemDocPrefix$GreekLower$NominalSystemDocSuffix$): α‎ β‎ γ‎ δ‎ ε‎ …‎ ω‎ αα‎ αβ‎ αγ‎ …‎ ψω‎ ωα‎ ωβ‎ ωγ
+- [`GreekUpper`]($NominalSystemDocPrefix$GreekUpper$NominalSystemDocSuffix$): Α‎ Β‎ Γ‎ Δ‎ Ε‎ …‎ Ω‎ ΑΑ‎ ΑΒ‎ ΑΓ‎ …‎ ΨΩ‎ ΩΑ‎ ΩΒ‎ ΩΓ
+- [`Gujarati`]($NominalSystemDocPrefix$Gujarati$NominalSystemDocSuffix$): ૦‎ ૧‎ ૨‎ ૩‎ ૪‎ …‎ ૯‎ ૧૦‎ ૧૧‎ ૧૨‎ …‎ ૯૯‎ ૧૦૦‎ ૧૦૧‎ ૧૦૨
+- [`Gurmukhi`]($NominalSystemDocPrefix$Gurmukhi$NominalSystemDocSuffix$): ੦‎ ੧‎ ੨‎ ੩‎ ੪‎ …‎ ੯‎ ੧੦‎ ੧੧‎ ੧੨‎ …‎ ੯੯‎ ੧੦੦‎ ੧੦੧‎ ੧੦੨
+- [`HanjaInformal`]($NominalSystemDocPrefix$HanjaInformal$NominalSystemDocSuffix$): 零‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
+- [`HangeulFormal`]($NominalSystemDocPrefix$HangeulFormal$NominalSystemDocSuffix$): 영‎ 일‎ 이‎ …‎ 구‎ 일십‎ 일십일‎ …‎ 일십구‎ 이십‎ 이십일‎ …‎ 구십구‎ 일백‎ 일백일
+- [`HangeulJamo`]($NominalSystemDocPrefix$HangeulJamo$NominalSystemDocSuffix$): ㄱ‎ ㄴ‎ ㄷ‎ ㄹ‎ ㅁ‎ …‎ ㅎ‎ ㄱㄱ‎ ㄱㄴ‎ ㄱㄷ‎ …‎ ㅍㅎ‎ ㅎㄱ‎ ㅎㄴ‎ ㅎㄷ
+- [`HangeulSyllable`]($NominalSystemDocPrefix$HangeulSyllable$NominalSystemDocSuffix$): 가‎ 나‎ 다‎ 라‎ 마‎ …‎ 하‎ 가가‎ 가나‎ 가다‎ …‎ 파하‎ 하가‎ 하나‎ 하다
+- [`HanjaFormal`]($NominalSystemDocPrefix$HanjaFormal$NominalSystemDocSuffix$): 零‎ 壹‎ 貳‎ …‎ 九‎ 壹拾‎ 壹拾壹‎ …‎ 壹拾九‎ 貳拾‎ 貳拾壹‎ …‎ 九拾九‎ 壹百‎ 壹百壹
+- [`Hebrew`]($NominalSystemDocPrefix$Hebrew$NominalSystemDocSuffix$): ׳א״‎ ׳ב״‎ ׳ג״‎ …‎ ׳ט״‎ ׳י״‎ …‎ יג‎ יד‎ ט״ו‎ ט״ז‎ יז‎ …‎ שצו‎ שצז‎ שצח‎ שצט‎ ׳ת״
+- [`HexLower`]($NominalSystemDocPrefix$HexLower$NominalSystemDocSuffix$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ f‎ 10‎ 11‎ 12‎ …‎ ff‎ 100‎ 101‎ 102
+- [`HexUpper`]($NominalSystemDocPrefix$HexUpper$NominalSystemDocSuffix$): 0‎ 1‎ 2‎ 3‎ 4‎ …‎ F‎ 10‎ 11‎ 12‎ …‎ FF‎ 100‎ 101‎ 102
+- [`Hiragana`]($NominalSystemDocPrefix$Hiragana$NominalSystemDocSuffix$): あ‎ い‎ う‎ え‎ お‎ …‎ ん‎ ああ‎ あい‎ あう‎ …‎ をん‎ んあ‎ んい‎ んう
+- [`HiraganaIroha`]($NominalSystemDocPrefix$HiraganaIroha$NominalSystemDocSuffix$): い‎ ろ‎ は‎ に‎ ほ‎ …‎ す‎ いい‎ いろ‎ いは‎ …‎ せす‎ すい‎ すろ‎ すは
+- [`JapaneseFormal`]($NominalSystemDocPrefix$JapaneseFormal$NominalSystemDocSuffix$): 零‎ 壱‎ 弐‎ …‎ 九‎ 壱拾‎ 壱拾壱‎ …‎ 壱拾九‎ 弐拾‎ 弐拾壱‎ …‎ 九拾九‎ 壱百‎ 壱百壱
+- [`JapaneseInformal`]($NominalSystemDocPrefix$JapaneseInformal$NominalSystemDocSuffix$): 〇‎ 一‎ 二‎ …‎ 九‎ 十‎ 十一‎ …‎ 十九‎ 二十‎ 二十一‎ …‎ 九十九‎ 百‎ 百一
+- [`Kannada`]($NominalSystemDocPrefix$Kannada$NominalSystemDocSuffix$): ೦‎ ೧‎ ೨‎ ೩‎ ೪‎ …‎ ೯‎ ೧೦‎ ೧೧‎ ೧೨‎ …‎ ೯೯‎ ೧೦೦‎ ೧೦೧‎ ೧೦೨
+- [`Katakana`]($NominalSystemDocPrefix$Katakana$NominalSystemDocSuffix$): ア‎ イ‎ ウ‎ エ‎ オ‎ …‎ ン‎ アア‎ アイ‎ アウ‎ …‎ ヲン‎ ンア‎ ンイ‎ ンウ
+- [`KatakanaIroha`]($NominalSystemDocPrefix$KatakanaIroha$NominalSystemDocSuffix$): イ‎ ロ‎ ハ‎ ニ‎ ホ‎ …‎ ス‎ イイ‎ イロ‎ イハ‎ …‎ セス‎ スイ‎ スロ‎ スハ
+- [`Lao`]($NominalSystemDocPrefix$Lao$NominalSystemDocSuffix$): ໐‎ ໑‎ ໒‎ ໓‎ ໔‎ …‎ ໙‎ ໑໐‎ ໑໑‎ ໑໒‎ …‎ ໙໙‎ ໑໐໐‎ ໑໐໑‎ ໑໐໒
+- [`Malayalam`]($NominalSystemDocPrefix$Malayalam$NominalSystemDocSuffix$): ൦‎ ൧‎ ൨‎ ൩‎ ൪‎ …‎ ൯‎ ൧൦‎ ൧൧‎ ൧൨‎ …‎ ൯൯‎ ൧൦൦‎ ൧൦൧‎ ൧൦൨
+- [`Mongolian`]($NominalSystemDocPrefix$Mongolian$NominalSystemDocSuffix$): ᠐‎ ᠑‎ ᠒‎ ᠓‎ ᠔‎ …‎ ᠙‎ ᠑᠐‎ ᠑᠑‎ ᠑᠒‎ …‎ ᠙᠙‎ ᠑᠐᠐‎ ᠑᠐᠑‎ ᠑᠐᠒
+- [`Myanmar`]($NominalSystemDocPrefix$Myanmar$NominalSystemDocSuffix$): ၀‎ ၁‎ ၂‎ ၃‎ ၄‎ …‎ ၉‎ ၁၀‎ ၁၁‎ ၁၂‎ …‎ ၉၉‎ ၁၀၀‎ ၁၀၁‎ ၁၀၂
+- [`Oriya`]($NominalSystemDocPrefix$Oriya$NominalSystemDocSuffix$): ୦‎ ୧‎ ୨‎ ୩‎ ୪‎ …‎ ୯‎ ୧୦‎ ୧୧‎ ୧୨‎ …‎ ୯୯‎ ୧୦୦‎ ୧୦୧‎ ୧୦୨
+- [`Persian`]($NominalSystemDocPrefix$Persian$NominalSystemDocSuffix$): ۰‎ ۱‎ ۲‎ ۳‎ ۴‎ …‎ ۹‎ ۱۰‎ ۱۱‎ ۱۲‎ …‎ ۹۹‎ ۱۰۰‎ ۱۰۱‎ ۱۰۲
+- [`Tamil`]($NominalSystemDocPrefix$Tamil$NominalSystemDocSuffix$): ௦‎ ௧‎ ௨‎ ௩‎ ௪‎ …‎ ௯‎ ௧௦‎ ௧௧‎ ௧௨‎ …‎ ௯௯‎ ௧௦௦‎ ௧௦௧‎ ௧௦௨
+- [`Telugu`]($NominalSystemDocPrefix$Telugu$NominalSystemDocSuffix$): ౦‎ ౧‎ ౨‎ ౩‎ ౪‎ …‎ ౯‎ ౧౦‎ ౧౧‎ ౧౨‎ …‎ ౯౯‎ ౧౦౦‎ ౧౦౧‎ ౧౦౨
+- [`Thai`]($NominalSystemDocPrefix$Thai$NominalSystemDocSuffix$): ๐‎ ๑‎ ๒‎ ๓‎ ๔‎ …‎ ๙‎ ๑๐‎ ๑๑‎ ๑๒‎ …‎ ๙๙‎ ๑๐๐‎ ๑๐๑‎ ๑๐๒
+- [`Tibetan`]($NominalSystemDocPrefix$Tibetan$NominalSystemDocSuffix$): ༠‎ ༡‎ ༢‎ ༣‎ ༤‎ …‎ ༩‎ ༡༠‎ ༡༡‎ ༡༢‎ …‎ ༩༩‎ ༡༠༠‎ ༡༠༡‎ ༡༠༢

@@ -5,7 +5,7 @@
 
 ![nominals is considered alpha](https://img.shields.io/badge/status-alpha-orange)
 [![crate version](https://img.shields.io/crates/v/nominals.svg)](https://crates.io/crates/nominals)
-[![Documentation for `v0.3.0`](https://img.shields.io/badge/docs-v0.3.0-informational)](https://docs.rs/nominals)
+[![Documentation for `v0.3.1`](https://img.shields.io/badge/docs-v0.3.1-informational)](https://docs.rs/nominals)
 
 This type of formatting can be used for list identifiers when creating ordered
 lists similar to HTML's `<ol>` tag. The crate was written to power the
@@ -57,6 +57,8 @@ This crate is `no_std` compatible, and can operate both with and without
 - [`LetterUpper`](https://docs.rs/nominals/latest/nominals/struct.LetterUpper.html): A‎ B‎ C‎ D‎ E‎ …‎ Z‎ AA‎ AB‎ AC‎ …‎ YZ‎ ZA‎ ZB‎ ZC
 - [`RomanLower`](https://docs.rs/nominals/latest/nominals/struct.RomanLower.html): i‎ ii‎ iii‎ iv‎ v‎ vi‎ …‎ ix‎ x‎ xi‎ …‎ mmmcmxcix‎ i̅v̅‎ i̅v̅i‎ …‎ d̅m̅l̅c̅i̅x̅cmxcix‎ m̅‎ m̅i
 - [`RomanUpper`](https://docs.rs/nominals/latest/nominals/struct.RomanUpper.html): I‎ II‎ III‎ IV‎ V‎ VI‎ …‎ IX‎ X‎ XI‎ …‎ MMMCMXCIX‎ I̅V̅‎ I̅V̅I‎ …‎ D̅M̅L̅C̅I̅X̅CMXCIX‎ M̅‎ M̅I
+- [`CircledNumber`](https://docs.rs/nominals/latest/nominals/struct.CircledNumber.html): ⓪‎ ①‎ ②‎ ③‎ ④‎ …‎ ⑨‎ ⑩‎ ⑪‎ ⑫‎ …‎ ㊽‎ ㊾‎ ㊿
+- [`DoubleCircledNumber`](https://docs.rs/nominals/latest/nominals/struct.DoubleCircledNumber.html): ⓵‎ ⓶‎ ⓷‎ ⓸‎ ⓹‎ ⓺‎ ⓻‎ ⓼‎ ⓽‎ ⓾
 - [`ArmenianLower`](https://docs.rs/nominals/latest/nominals/struct.ArmenianLower.html): ա‎ բ‎ գ‎ …‎ թ‎ ժ‎ ժա‎ ժբ‎ …‎ ղթ‎ ճ‎ ճա
 - [`ArmenianUpper`](https://docs.rs/nominals/latest/nominals/struct.ArmenianUpper.html): Ա ‎ Բ‎ Գ‎ …‎ Թ‎ Ժ‎ ԺԱ ‎ ԺԲ‎ …‎ ՂԹ‎ Ճ‎ ՃԱ 
 - [`Bengali`](https://docs.rs/nominals/latest/nominals/struct.Bengali.html): ০‎ ১‎ ২‎ ৩‎ ৪‎ …‎ ৯‎ ১০‎ ১১‎ ১২‎ …‎ ৯৯‎ ১০০‎ ১০১‎ ১০২

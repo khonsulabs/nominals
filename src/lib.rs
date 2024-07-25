@@ -11,6 +11,10 @@ mod ethiopic;
 mod hebrew;
 mod nominalstring;
 
+/// Systems that using a finite ordered set of nominals,
+/// without the option to compose multi character nominals.
+mod enumerated;
+
 mod sealed {
     /// A trait that marks a type as performing integer-style division with its
     /// `Div` and `Rem` implementations.
@@ -26,6 +30,7 @@ use core::ops::{Div, DivAssign, Mul, MulAssign, Rem, RemAssign, Sub, SubAssign};
 pub use additive::*;
 pub use chinese::*;
 pub use digital::*;
+pub use enumerated::*;
 pub use ethiopic::*;
 pub use hebrew::Hebrew;
 pub use nominalstring::{NominalString, OutOfMemoryError};
@@ -143,10 +148,10 @@ pub trait UnsignedInteger:
     /// Returns true if `self` is 0.
     fn is_zero(self) -> bool;
 
-    /// Casts `self` as a usize.
+    /// Casts `self` as a [`usize`].
     ///
     /// This function should only be invoked when it is guaranteed the value is
-    /// within the range of a usize. Otherwise, using fallible operations and
+    /// within the range of a [`usize`]. Otherwise, using fallible operations and
     /// returning an [`Error::OutOfBounds`] is preferred.
     fn as_usize(self) -> usize;
 }
